@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2014  Saul Rodriguez
+   Copyright (C) 2015  Laurent Vromman
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
