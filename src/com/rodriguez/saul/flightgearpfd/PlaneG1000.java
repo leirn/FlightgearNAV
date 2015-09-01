@@ -15,7 +15,7 @@ import android.graphics.Paint.Align;
 import android.graphics.Paint.Style;
 import android.util.Log;
 
-public class Plane777 extends Plane {
+public class PlaneG1000 extends Plane {
 	
 	
 
@@ -92,12 +92,12 @@ public class Plane777 extends Plane {
 	int sync;
 	
 	
-	public Plane777(Context context) {
+	public PlaneG1000(Context context) {
 		
 		mContext = context;
 		
 		//Default plane
-		planeType = B777;
+		planeType = G1000;
 		
 		//Initialize the matrices;
 		maskMatrix = new Matrix();
