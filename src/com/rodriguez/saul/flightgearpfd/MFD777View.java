@@ -47,8 +47,7 @@ public class MFD777View extends SurfaceView implements SurfaceHolder.Callback {
 	public static final int B787 = 2;
 	public static final int B747 = 3;
 	public static final int A330 = 4;	
-	public static final int A380 = 5;	
-	public static final int G1000 = 6;
+	public static final int A380 = 5;
 		
 	Plane plane;
 	int planeType;
@@ -71,6 +70,138 @@ public class MFD777View extends SurfaceView implements SurfaceHolder.Callback {
 		
 		//plane = new Plane777(mcontext);
 				
+		
+	}
+
+	public updateView(values) {
+		//update NAV
+		setHeading(values[0].getFloat(MessageHandlerFGFS.HEADING));
+		setAPheading(values[0].getInt(MessageHandlerFGFS.APHEADING));
+	
+		//VORL
+		setNAV1ID(values[0].getString(MessageHandlerFGFS.VORLID));
+		setNAV1DME(values[0].getFloat(MessageHandlerFGFS.VORLDME));
+		setNAV1DMEinrange(values[0].getBool(MessageHandlerFGFS.VORLDMEINRANGE));
+		setNAV1inrange(values[0].getBool(MessageHandlerFGFS.VORLINRANGE));
+		setNAV1freq(values[0].getFloat(MessageHandlerFGFS.VORLFREQ));
+	
+		setSwitchleft(values[0].getInt(MessageHandlerFGFS.SWITCHLEFT));
+		setNAV1dir(values[0].getFloat(MessageHandlerFGFS.VORLDIR));
+	
+		//VORRL
+		setNAV2ID(values[0].getString(MessageHandlerFGFS.VORRID));
+		setNAV2DME(values[0].getFloat(MessageHandlerFGFS.VORRDME));
+		setNAV2DMEinrange(values[0].getBool(MessageHandlerFGFS.VORRDMEINRANGE));
+		setNAV2inrange(values[0].getBool(MessageHandlerFGFS.VORRINRANGE));
+		setNAV2freq(values[0].getFloat(MessageHandlerFGFS.VORRFREQ));
+	
+		setSwitchright(values[0].getInt(MessageHandlerFGFS.SWITCHRIGHT));
+		setNAV2dir(values[0].getFloat(MessageHandlerFGFS.VORRDIR));
+	
+		//ADFL
+		setADF1ID(values[0].getString(MessageHandlerFGFS.ADFLID));
+		setADF1inrange(values[0].getBool(MessageHandlerFGFS.ADFLINRANGE));
+		setADF1freq(values[0].getInt(MessageHandlerFGFS.ADFLFREQ));
+		setADF1dir(values[0].getFloat(MessageHandlerFGFS.ADFLDIR));
+	
+		//ADFR
+		setADFrID(values[0].getString(MessageHandlerFGFS.ADFRID));
+		setADFrinrange(values[0].getBool(MessageHandlerFGFS.ADFRINRANGE));
+		setADFrfreq(values[0].getInt(MessageHandlerFGFS.ADFRFREQ));
+		setADFrdir(values[0].getFloat(MessageHandlerFGFS.ADFRDIR));
+	
+		//RADIAL NAV1
+		setRaddir(values[0].getFloat(MessageHandlerFGFS.RADIALDIR));
+		setRadhead(values[0].getFloat(MessageHandlerFGFS.RADIALHEAD));
+		setRaddef(values[0].getFloat(MessageHandlerFGFS.RADIALDEF));
+		setGSdef(values[0].getFloat(MessageHandlerFGFS.GSDEF));
+	
+		//Modes
+		setMode(values[0].getInt(MessageHandlerFGFS.MODE));
+		setRange(values[0].getInt(MessageHandlerFGFS.RANGE));
+		setModebut(values[0].getBool(MessageHandlerFGFS.MODEBUT));
+	
+		//Speed
+		setTruespeed(values[0].getFloat(MessageHandlerFGFS.TRUESPEED));
+		setGroundpeed(values[0].getFloat(MessageHandlerFGFS.GROUNDSPEED));
+		setWindhead(values[0].getFloat(MessageHandlerFGFS.WINDHEADING));
+		setWindspeed(values[0].getFloat(MessageHandlerFGFS.WINDSPEED));
+	
+		//Position
+		setLat(values[0].getFloat(MessageHandlerFGFS.LATITUDE));
+		setLon(values[0].getFloat(MessageHandlerFGFS.LONGITUDE));
+		
+		//route
+		setLatwp0(values[0].getFloat(MessageHandlerFGFS.LATWP1));
+		setLonwp0(values[0].getFloat(MessageHandlerFGFS.LONWP1));
+		setLatwp1(values[0].getFloat(MessageHandlerFGFS.LATWP2));
+		setLonwp1(values[0].getFloat(MessageHandlerFGFS.LONWP2));
+		setLatwp2(values[0].getFloat(MessageHandlerFGFS.LATWP3));
+		setLonwp2(values[0].getFloat(MessageHandlerFGFS.LONWP3));
+		setLatwp3(values[0].getFloat(MessageHandlerFGFS.LATWP4));
+		setLonwp3(values[0].getFloat(MessageHandlerFGFS.LONWP4));
+		setLatwp4(values[0].getFloat(MessageHandlerFGFS.LATWP5));
+		setLonwp4(values[0].getFloat(MessageHandlerFGFS.LONWP5));
+		setLatwp5(values[0].getFloat(MessageHandlerFGFS.LATWP6));
+		setLonwp5(values[0].getFloat(MessageHandlerFGFS.LONWP6));
+		setLatwp6(values[0].getFloat(MessageHandlerFGFS.LATWP7));
+		setLonwp6(values[0].getFloat(MessageHandlerFGFS.LONWP7));
+		setLatwp7(values[0].getFloat(MessageHandlerFGFS.LATWP8));
+		setLonwp7(values[0].getFloat(MessageHandlerFGFS.LONWP8));
+		setLatwp8(values[0].getFloat(MessageHandlerFGFS.LATWP9));
+		setLonwp8(values[0].getFloat(MessageHandlerFGFS.LONWP9));
+		setLatwp9(values[0].getFloat(MessageHandlerFGFS.LATWP10));
+		setLonwp9(values[0].getFloat(MessageHandlerFGFS.LONWP10));
+		setLatwp10(values[0].getFloat(MessageHandlerFGFS.LATWP11));
+		setLonwp10(values[0].getFloat(MessageHandlerFGFS.LONWP11));
+		setLatwp11(values[0].getFloat(MessageHandlerFGFS.LATWP12));
+		setLonwp11(values[0].getFloat(MessageHandlerFGFS.LONWP12));
+		
+		setCurrentwp(values[0].getString(MessageHandlerFGFS.CURRENTWP));
+		setNumwp(values[0].getInt(MessageHandlerFGFS.NUMWP));
+		
+		//Default plane is 777m other planes need to rearrange parameters
+		if (planeType == MFD777View.A330) {
+			rearrangeParamA330();				
+		}
+		
+		//Check if the database needs update
+		if (plane.checkUpdateDBNeeded()) {
+			plane.updateDB();
+		} else {
+			draw();
+		}
+	
+	}
+
+	public void rearrangeParamA330()
+	{
+		switch (mMFD777.plane.mode) {
+			case 0:  //ILS
+					mMFD777.setModebut(true); //Circle						
+					break;
+					
+			case 1: //VOR
+					mMFD777.setModebut(true); //Circle						
+					break;
+			case 2: //NAV
+					mMFD777.setModebut(true); //Circle	
+					if (mMFD777.plane.switchvorl == 2)
+						mMFD777.setSwitchleft(-1);
+					if (mMFD777.plane.switchvorr == 2)
+						mMFD777.setSwitchright(-1);
+					break;
+			case 3: //ARC
+					mMFD777.setModebut(false); //Arc
+					mMFD777.setMode(2);
+					break;
+			case 4: break;
+			default: break;
+					
+		}
+		
+		
+		//ARC
 		
 	}
 
