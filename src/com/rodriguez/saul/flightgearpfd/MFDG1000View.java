@@ -196,6 +196,8 @@ public class MFDG1000View extends SurfaceView implements SurfaceHolder.Callback 
 		//scaleFactor = (float) 0.5; //Only for test and new features
 		g1000scaleFactor = (float)(mheight)/(float)g1000enginedisplayHeight;
 				
+		plane.width = width;
+		plane.height = height;
 		plane.g1000scaleFactor = g1000scaleFactor;
 		
 		//plane.
