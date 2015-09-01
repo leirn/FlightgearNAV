@@ -108,6 +108,7 @@ public class PlaneG1000 extends Plane {
 	FIXdb fixdb;
 	int sync;
 	
+	int pfdormfd;
 	
 	float g1000scaleFactor;
 	float leftload, rightload, leftload, rightrpm;
@@ -303,6 +304,14 @@ public class PlaneG1000 extends Plane {
 		rightload = 0;
 		leftload = 0;
 		rightrpm = 0;
+		
+		leftoiltemp = 0;
+		rightoiltemp = 0;
+		leftoilpres = 0;
+		rightoilpres = 0;
+		
+		pfdormfd = MFDG1000View.MFD;
+		
 	}
 	
 	public void setdb(NAVdb[] nav, FIXdb[] fix)
@@ -374,10 +383,17 @@ public class PlaneG1000 extends Plane {
 	        	}
 	        }
 	        
-	        drawG1000TopBar(canvas,paint);
-	        drawG1000EngineDisplay(canvas,paint);
-	        drawG1000SoftKeys(canvas,paint);
-        
+	        if (pfdormfd = MFDG1000View.MFD;)
+	        {
+		        drawG1000TopBar(canvas,paint);
+		        drawG1000EngineDisplay(canvas,paint);
+		        drawG1000SoftKeys(canvas,paint);
+	        }
+	        else {
+	        	drawG1000TopBar(canvas,paint);
+		        
+		        drawG1000SoftKeys(canvas,paint);
+	        }
 		//drawHsiArc(canvas, paint);
 	}
 	
@@ -451,13 +467,25 @@ public class PlaneG1000 extends Plane {
 		drawG1000Numbers(canvas, paint, value, x, y)
 		//Paint right fuel flow
 		drawG1000Numbers(canvas, paint, value, x, y)
-		//Paint left oil temp
+		//Paint left oil tempm.reset();
+		m.postTranslate((25.0 + leftoiltemp * 300, 866.0);
+		m.postScale(EISscale, EISscale);
+		m.postTranslate(0.1 * height, 0);
 		canvas.drawBitmap(lefttriangle,m,paint);
 		//Paint right oil temp
+		m.postTranslate((25.0 + rightoiltemp * 300, 915.0);
+		m.postScale(EISscale, EISscale);
+		m.postTranslate(0.1 * height, 0);
 		canvas.drawBitmap(righttriangle,m,paint);
 		//Paint left oil pres
+		m.postTranslate((25.0 + leftoilpres * 300, 1015.0);
+		m.postScale(EISscale, EISscale);
+		m.postTranslate(0.1 * height, 0);
 		canvas.drawBitmap(lefttriangle,m,paint);
 		//Paint right oil pres
+		m.postTranslate((25.0 + rightoilpres * 300, 1064.0);
+		m.postScale(EISscale, EISscale);
+		m.postTranslate(0.1 * height, 0);
 		canvas.drawBitmap(righttriangle,m,paint);
 		//Paint left coolant temp
 		canvas.drawBitmap(lefttriangle,m,paint);
