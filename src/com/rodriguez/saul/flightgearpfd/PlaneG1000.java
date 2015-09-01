@@ -109,6 +109,9 @@ public class PlaneG1000 extends Plane {
 	int sync;
 	
 	
+	float g1000scaleFactor;
+	
+	
 	public PlaneG1000(Context context) {
 		
 		mContext = context;
@@ -160,8 +163,10 @@ public class PlaneG1000 extends Plane {
 		num8 = Bitmap.createBitmap(g1000symbols, 575, 33, 30, 45);
 		num9 = Bitmap.createBitmap(g1000symbols, 643, 33, 30, 45);
 		numdot = Bitmap.createBitmap(g1000symbols, 342, 101, 11, 45);
-		leftgauge = Bitmap.createBitmap(g1000symbols, 43, 106, 286, 33);
-		rightgauge = Bitmap.createBitmap(g1000symbols, 43, 169, 286, 33);
+		Matrix m = new Matrix()
+		m.postRotate(90);
+		leftgauge = Bitmap.createBitmap(g1000symbols, 43, 106, 286, 33, m);
+		rightgauge = Bitmap.createBitmap(g1000symbols, 43, 169, 286, 33, m);
 		lefttriangle = Bitmap.createBitmap(g1000symbols, 595, 123, 57, 41);
 		righttriangle = Bitmap.createBitmap(g1000symbols, 335, 180, 57, 41);
 		
@@ -214,6 +219,7 @@ public class PlaneG1000 extends Plane {
 		
 		//Initialize all the parameters
 		scaleFactor = (float)1.0;
+		g1000scaleFactor = (float)1.0;
 		
 		heading = 330;
 		apheading = 10;
@@ -385,14 +391,27 @@ public class PlaneG1000 extends Plane {
 		Matrix m = new Matrix();
 		m.reset();
 		//Paint panel
+		m.postScale(g1000scaleFactor, g1000scaleFactor);
 		canvas.drawBitmap(g1000enginedisplay,m,paint);
 		//Paint left load gauge
+		m.reset();
+		m.postTranslate(32.0, (31.0 + (100 - leftload) * 246);
+		m.postScale(g1000scaleFactor, g1000scaleFactor);
 		canvas.drawBitmap(leftgauge,m,paint);
 		//Paint right load gauge
+		m.reset();
+		m.postTranslate(287.0, (31.0 + (100 - rightload) * 246);
+		m.postScale(g1000scaleFactor, g1000scaleFactor);
 		canvas.drawBitmap(rightgauge,m,paint);
 		//Paint left rpm gauge
+		m.reset();
+		m.postTranslate(32.0, (367.0 + (100 - leftrpm) * 270);
+		m.postScale(g1000scaleFactor, g1000scaleFactor);
 		canvas.drawBitmap(leftgauge,m,paint);
 		//Paint right rpm gauge
+		m.reset();
+		m.postTranslate(287.0, (367.0 + (100 - rightrpm) * 270);
+		m.postScale(g1000scaleFactor, g1000scaleFactor);
 		canvas.drawBitmap(rightgauge,m,paint);
 		//Paint left fuel flow
 		drawG1000Numbers(canvas, paint, value, x, y)
