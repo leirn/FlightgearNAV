@@ -110,6 +110,7 @@ public class PlaneG1000 extends Plane {
 	
 	
 	float g1000scaleFactor;
+	float leftload, rightload, leftload, rightrpm;
 	
 	
 	public PlaneG1000(Context context) {
@@ -297,7 +298,11 @@ public class PlaneG1000 extends Plane {
 		currentwp = "None";
 		numwp = 0;
 		
-		
+		//EIS
+		leftload = 0;
+		rightload = 0;
+		leftload = 0;
+		rightrpm = 0;
 	}
 	
 	public void setdb(NAVdb[] nav, FIXdb[] fix)
@@ -315,7 +320,6 @@ public class PlaneG1000 extends Plane {
 		fixdb = new FIXdb(mContext);
 		fixdb.readDB();
 		//sync = 0;
-		
 	}
 	
 	public boolean checkUpdateDBNeeded()
@@ -332,8 +336,6 @@ public class PlaneG1000 extends Plane {
 		navdb.calcQuickcoeff(lat);
 		navdb.selectNear(lat, lon);
 		
-		
-		
 		fixdb.calcQuickcoeff(lat);			
 		fixdb.selectNear(lat, lon);
 	}
@@ -347,13 +349,9 @@ public class PlaneG1000 extends Plane {
 	        if (modebut == true) { //Circle
 	        	switch(mode) {
 	    			case 0:
-	    					drawCir(canvas,paint, 0); //APP
-	    					break;
 	    			case 1:
-	    					drawCir(canvas,paint, 1); //VOR
-	    					break;
 	    			case 2:
-	    					drawCir(canvas,paint, 2); //MAP
+	    					drawCir(canvas,paint, mode); //APP
 	    					break;
 	    			case 3:
 	    					drawPln(canvas,paint);
@@ -364,13 +362,9 @@ public class PlaneG1000 extends Plane {
 	        } else { //Arc
 	        	switch(mode) {
 	        		case 0:
-	        				drawArc(canvas,paint, 0); //APP
-	        				break;
 	        		case 1:
-	        				drawArc(canvas,paint, 1); //VOR
-	        				break;
 	        		case 2:
-	        				drawArc(canvas,paint, 2); //MAP
+	        				drawArc(canvas,paint, mode); //APP
 	        				break;
 	        		case 3:
 	        				drawPln(canvas,paint);
@@ -383,7 +377,6 @@ public class PlaneG1000 extends Plane {
 	        drawG1000EngineDisplay(canvas,paint);
         
 		//drawHsiArc(canvas, paint);
-	
 	}
 	
 	public void drawG1000EngineDisplay(canvas,paint)
@@ -501,20 +494,17 @@ public class PlaneG1000 extends Plane {
 		//paint.setColor(Color.BLACK);
 		//canvas.drawRect((centerx - 254*scaleFactor), (centery + offsety*scaleFactor), (centerx + 254*scaleFactor), 2*centery, paint);
 		
-		
 		paint.setColor(Color.GREEN);
 		paint.setTextSize(18*scaleFactor);
 		paint.setStrokeWidth((int)(0.8*scaleFactor));
 		//canvas.drawText("TRK", centerx - (int)(50*scaleFactor), centery - (int)(180*scaleFactor), paint);
 		canvas.drawText("MAG", centerx + (int)(55*scaleFactor), centery - (int)(180*scaleFactor), paint);
 		
-		
 		//Draw Radial and GS if required
 		if (curmode == 0) {
 			canvas.drawText("HDG", centerx - (int)(50*scaleFactor), centery - (int)(180*scaleFactor), paint);
 			drawRadialcirc(canvas,paint);
-			drawGScirc(canvas,paint);	
-			
+			drawGScirc(canvas,paint);
 		}
 		
 		if (curmode == 1) {
@@ -530,10 +520,7 @@ public class PlaneG1000 extends Plane {
 		//Draw VORL
 		
 		if (switchvorl == 1) {
-						
-			
 			drawVORL(canvas, paint, curmode);
-			
 		} else if (switchvorl == -1) {
 			drawADFL(canvas, paint,curmode);
 		}
@@ -561,9 +548,6 @@ public class PlaneG1000 extends Plane {
 			canvas.drawBitmap(circenter, circenterMatrix, paint);
 		}
 		
-	    
-		
-		
 		//Draw vertical line
 		
 		paint.setColor(Color.WHITE);
@@ -580,7 +564,6 @@ public class PlaneG1000 extends Plane {
 		canvas.drawLine(centerx - (float)(15*scaleFactor),
 				centery + (float)((offsety + 120)*scaleFactor),
 				centerx + (float)(15*scaleFactor), centery + (float)((offsety + 120)*scaleFactor), paint);
-		
 		
 		//Draw true speed text 
 		paint.setColor(Color.WHITE);
@@ -679,9 +662,6 @@ public class PlaneG1000 extends Plane {
 		canvas.drawText("MAG", centerx + (int)(55*scaleFactor), centery - (int)(210*scaleFactor), paint);
 		
 		//Draw Radial and GS if required
-		
-
-		//Draw Radial and GS if required
 		if (curmode == 0) {
 			canvas.drawText("HDG", centerx - (int)(50*scaleFactor), centery - (int)(210*scaleFactor), paint);
 			drawRadialARC(canvas,paint);
@@ -741,7 +721,6 @@ public class PlaneG1000 extends Plane {
 				centery + (float)((offsety - 285*0.9)*scaleFactor),
 				centerx + (float)(10*scaleFactor), centery + (float)((offsety - 285*0.9)*scaleFactor), paint);
 	
-		
 		//Draw true speed text 
 		paint.setColor(Color.WHITE);
 		paint.setStyle(Style.FILL_AND_STROKE);
@@ -768,7 +747,6 @@ public class PlaneG1000 extends Plane {
 		//canvas.drawRect((centerx + 256*scaleFactor), 0, (centerx + 380*scaleFactor), 2*centery, paint);
 		canvas.drawRect(0, 0, (centerx - 256*scaleFactor), 2*centery, paint);
 		canvas.drawRect((centerx + 256*scaleFactor), 0, 2*centerx, 2*centery, paint);
-		
 	}
 	
 	public void drawWind(Canvas canvas, Paint paint)
@@ -801,17 +779,12 @@ public class PlaneG1000 extends Plane {
 		windMatrix.postTranslate(centerx - (int)(200*scaleFactor), centery - (float)(190*scaleFactor));
 		
 		canvas.drawBitmap(wind, windMatrix, paint);
-		
-		
 	}
-		
 	
 	public void drawPln(Canvas canvas, Paint paint)
 	{
 		
 	}
-	
-	
 	
 	void drawAPheading(Canvas canvas, Paint paint)
 	{
@@ -940,7 +913,6 @@ public class PlaneG1000 extends Plane {
 				
 				canvas.drawBitmap(vorlback, vorlbackMatrix, paint);
 			}
-			
 		}
 	}
 	
@@ -1143,8 +1115,7 @@ public class PlaneG1000 extends Plane {
 								
 				canvas.drawBitmap(adfrback, adfrbackMatrix, paint);
 			}
-		}
-				
+		}		
 	}
 	
 	void drawRadialARC(Canvas canvas, Paint paint)
@@ -1218,8 +1189,7 @@ public class PlaneG1000 extends Plane {
 			canvas.drawText(String.format("CRS 0%d", (int)radial), centerx + (int)(200*scaleFactor), centery - (int)(210*scaleFactor), paint);
 		} else {
 			canvas.drawText(String.format("CRS %d", (int)radial), centerx + (int)(200*scaleFactor), centery - (int)(210*scaleFactor), paint);
-		}
-					
+		}			
 	}
 	
 	void drawRadialcirc(Canvas canvas, Paint paint)
@@ -1262,16 +1232,16 @@ public class PlaneG1000 extends Plane {
 		paint.setColor(Color.WHITE);
 		paint.setTextSize(18*scaleFactor);
 		paint.setStrokeWidth((int)(0.8*scaleFactor));
-		
+
 		if (vorlinrange == true) {
 			canvas.drawBitmap(defnid, defnidMatrix, paint);			
 		}
-		
+
 		if ((vorldmeinrange == true) && (vorlinrange == true)) {			
 			float dme = (float)(vorldme/1852.);	
 			canvas.drawText(String.format("DME %3.1f", dme), centerx + (float)(200*scaleFactor), centery - (int)((190)*scaleFactor), paint);
 		}
-						
+	
 		//Draw horizontal deflection circles
 		defhorMatrix.reset();
 		defhorMatrix.postTranslate(-defhor.getWidth()/2, -defhor.getHeight()/2);
@@ -1292,9 +1262,7 @@ public class PlaneG1000 extends Plane {
 		} else {
 			canvas.drawText(String.format("CRS %d", (int)radial), centerx + (int)(200*scaleFactor), centery - (int)(210*scaleFactor), paint);
 		}
-					
 	}
-	
 	
 	void drawGSArc(Canvas canvas, Paint paint)
 	{
@@ -1328,7 +1296,6 @@ public class PlaneG1000 extends Plane {
 		} else {
 			canvas.drawText("ILS "+ vorlid, centerx + (int)(200*scaleFactor), centery - (int)(230*scaleFactor), paint);
 		}
-		
 	}
 	
 	void drawGScirc(Canvas canvas, Paint paint)
@@ -1363,7 +1330,6 @@ public class PlaneG1000 extends Plane {
 		} else {
 			canvas.drawText("ILS "+ vorlid, centerx + (int)(200*scaleFactor), centery - (int)(230*scaleFactor), paint);
 		}
-		
 	}
 	
 	void drawCircles(Canvas canvas, Paint paint)
@@ -1381,14 +1347,11 @@ public class PlaneG1000 extends Plane {
 	}
 	
 	void drawNAVobjects(Canvas canvas, Paint paint, int offsety)
-	{			
-			
-		
+	{	
 		//paint.setColor(Color.CYAN);
 		paint.setStyle(Style.STROKE);
 		paint.setTextSize((float)(10*scaleFactor));
 		paint.setStrokeWidth(0);
-		
 		
 		float dist,distx, disty, angle;
 		for (int i = 0; i<navdb.mnear; i++ ){
@@ -1421,7 +1384,6 @@ public class PlaneG1000 extends Plane {
 					centery + (float)((offsety-disty+10)*scaleFactor),
 					paint);
 			}
-			
 			
 			//ADF
 			if (navdb.mID[i] == 2) {
@@ -1456,17 +1418,12 @@ public class PlaneG1000 extends Plane {
 					paint);
 			}
 		}
-		
-		
-		
-		
 	}
 	
 	void drawFixobjects(Canvas canvas, Paint paint, int offsety){
 		paint.setStyle(Style.STROKE);
 		paint.setTextSize((float)(10*scaleFactor));
 		paint.setStrokeWidth(0);
-		
 		
 		float dist,distx, disty, angle;
 		//Fix points
@@ -1512,13 +1469,10 @@ public class PlaneG1000 extends Plane {
 		paint.setTextSize((float)(10*scaleFactor));
 		paint.setStrokeWidth(2*scaleFactor);
 				
-				
 		float dist,distx, disty, angle;
 
 		float pointx[] = new float[ROUTESIZE];
 		float pointy[] = new float[ROUTESIZE];
-		
-		int count = 0;
 		
 		if (numwp > ROUTESIZE)
 			numwp = ROUTESIZE;
@@ -1529,9 +1483,6 @@ public class PlaneG1000 extends Plane {
 			//Log.d("SAUL",String.format("Num WP = %d", numwp));
 			//Log.d("SAUL",String.format("Lat= %f Lon= %f ", lat, lon));
 			//Log.d("SAUL",String.format("Lat1= %f Lon1= %f ", latwp[0], lonwp[0]));
-			
-			
-			count++;
 			
 			dist = fixdb.calcDistance(lat, lon, latwp[i], lonwp[i]);
 			distx = (float)fixdb.distx;
@@ -1557,15 +1508,11 @@ public class PlaneG1000 extends Plane {
 			ndwpMatrix.postTranslate(pointx[i],pointy[i]);
 			
 			canvas.drawBitmap(ndwp, ndwpMatrix, paint);
-				
 		}
 		
 		for (int i = 0; i < (numwp - 1); i++) {
 			canvas.drawLine(pointx[i], pointy[i], pointx[i+1], pointy[i+1], paint);
 		}
-		
-		
-		
 	}
 	
 	void drawWPtext(Canvas canvas, Paint paint)
@@ -1586,7 +1533,5 @@ public class PlaneG1000 extends Plane {
 		} else {
 			canvas.drawText(currentwp, centerx + (int)(200*scaleFactor), centery - (int)(230*scaleFactor), paint);
 		}
-		
 	}
-	
 }
