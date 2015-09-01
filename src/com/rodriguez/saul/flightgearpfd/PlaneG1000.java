@@ -18,6 +18,7 @@ import android.util.Log;
 public class PlaneG1000 extends Plane {
 	//Specific G1000 Bitmap
 	Bitmap g1000enginedisplay;
+	Bitmap g1000symbols;
 	Bitmap num1;
 	Bitmap num2;
 	Bitmap num3;
@@ -319,61 +320,61 @@ public class PlaneG1000 extends Plane {
 	public void updateDB()
 	{
 		//Calculate objects nearby
-			reflat = lat;
-			reflon = lon;
-			
-			navdb.calcQuickcoeff(lat);
-			navdb.selectNear(lat, lon);
-			
-			
-			
-			fixdb.calcQuickcoeff(lat);			
-			fixdb.selectNear(lat, lon);
+		reflat = lat;
+		reflon = lon;
+		
+		navdb.calcQuickcoeff(lat);
+		navdb.selectNear(lat, lon);
+		
+		
+		
+		fixdb.calcQuickcoeff(lat);			
+		fixdb.selectNear(lat, lon);
 	}
 	
 	public void draw(Canvas canvas) {
 		
 		Paint paint = new Paint();
-        paint.setAntiAlias(true);
-        paint.setFilterBitmap(true);
-        
-        if (modebut == true) { //Circle
-        	switch(mode) {
-    			case 0:
-    					drawCir(canvas,paint, 0); //APP
-    					break;
-    			case 1:
-    					drawCir(canvas,paint, 1); //VOR
-    					break;
-    			case 2:
-    					drawCir(canvas,paint, 2); //MAP
-    					break;
-    			case 3:
-    					drawPln(canvas,paint);
-    					break;
-    			default:
-    					break;
-        	}
-        } else { //Arc
-        	switch(mode) {
-        		case 0:
-        				drawArc(canvas,paint, 0); //APP
-        				break;
-        		case 1:
-        				drawArc(canvas,paint, 1); //VOR
-        				break;
-        		case 2:
-        				drawArc(canvas,paint, 2); //MAP
-        				break;
-        		case 3:
-        				drawPln(canvas,paint);
-        				break;
-        		default:
-        				break;
-        	}
-        }
-        
-        drawG1000EngineDisplay(canvas,paint);
+        	paint.setAntiAlias(true);
+	        paint.setFilterBitmap(true);
+	        
+	        if (modebut == true) { //Circle
+	        	switch(mode) {
+	    			case 0:
+	    					drawCir(canvas,paint, 0); //APP
+	    					break;
+	    			case 1:
+	    					drawCir(canvas,paint, 1); //VOR
+	    					break;
+	    			case 2:
+	    					drawCir(canvas,paint, 2); //MAP
+	    					break;
+	    			case 3:
+	    					drawPln(canvas,paint);
+	    					break;
+	    			default:
+	    					break;
+	        	}
+	        } else { //Arc
+	        	switch(mode) {
+	        		case 0:
+	        				drawArc(canvas,paint, 0); //APP
+	        				break;
+	        		case 1:
+	        				drawArc(canvas,paint, 1); //VOR
+	        				break;
+	        		case 2:
+	        				drawArc(canvas,paint, 2); //MAP
+	        				break;
+	        		case 3:
+	        				drawPln(canvas,paint);
+	        				break;
+	        		default:
+	        				break;
+	        	}
+	        }
+	        
+	        drawG1000EngineDisplay(canvas,paint);
         
 		//drawHsiArc(canvas, paint);
 	
@@ -381,23 +382,46 @@ public class PlaneG1000 extends Plane {
 	
 	public void drawG1000EngineDisplay(canvas,paint)
 	{
+		Matrix m = new Matrix();
+		m.reset();
 		//Paint panel
+		canvas.drawBitmap(g1000enginedisplay,m,paint);
 		//Paint left load gauge
+		canvas.drawBitmap(leftgauge,m,paint);
 		//Paint right load gauge
+		canvas.drawBitmap(rightgauge,m,paint);
 		//Paint left rpm gauge
+		canvas.drawBitmap(leftgauge,m,paint);
 		//Paint right rpm gauge
+		canvas.drawBitmap(rightgauge,m,paint);
 		//Paint left fuel flow
+		drawG1000Numbers(canvas, paint, value, x, y)
 		//Paint right fuel flow
+		drawG1000Numbers(canvas, paint, value, x, y)
 		//Paint left oil temp
+		canvas.drawBitmap(lefttriangle,m,paint);
 		//Paint right oil temp
+		canvas.drawBitmap(righttriangle,m,paint);
 		//Paint left oil pres
+		canvas.drawBitmap(lefttriangle,m,paint);
 		//Paint right oil pres
+		canvas.drawBitmap(righttriangle,m,paint);
 		//Paint left coolant temp
+		canvas.drawBitmap(lefttriangle,m,paint);
 		//Paint right coolant temp
+		canvas.drawBitmap(righttriangle,m,paint);
 		//Paint left fuel temp
+		canvas.drawBitmap(lefttriangle,m,paint);
 		//Paint right fuel temp
+		canvas.drawBitmap(righttriangle,m,paint);
 		//Paint left fuel qty gal
+		canvas.drawBitmap(lefttriangle,m,paint);
 		//Paint right fuel qty gal
+		canvas.drawBitmap(righttriangle,m,paint);
+	}
+	
+	private drawG1000Numbers(Canvas canvas, Paint paint, float value, int x, int y) {
+		
 	}
 	
 	public void drawCir(Canvas canvas, Paint paint, int curmode)
@@ -675,7 +699,7 @@ public class PlaneG1000 extends Plane {
 		}
 			
 		//prepare and draw Triangle
-	    triangleMatrix.reset();
+	    	triangleMatrix.reset();
 		triangleMatrix.postTranslate(-triangle.getWidth()/2, -triangle.getHeight()/2 );
 		triangleMatrix.postScale((float)(0.5*scaleFactor),(float)(0.5*scaleFactor));
 		triangleMatrix.postTranslate(centerx, centery + (float)(offsety*scaleFactor));
@@ -751,7 +775,7 @@ public class PlaneG1000 extends Plane {
 		}
 		
 		//prepare and draw Triangle
-	    windMatrix.reset();
+	    	windMatrix.reset();
 		windMatrix.postTranslate(-wind.getWidth()/2, -wind.getHeight()/2 );
 		windMatrix.postScale((float)(0.25*scaleFactor),(float)(0.25*scaleFactor));
 		windMatrix.postRotate(-rotation + windheading);
