@@ -50,6 +50,10 @@ public class MFDG1000View extends SurfaceView implements SurfaceHolder.Callback 
 	int centery;
 	float scaleFactor;
 	float g1000scaleFactor;
+	int pfdormfd;
+	static int PFD = 0;
+	static int MFD = 1;
+	
 	
 	public MFDG1000View(Context context, AttributeSet attrs) {
 		super(context, attrs);
@@ -58,6 +62,9 @@ public class MFDG1000View extends SurfaceView implements SurfaceHolder.Callback 
 		// TODO Auto-generated constructor stub
 		surfaceHolder = this.getHolder();
 		surfaceHolder.addCallback(this);
+		
+		pfdormfd = MFD;
+		
 	}
 
 	public updateView(values) {
@@ -153,6 +160,11 @@ public class MFDG1000View extends SurfaceView implements SurfaceHolder.Callback 
 		plane.leftload = values[0].getFloat(G1000Protocol.LEFT_RPM);
 		plane.rightrpm = values[0].getFloat(G1000Protocol.RIGHT_RPM);
 		
+		plane.leftoiltemp = values[0].getFloat(G1000Protocol.LEFT_OIL_TEMP);
+		plane.rightoiltemp = values[0].getFloat(G1000Protocol.RIGHT_OIL_TEMP);
+		plane.leftoilpres = values[0].getFloat(G1000Protocol.LEFT_OIL_PRES);
+		plane.rightoilpres = values[0].getFloat(G1000Protocol.RIGHT_OIL_PRES);
+		
 		//Check if the database needs update
 		if (plane.checkUpdateDBNeeded()) {
 			plane.updateDB();
@@ -199,6 +211,7 @@ public class MFDG1000View extends SurfaceView implements SurfaceHolder.Callback 
 		plane.width = width;
 		plane.height = height;
 		plane.g1000scaleFactor = g1000scaleFactor;
+		plane.pfdormfd = pfdormfd;
 		
 		//plane.
 		plane.reflat = 0;
@@ -255,6 +268,8 @@ public class MFDG1000View extends SurfaceView implements SurfaceHolder.Callback 
 	    		}
 	    		break;
 	    	case MotionEvent.ACTION_MOVE:
+	    		pfdormfd = !pfdormfd;
+			plane.pfdormfd = pfdormfd;
 	    		break;
 	    	case MotionEvent.ACTION_UP:
 	            break;
