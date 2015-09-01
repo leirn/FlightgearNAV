@@ -70,90 +70,90 @@ public class MFDG1000View extends SurfaceView implements SurfaceHolder.Callback 
 
 	public updateView(values) {
 		//update NAV
-		setHeading(values[0].getFloat(MessageHandlerFGFS.HEADING));
-		setAPheading(values[0].getInt(MessageHandlerFGFS.APHEADING));
+		setHeading(values[0].getFloat(G1000Protocol.HEADING));
+		setAPheading(values[0].getInt(G1000Protocol.APHEADING));
 	
 		//VORL
-		setNAV1ID(values[0].getString(MessageHandlerFGFS.VORLID));
-		setNAV1DME(values[0].getFloat(MessageHandlerFGFS.VORLDME));
-		setNAV1DMEinrange(values[0].getBool(MessageHandlerFGFS.VORLDMEINRANGE));
-		setNAV1inrange(values[0].getBool(MessageHandlerFGFS.VORLINRANGE));
-		setNAV1freq(values[0].getFloat(MessageHandlerFGFS.VORLFREQ));
+		setNAV1ID(values[0].getString(G1000Protocol.VORLID));
+		setNAV1DME(values[0].getFloat(G1000Protocol.VORLDME));
+		setNAV1DMEinrange(values[0].getBool(G1000Protocol.VORLDMEINRANGE));
+		setNAV1inrange(values[0].getBool(G1000Protocol.VORLINRANGE));
+		setNAV1freq(values[0].getFloat(G1000Protocol.VORLFREQ));
 	
-		setSwitchleft(values[0].getInt(MessageHandlerFGFS.SWITCHLEFT));
-		setNAV1dir(values[0].getFloat(MessageHandlerFGFS.VORLDIR));
+		setSwitchleft(values[0].getInt(G1000Protocol.SWITCHLEFT));
+		setNAV1dir(values[0].getFloat(G1000Protocol.VORLDIR));
 	
 		//VORRL
-		setNAV2ID(values[0].getString(MessageHandlerFGFS.VORRID));
-		setNAV2DME(values[0].getFloat(MessageHandlerFGFS.VORRDME));
-		setNAV2DMEinrange(values[0].getBool(MessageHandlerFGFS.VORRDMEINRANGE));
-		setNAV2inrange(values[0].getBool(MessageHandlerFGFS.VORRINRANGE));
-		setNAV2freq(values[0].getFloat(MessageHandlerFGFS.VORRFREQ));
+		setNAV2ID(values[0].getString(G1000Protocol.VORRID));
+		setNAV2DME(values[0].getFloat(G1000Protocol.VORRDME));
+		setNAV2DMEinrange(values[0].getBool(G1000Protocol.VORRDMEINRANGE));
+		setNAV2inrange(values[0].getBool(G1000Protocol.VORRINRANGE));
+		setNAV2freq(values[0].getFloat(G1000Protocol.VORRFREQ));
 	
-		setSwitchright(values[0].getInt(MessageHandlerFGFS.SWITCHRIGHT));
-		setNAV2dir(values[0].getFloat(MessageHandlerFGFS.VORRDIR));
+		setSwitchright(values[0].getInt(G1000Protocol.SWITCHRIGHT));
+		setNAV2dir(values[0].getFloat(G1000Protocol.VORRDIR));
 	
 		//ADFL
-		setADF1ID(values[0].getString(MessageHandlerFGFS.ADFLID));
-		setADF1inrange(values[0].getBool(MessageHandlerFGFS.ADFLINRANGE));
-		setADF1freq(values[0].getInt(MessageHandlerFGFS.ADFLFREQ));
-		setADF1dir(values[0].getFloat(MessageHandlerFGFS.ADFLDIR));
+		setADF1ID(values[0].getString(G1000Protocol.ADFLID));
+		setADF1inrange(values[0].getBool(G1000Protocol.ADFLINRANGE));
+		setADF1freq(values[0].getInt(G1000Protocol.ADFLFREQ));
+		setADF1dir(values[0].getFloat(G1000Protocol.ADFLDIR));
 	
 		//ADFR
-		setADFrID(values[0].getString(MessageHandlerFGFS.ADFRID));
-		setADFrinrange(values[0].getBool(MessageHandlerFGFS.ADFRINRANGE));
-		setADFrfreq(values[0].getInt(MessageHandlerFGFS.ADFRFREQ));
-		setADFrdir(values[0].getFloat(MessageHandlerFGFS.ADFRDIR));
+		setADFrID(values[0].getString(G1000Protocol.ADFRID));
+		setADFrinrange(values[0].getBool(G1000Protocol.ADFRINRANGE));
+		setADFrfreq(values[0].getInt(G1000Protocol.ADFRFREQ));
+		setADFrdir(values[0].getFloat(G1000Protocol.ADFRDIR));
 	
 		//RADIAL NAV1
-		setRaddir(values[0].getFloat(MessageHandlerFGFS.RADIALDIR));
-		setRadhead(values[0].getFloat(MessageHandlerFGFS.RADIALHEAD));
-		setRaddef(values[0].getFloat(MessageHandlerFGFS.RADIALDEF));
-		setGSdef(values[0].getFloat(MessageHandlerFGFS.GSDEF));
+		setRaddir(values[0].getFloat(G1000Protocol.RADIALDIR));
+		setRadhead(values[0].getFloat(G1000Protocol.RADIALHEAD));
+		setRaddef(values[0].getFloat(G1000Protocol.RADIALDEF));
+		setGSdef(values[0].getFloat(G1000Protocol.GSDEF));
 	
 		//Modes
-		setMode(values[0].getInt(MessageHandlerFGFS.MODE));
-		setRange(values[0].getInt(MessageHandlerFGFS.RANGE));
-		setModebut(values[0].getBool(MessageHandlerFGFS.MODEBUT));
+		setMode(values[0].getInt(G1000Protocol.MODE));
+		setRange(values[0].getInt(G1000Protocol.RANGE));
+		setModebut(values[0].getBool(G1000Protocol.MODEBUT));
 	
 		//Speed
-		setTruespeed(values[0].getFloat(MessageHandlerFGFS.TRUESPEED));
-		setGroundpeed(values[0].getFloat(MessageHandlerFGFS.GROUNDSPEED));
-		setWindhead(values[0].getFloat(MessageHandlerFGFS.WINDHEADING));
-		setWindspeed(values[0].getFloat(MessageHandlerFGFS.WINDSPEED));
+		setTruespeed(values[0].getFloat(G1000Protocol.TRUESPEED));
+		setGroundpeed(values[0].getFloat(G1000Protocol.GROUNDSPEED));
+		setWindhead(values[0].getFloat(G1000Protocol.WINDHEADING));
+		setWindspeed(values[0].getFloat(G1000Protocol.WINDSPEED));
 	
 		//Position
-		setLat(values[0].getFloat(MessageHandlerFGFS.LATITUDE));
-		setLon(values[0].getFloat(MessageHandlerFGFS.LONGITUDE));
+		setLat(values[0].getFloat(G1000Protocol.LATITUDE));
+		setLon(values[0].getFloat(G1000Protocol.LONGITUDE));
 		
 		//route
-		setLatwp0(values[0].getFloat(MessageHandlerFGFS.LATWP1));
-		setLonwp0(values[0].getFloat(MessageHandlerFGFS.LONWP1));
-		setLatwp1(values[0].getFloat(MessageHandlerFGFS.LATWP2));
-		setLonwp1(values[0].getFloat(MessageHandlerFGFS.LONWP2));
-		setLatwp2(values[0].getFloat(MessageHandlerFGFS.LATWP3));
-		setLonwp2(values[0].getFloat(MessageHandlerFGFS.LONWP3));
-		setLatwp3(values[0].getFloat(MessageHandlerFGFS.LATWP4));
-		setLonwp3(values[0].getFloat(MessageHandlerFGFS.LONWP4));
-		setLatwp4(values[0].getFloat(MessageHandlerFGFS.LATWP5));
-		setLonwp4(values[0].getFloat(MessageHandlerFGFS.LONWP5));
-		setLatwp5(values[0].getFloat(MessageHandlerFGFS.LATWP6));
-		setLonwp5(values[0].getFloat(MessageHandlerFGFS.LONWP6));
-		setLatwp6(values[0].getFloat(MessageHandlerFGFS.LATWP7));
-		setLonwp6(values[0].getFloat(MessageHandlerFGFS.LONWP7));
-		setLatwp7(values[0].getFloat(MessageHandlerFGFS.LATWP8));
-		setLonwp7(values[0].getFloat(MessageHandlerFGFS.LONWP8));
-		setLatwp8(values[0].getFloat(MessageHandlerFGFS.LATWP9));
-		setLonwp8(values[0].getFloat(MessageHandlerFGFS.LONWP9));
-		setLatwp9(values[0].getFloat(MessageHandlerFGFS.LATWP10));
-		setLonwp9(values[0].getFloat(MessageHandlerFGFS.LONWP10));
-		setLatwp10(values[0].getFloat(MessageHandlerFGFS.LATWP11));
-		setLonwp10(values[0].getFloat(MessageHandlerFGFS.LONWP11));
-		setLatwp11(values[0].getFloat(MessageHandlerFGFS.LATWP12));
-		setLonwp11(values[0].getFloat(MessageHandlerFGFS.LONWP12));
+		setLatwp0(values[0].getFloat(G1000Protocol.LATWP1));
+		setLonwp0(values[0].getFloat(G1000Protocol.LONWP1));
+		setLatwp1(values[0].getFloat(G1000Protocol.LATWP2));
+		setLonwp1(values[0].getFloat(G1000Protocol.LONWP2));
+		setLatwp2(values[0].getFloat(G1000Protocol.LATWP3));
+		setLonwp2(values[0].getFloat(G1000Protocol.LONWP3));
+		setLatwp3(values[0].getFloat(G1000Protocol.LATWP4));
+		setLonwp3(values[0].getFloat(G1000Protocol.LONWP4));
+		setLatwp4(values[0].getFloat(G1000Protocol.LATWP5));
+		setLonwp4(values[0].getFloat(G1000Protocol.LONWP5));
+		setLatwp5(values[0].getFloat(G1000Protocol.LATWP6));
+		setLonwp5(values[0].getFloat(G1000Protocol.LONWP6));
+		setLatwp6(values[0].getFloat(G1000Protocol.LATWP7));
+		setLonwp6(values[0].getFloat(G1000Protocol.LONWP7));
+		setLatwp7(values[0].getFloat(G1000Protocol.LATWP8));
+		setLonwp7(values[0].getFloat(G1000Protocol.LONWP8));
+		setLatwp8(values[0].getFloat(G1000Protocol.LATWP9));
+		setLonwp8(values[0].getFloat(G1000Protocol.LONWP9));
+		setLatwp9(values[0].getFloat(G1000Protocol.LATWP10));
+		setLonwp9(values[0].getFloat(G1000Protocol.LONWP10));
+		setLatwp10(values[0].getFloat(G1000Protocol.LATWP11));
+		setLonwp10(values[0].getFloat(G1000Protocol.LONWP11));
+		setLatwp11(values[0].getFloat(G1000Protocol.LATWP12));
+		setLonwp11(values[0].getFloat(G1000Protocol.LONWP12));
 		
-		setCurrentwp(values[0].getString(MessageHandlerFGFS.CURRENTWP));
-		setNumwp(values[0].getInt(MessageHandlerFGFS.NUMWP));
+		setCurrentwp(values[0].getString(G1000Protocol.CURRENTWP));
+		setNumwp(values[0].getInt(G1000Protocol.NUMWP));
 		
 		
 		//Check if the database needs update
