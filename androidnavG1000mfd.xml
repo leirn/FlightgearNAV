@@ -1,0 +1,393 @@
+<?xml version="1.0"?>
+<PropertyList>
+    <generic>
+        <output>
+            <line_separator>newline</line_separator>
+            <var_separator>:</var_separator>
+            <!--
+            <chunk>
+                <name>heading</name>
+                <type>float</type>
+                <format>%f</format>
+                <node>/orientation/heading-deg</node>
+            </chunk>
+            -->
+            <chunk>
+                <name>heading</name>
+                <type>float</type>
+                <format>%f</format>
+                <node>/orientation/heading-magnetic-deg</node>
+            </chunk>
+            <chunk>
+                <name>AP heading bug</name>
+                <format>%d</format>
+                <node>/autopilot/settings/heading-bug-deg</node>
+            </chunk>
+            <!-- NAV1 starts here -->
+            <chunk>
+                <name>NAV1 ID</name>
+                <type>string</type>
+                <format>%s</format>
+                <node>/instrumentation/nav/nav-id</node>
+            </chunk>
+            <chunk>
+                <name>NAV1 DME</name>
+                <type>float</type>
+                <format>%f</format>
+                <node>/instrumentation/nav/nav-distance</node>
+            </chunk>
+            <chunk>
+                <name>NAV1 DME in range</name>
+                <type>bool</type>
+                <node>/instrumentation/nav/dme-in-range</node>
+            </chunk>
+            <chunk>
+                <name>NAV1 in range</name>
+                <type>bool</type>
+                <node>/instrumentation/nav/in-range</node>
+            </chunk>
+            <chunk>
+                <name>NAV1 DME</name>
+                <type>float</type>
+                <format>%f</format>
+                <node>/instrumentation/nav/frequencies/selected-mhz</node>
+            </chunk>
+            <chunk>
+                <name>switch left VOR ADF</name>
+                <format>%d</format>
+                <node>/instrumentation/efis/inputs/lh-vor-adf</node>
+            </chunk>
+            <chunk>
+                <name>NAV1 direction</name>
+                <type>float</type>
+                <format>%f</format>
+                <node>/instrumentation/efis/mfd/lvordirection</node>
+            </chunk>
+            <!-- NAV1 ends here -->
+            <!-- NAV2 starts here -->
+            <chunk>
+                <name>NAV2 ID</name>
+                <type>string</type>
+                <format>%s</format>
+                <node>/instrumentation/nav[1]/nav-id</node>
+            </chunk>
+            <chunk>
+                <name>NAV2 DME</name>
+                <type>float</type>
+                <format>%f</format>
+                <node>/instrumentation/nav[1]/nav-distance</node>
+            </chunk>
+            <chunk>
+                <name>NAV2 DME in range</name>
+                <type>bool</type>
+                <node>/instrumentation/nav[1]/dme-in-range</node>
+            </chunk>
+            <chunk>
+                <name>NAV2 in range</name>
+                <type>bool</type>
+                <node>/instrumentation/nav[1]/in-range</node>
+            </chunk>
+            <chunk>
+                <name>NAV2 DME</name>
+                <type>float</type>
+                <format>%f</format>
+                <node>/instrumentation/nav[1]/frequencies/selected-mhz</node>
+            </chunk>
+            <chunk>
+                <name>switch left VOR ADF</name>
+                <format>%d</format>
+                <node>/instrumentation/efis/inputs/rh-vor-adf</node>
+            </chunk>
+            <chunk>
+                <name>NAV1 direction</name>
+                <type>float</type>
+                <format>%f</format>
+                <node>/instrumentation/efis/mfd/rvordirection</node>
+            </chunk>
+            <!-- NAV2 starts here -->
+            <!-- ADF1 starts here -->
+            <chunk>
+                <name>ADF1 ID</name>
+                <type>string</type>
+                <format>%s</format>
+                <node>/instrumentation/adf/ident</node>
+            </chunk>
+            <chunk>
+                <name>ADF1 in range</name>
+                <type>bool</type>
+                <node>/instrumentation/adf/in-range</node>
+            </chunk>
+            <chunk>
+                <name>ADF1 freq</name>
+                <format>%d</format>
+                <node>/instrumentation/adf/frequencies/selected-khz</node>
+            </chunk>
+            <chunk>
+                <name>ADF1 direction</name>
+                <type>float</type>
+                <format>%f</format>
+                <node>/instrumentation/efis/mfd/ladfdirection</node>
+            </chunk>
+            <!-- ADF1 ends here -->
+            <!-- ADF2 starts here -->
+            <chunk>
+                <name>ADF1 ID</name>
+                <type>string</type>
+                <format>%s</format>
+                <node>/instrumentation/adf[1]/ident</node>
+            </chunk>
+            <chunk>
+                <name>ADF1 in range</name>
+                <type>bool</type>
+                <node>/instrumentation/adf[1]/in-range</node>
+            </chunk>
+            <chunk>
+                <name>ADF1 freq</name>
+                <format>%d</format>
+                <node>/instrumentation/adf[1]/frequencies/selected-khz</node>
+            </chunk>
+            <chunk>
+                <name>ADF1 direction</name>
+                <type>float</type>
+                <format>%f</format>
+                <node>/instrumentation/efis/mfd/radfdirection</node>
+            </chunk>
+            <!-- ADF2 ends here -->
+            <!-- VOR1 starts here -->
+            <chunk>
+                <name>Radial direction</name>
+                <type>float</type>
+                <format>%f</format>
+                <node>/instrumentation/nav/radials/selected-deg</node>
+            </chunk>
+            <chunk>
+                <name>Real heading</name>
+                <type>float</type>
+                <format>%f</format>
+                <node>/orientation/heading-deg</node>
+            </chunk>
+            <chunk>
+                <name>Nav1 heading deflection </name>
+                <type>float</type>
+                <format>%f</format>
+                <node>/instrumentation/nav/heading-needle-deflection-norm</node>
+            </chunk>
+            <chunk>
+                <name>Nav1 gs deflection </name>
+                <type>float</type>
+                <format>%f</format>
+                <node>/instrumentation/nav/gs-needle-deflection-norm</node>
+            </chunk>
+            <!-- VOR1 ends here -->
+            <chunk>
+                <name>Encoder Mode </name>
+                <format>%d</format>
+                <node>/instrumentation/efis/mfd/mode-num</node>
+            </chunk>
+            <chunk>
+                <name>range </name>
+                <format>%d</format>
+                <node>/instrumentation/efis/inputs/range-nm</node>
+            </chunk>
+            <chunk>
+                <name>Encoder mode pushutton</name>
+                <type>bool</type>
+                <node>/instrumentation/efis/inputs/nd-centered</node>
+            </chunk>
+            <chunk>
+                <name>true air speed TAS </name>
+                <type>float</type>
+                <format>%f</format>
+                <node>/velocities/airspeed-kt</node>
+            </chunk>
+            <chunk>
+                <name>ground speed GS </name>
+                <type>float</type>
+                <format>%f</format>
+                <node>/velocities/groundspeed-kt</node>
+            </chunk>
+            <chunk>
+                <name>wind direction</name>
+                <type>float</type>
+                <format>%f</format>
+                <node>/environment/wind-from-heading-deg</node>
+            </chunk>
+            <chunk>
+                <name>wind speed</name>
+                <type>float</type>
+                <format>%f</format>
+                <node>/environment/wind-speed-kt</node>
+            </chunk>
+            <chunk>
+                <name>latitude</name>
+                <type>float</type>
+                <format>%f</format>
+                <node>/position/latitude-deg</node>
+            </chunk>
+            <chunk>
+                <name>longitude</name>
+                <type>float</type>
+                <format>%f</format>
+                <node>/position/longitude-deg</node>
+            </chunk>
+            <!-- Waypoints section starts here -->
+            <chunk>
+                <name>lat wp0</name>
+                <type>float</type>
+                <format>%f</format>
+                <node>/androidnav/wp0_lat</node>
+                <!-- <node>/autopilot/route-manager/route/wp/latitude-deg</node> -->
+            </chunk>
+            <chunk>
+                <name>lon wp0</name>
+                <type>float</type>
+                <format>%f</format>
+                <node>/androidnav/wp0_lon</node>
+            </chunk>
+            <chunk>
+                <name>lat wp1</name>
+                <type>float</type>
+                <format>%f</format>
+                <node>/androidnav/wp1_lat</node>
+            </chunk>
+            <chunk>
+                <name>lon wp1</name>
+                <type>float</type>
+                <format>%f</format>
+                <node>/androidnav/wp1_lon</node>
+            </chunk>
+            <chunk>
+                <name>lat wp2</name>
+                <type>float</type>
+                <format>%f</format>
+                <node>/androidnav/wp2_lat</node>
+            </chunk>
+            <chunk>
+                <name>lon wp2</name>
+                <type>float</type>
+                <format>%f</format>
+                <node>/androidnav/wp2_lon</node>
+            </chunk>
+            <chunk>
+                <name>lat wp3</name>
+                <type>float</type>
+                <format>%f</format>
+                <node>/androidnav/wp3_lat</node>
+            </chunk>
+            <chunk>
+                <name>lon wp3</name>
+                <type>float</type>
+                <format>%f</format>
+                <node>/androidnav/wp3_lon</node>
+            </chunk>
+            <chunk>
+                <name>lat wp4</name>
+                <type>float</type>
+                <format>%f</format>
+                <node>/androidnav/wp4_lat</node>
+            </chunk>
+            <chunk>
+                <name>lon wp4</name>
+                <type>float</type>
+                <format>%f</format>
+                <node>/androidnav/wp4_lon</node>
+            </chunk>
+            <chunk>
+                <name>lat wp5</name>
+                <type>float</type>
+                <format>%f</format>
+                <node>/androidnav/wp5_lat</node>
+            </chunk>
+            <chunk>
+                <name>lon wp5</name>
+                <type>float</type>
+                <format>%f</format>
+                <node>/androidnav/wp5_lon</node>
+            </chunk>
+            <chunk>
+                <name>lat wp6</name>
+                <type>float</type>
+                <format>%f</format>
+                <node>/androidnav/wp6_lat</node>
+            </chunk>
+            <chunk>
+                <name>lon wp6</name>
+                <type>float</type>
+                <format>%f</format>
+                <node>/androidnav/wp6_lon</node>
+            </chunk>
+            <chunk>
+                <name>lat wp7</name>
+                <type>float</type>
+                <format>%f</format>
+                <node>/androidnav/wp7_lat</node>
+            </chunk>
+            <chunk>
+                <name>lon wp7</name>
+                <type>float</type>
+                <format>%f</format>
+                <node>/androidnav/wp7_lon</node>
+            </chunk>
+            <chunk>
+                <name>lat wp8</name>
+                <type>float</type>
+                <format>%f</format>
+                <node>/androidnav/wp8_lat</node>
+            </chunk>
+            <chunk>
+                <name>lon wp8</name>
+                <type>float</type>
+                <format>%f</format>
+                <node>/androidnav/wp8_lon</node>
+            </chunk>
+            <chunk>
+                <name>lat wp9</name>
+                <type>float</type>
+                <format>%f</format>
+                <node>/androidnav/wp9_lat</node>
+            </chunk>
+            <chunk>
+                <name>lon wp9</name>
+                <type>float</type>
+                <format>%f</format>
+                <node>/androidnav/wp9_lon</node>
+            </chunk>
+            <chunk>
+                <name>lat wp10</name>
+                <type>float</type>
+                <format>%f</format>
+                <node>/androidnav/wp10_lat</node>
+            </chunk>
+            <chunk>
+                <name>lon wp10</name>
+                <type>float</type>
+                <format>%f</format>
+                <node>/androidnav/wp10_lon</node>
+            </chunk>
+            <chunk>
+                <name>lat wp11</name>
+                <type>float</type>
+                <format>%f</format>
+                <node>/androidnav/wp11_lat</node>
+            </chunk>
+            <chunk>
+                <name>lon wp11</name>
+                <type>float</type>
+                <format>%f</format>
+                <node>/androidnav/wp11_lon</node>
+            </chunk>
+            <!-- Waypoints section ends here -->
+            <chunk>
+                <name>current wp</name>
+                <type>string</type>
+                <format>%s</format>
+                <node>/autopilot/route-manager/wp/id</node>
+            </chunk>
+            <chunk>
+                <name>number of wp</name>
+                <format>%d</format>
+                <node>/autopilot/route-manager/route/num</node>
+            </chunk>
+        </output>
+    </generic>
+</PropertyList>
