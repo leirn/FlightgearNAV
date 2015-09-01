@@ -16,7 +16,23 @@ import android.graphics.Paint.Style;
 import android.util.Log;
 
 public class PlaneG1000 extends Plane {
-	
+	//Specific G1000 Bitmap
+	Bitmap g1000enginedisplay;
+	Bitmap num1;
+	Bitmap num2;
+	Bitmap num3;
+	Bitmap num4;
+	Bitmap num5;
+	Bitmap num6;
+	Bitmap num7;
+	Bitmap num8;
+	Bitmap num9;
+	Bitmap num0;
+	Bitmap numdot;
+	Bitmap leftgauge;
+	Bitmap rightgauge;
+	Bitmap lefttriangle;
+	Bitmap righttriangle;
 	
 
 	//Bitmap mask; defined in the base class!
@@ -130,6 +146,24 @@ public class PlaneG1000 extends Plane {
 		ndwpMatrix = new Matrix();
 		
 		//Load bitmaps
+		g1000symbols = BitmapFactory.decodeResource(mContext.getResources(),R.drawable.g1000symbols);
+		g1000enginedisplay = BitmapFactory.decodeResource(mContext.getResources(),R.drawable.g1000enginedisplay);
+		num0 = Bitmap.createBitmap(g1000symbols, 25, 33, 30, 45);
+		num1 = Bitmap.createBitmap(g1000symbols, 95, 33, 30, 45);
+		num2 = Bitmap.createBitmap(g1000symbols, 163, 33, 30, 45);
+		num3 = Bitmap.createBitmap(g1000symbols, 234, 33, 30, 45);
+		num4 = Bitmap.createBitmap(g1000symbols, 298, 33, 30, 45);
+		num5 = Bitmap.createBitmap(g1000symbols, 373, 33, 30, 45);
+		num6 = Bitmap.createBitmap(g1000symbols, 438, 33, 30, 45);
+		num7 = Bitmap.createBitmap(g1000symbols, 508, 33, 30, 45);
+		num8 = Bitmap.createBitmap(g1000symbols, 575, 33, 30, 45);
+		num9 = Bitmap.createBitmap(g1000symbols, 643, 33, 30, 45);
+		numdot = Bitmap.createBitmap(g1000symbols, 342, 101, 11, 45);
+		leftgauge = Bitmap.createBitmap(g1000symbols, 43, 106, 286, 33);
+		rightgauge = Bitmap.createBitmap(g1000symbols, 43, 169, 286, 33);
+		lefttriangle = Bitmap.createBitmap(g1000symbols, 595, 123, 57, 41);
+		righttriangle = Bitmap.createBitmap(g1000symbols, 335, 180, 57, 41);
+		
 		
 		mask = BitmapFactory.decodeResource(mContext.getResources(),R.drawable.navmask);
 		maskfull = BitmapFactory.decodeResource(mContext.getResources(),R.drawable.navmaskfull);
@@ -339,8 +373,31 @@ public class PlaneG1000 extends Plane {
         	}
         }
         
+        drawG1000EngineDisplay(canvas,paint);
+        
 		//drawHsiArc(canvas, paint);
 	
+	}
+	
+	public void drawG1000EngineDisplay(canvas,paint)
+	{
+		//Paint panel
+		//Paint left load gauge
+		//Paint right load gauge
+		//Paint left rpm gauge
+		//Paint right rpm gauge
+		//Paint left fuel flow
+		//Paint right fuel flow
+		//Paint left oil temp
+		//Paint right oil temp
+		//Paint left oil pres
+		//Paint right oil pres
+		//Paint left coolant temp
+		//Paint right coolant temp
+		//Paint left fuel temp
+		//Paint right fuel temp
+		//Paint left fuel qty gal
+		//Paint right fuel qty gal
 	}
 	
 	public void drawCir(Canvas canvas, Paint paint, int curmode)
