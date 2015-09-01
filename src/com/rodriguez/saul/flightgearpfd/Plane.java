@@ -10,7 +10,8 @@ public class Plane {
 	public static final int B787 = 2;
 	public static final int B747 = 3;
 	public static final int A330 = 4;	
-	public static final int A380 = 5;
+	public static final int A380 = 5;	
+	public static final int G1000 = 6;
 	
 	int planeType;
 	
