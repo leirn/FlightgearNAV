@@ -61,7 +61,8 @@ public class MainActivity extends Activity {
 	public static final int B787 = 2;
 	public static final int B747 = 3;
 	public static final int A330 = 4;	
-	public static final int A380 = 5;
+	public static final int A380 = 5;	
+	public static final int G1000 = 6;
 	
 	//int plane = B787;
 	
@@ -90,6 +91,7 @@ public class MainActivity extends Activity {
 		list.add("Boeing 747-400 (No available)");
 		list.add("Airbus 330");
 		list.add("Airbus 380 (No available)");
+		list.add("G1000");
 		
 		ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item, list);
 		dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -153,7 +155,7 @@ public class MainActivity extends Activity {
 		text += "[Frequency] = Refresh rate in Hz\n";
 		text += "[IP android] = The IP address of this device: " +  ip + " \n";
 		text += "[port] = Port number (must match field PORT NUMBER entered above)\n";
-		text += "[protocol filename  without .xml] =  androidpfd777, androidpfd787, androidpfd330, androidpfd330, androidpfd747\n\n";
+		text += "[protocol filename  without .xml] =  androidnav777, androidnavG1000mfd\n\n";
 		text += "Example:\n";
 		text += "fgfs --generic=socket,out,20,"+ ip +",5503,udp,androidnav777\n";
 		text += "5 Wait until flightgear finishes to start (cockpit visible), and click “Connect” in the android device.\n\n";
