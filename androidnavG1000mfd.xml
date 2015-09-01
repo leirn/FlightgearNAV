@@ -389,33 +389,105 @@
                 <node>/autopilot/route-manager/route/num</node>
             </chunk>
             
-            <!-- Engine part for G1000 MFD Left column -->
+            <!-- G1000 MFD Top bar -->
+            <!-- TODO : Add NAV 1 -->
+            <!-- TODO : Add NAV 2 -->
+            <!-- TODO : Add COM 1 -->
+            <!-- TODO : Add COM 2 -->
+            <!-- TODO : Add GROUND SPEED (GS) -->
+            <!-- TODO : Add TRK -->
+            <!-- TODO : Add BEARING (BRG) -->
+            <!-- TODO : Add ETE -->
+            
+            <!-- End of G1000 MFD Top bar -->
+            
+            <!-- ENGINE INDICATION SYSTEM -->
+            <!-- Engine part for G1000 MFD EIS -->
+            <chunk>
+                <name>load left</name>
+                <format>%d</format>
+                <node>/engines/engine[0]/prop-thrust</node>
+            </chunk>
+            <chunk>
+                <name>load right</name>
+                <format>%d</format>
+                <node>/engines/engine[1]/prop-thrust</node>
+            </chunk>
             <chunk>
                 <name>throttle left</name>
                 <format>%d</format>
-                <node>/controls/engines/engine[0]/throttle</node>
+                <node>/engines/engine[0]/rpm</node>
             </chunk>
             <chunk>
                 <name>throttle right</name>
                 <format>%d</format>
-                <node>/controls/engines/engine[1]/throttle</node>
+                <node>/engines/engine[1]/rpm</node>
             </chunk>
             <!-- End of engine part -->
             
-            <!-- Oil part for G1000 MFD Left column -->
-            <!-- TODO : Add Oil temp -->
-            <!-- TODO : Add Oil pres -->
+            <!-- Oil part for G1000 MFD EIS -->
+            <chunk>
+                <name>oil temp left</name>
+                <format>%d</format>
+                <node>/engines/engine[0]/oil-temperature-degf</node>
+            </chunk>
+            <chunk>
+                <name>oil temp right</name>
+                <format>%d</format>
+                <node>/engines/engine[1]/oil-temperature-degf/node>
+            </chunk>
+            <chunk>
+                <name>oil pres left</name>
+                <format>%d</format>
+                <node>/engines/engine[0]/oil-pressure-psi</node>
+            </chunk>
+            <chunk>
+                <name>oil pres right</name>
+                <format>%d</format>
+                <node>/engines/engine[1]/oil-pressure-psi/node>
+            </chunk>
             <!-- Oil of engine part -->
             
-            <!-- Fuel part for G1000 MFD Left column -->
-            <!-- TODO : Add Fuel flow -->
-            <!-- TODO : Add Fuel temp -->
-            <!-- TODO : Add Fuel qty -->
-                <name>fuel quantity</name>
+            <!-- Fuel part for G1000 MFD EIS -->
+            <chunk>
+                <name>fuel flow left</name>
                 <format>%d</format>
-                <node>/consumables/fuel/total-gal_us</node>
+                <node>/engines/engine[0]/fuel-flow-gph</node>
             </chunk>
-            <!-- Fuel of engine part -->
+            <chunk>
+                <name>fuel flow right</name>
+                <format>%d</format>
+                <node>/engines/engine[1]/fuel-flow-gph</node>
+            </chunk>
+            <!-- TODO : Add Fuel temp -->
+            <chunk>
+                <name>fuel quantity left</name>
+                <format>%d</format>
+                <node>/consumables/fuel/tank[0]/level-norm</node>
+            </chunk>
+            <chunk>
+                <name>fuel quantity right</name>
+                <format>%d</format>
+                <node>/consumables/fuel/tank[1]/level-norm</node>
+            </chunk>
+            <!-- End of fuel part -->
+            
+            
+            <!-- Electrical part for G1000 MFD EIS -->
+            <chunk>
+                <name>voltmeter left</name>
+                <format>%d</format>
+                <node>/systems/electrical/bus/left-main-bus'/node>
+            </chunk>
+            <chunk>
+                <name>voltmeter right</name>
+                <format>%d</format>
+                <node>/systems/electrical/bus/right-main-bus'/node>
+            </chunk>
+            <!-- TODO : Add Ampmeter -->
+            
+            <!-- TODO : Add Gearbox indicator -->
+            <!-- TODO : Add Deice Fluid -->
             
         </output>
     </generic>
