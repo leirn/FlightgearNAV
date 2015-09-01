@@ -36,18 +36,13 @@ import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
-public class MFD777View extends SurfaceView implements SurfaceHolder.Callback {
+public class MFDG1000View extends SurfaceView implements SurfaceHolder.Callback {
 
 	private SurfaceHolder surfaceHolder;
 	Context mcontext;
 		
 	
-	public static final int BASIC = 0;
-	public static final int B777 = 1;
-	public static final int B787 = 2;
-	public static final int B747 = 3;
-	public static final int A330 = 4;	
-	public static final int A380 = 5;
+	
 		
 	Plane plane;
 	int planeType;
@@ -59,7 +54,7 @@ public class MFD777View extends SurfaceView implements SurfaceHolder.Callback {
 	float scaleFactor;
 			
 	
-	public MFD777View(Context context, AttributeSet attrs) {
+	public MFDG1000View(Context context, AttributeSet attrs) {
 		super(context, attrs);
 				
 		
@@ -160,10 +155,6 @@ public class MFD777View extends SurfaceView implements SurfaceHolder.Callback {
 		setCurrentwp(values[0].getString(MessageHandlerFGFS.CURRENTWP));
 		setNumwp(values[0].getInt(MessageHandlerFGFS.NUMWP));
 		
-		//Default plane is 777m other planes need to rearrange parameters
-		if (planeType == MFD777View.A330) {
-			rearrangeParamA330();				
-		}
 		
 		//Check if the database needs update
 		if (plane.checkUpdateDBNeeded()) {
@@ -174,36 +165,7 @@ public class MFD777View extends SurfaceView implements SurfaceHolder.Callback {
 	
 	}
 
-	public void rearrangeParamA330()
-	{
-		switch (mMFD777.plane.mode) {
-			case 0:  //ILS
-					mMFD777.setModebut(true); //Circle						
-					break;
-					
-			case 1: //VOR
-					mMFD777.setModebut(true); //Circle						
-					break;
-			case 2: //NAV
-					mMFD777.setModebut(true); //Circle	
-					if (mMFD777.plane.switchvorl == 2)
-						mMFD777.setSwitchleft(-1);
-					if (mMFD777.plane.switchvorr == 2)
-						mMFD777.setSwitchright(-1);
-					break;
-			case 3: //ARC
-					mMFD777.setModebut(false); //Arc
-					mMFD777.setMode(2);
-					break;
-			case 4: break;
-			default: break;
-					
-		}
-		
-		
-		//ARC
-		
-	}
+	
 
 	@Override
 	public void surfaceCreated(SurfaceHolder holder) {
