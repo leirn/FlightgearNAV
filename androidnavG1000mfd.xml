@@ -388,6 +388,35 @@
                 <format>%d</format>
                 <node>/autopilot/route-manager/route/num</node>
             </chunk>
+            
+            <!-- Engine part for G1000 MFD Left column -->
+            <chunk>
+                <name>throttle left</name>
+                <format>%d</format>
+                <node>/controls/engines/engine[0]/throttle</node>
+            </chunk>
+            <chunk>
+                <name>throttle right</name>
+                <format>%d</format>
+                <node>/controls/engines/engine[1]/throttle</node>
+            </chunk>
+            <!-- End of engine part -->
+            
+            <!-- Oil part for G1000 MFD Left column -->
+            <!-- TODO : Add Oil temp -->
+            <!-- TODO : Add Oil pres -->
+            <!-- Oil of engine part -->
+            
+            <!-- Fuel part for G1000 MFD Left column -->
+            <!-- TODO : Add Fuel flow -->
+            <!-- TODO : Add Fuel temp -->
+            <!-- TODO : Add Fuel qty -->
+                <name>fuel quantity</name>
+                <format>%d</format>
+                <node>/consumables/fuel/total-gal_us</node>
+            </chunk>
+            <!-- Fuel of engine part -->
+            
         </output>
     </generic>
 </PropertyList>
