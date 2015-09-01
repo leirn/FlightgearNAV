@@ -50,7 +50,6 @@ public class MFDG1000View extends SurfaceView implements SurfaceHolder.Callback 
 	int centery;
 	float scaleFactor;
 	float g1000scaleFactor;
-			
 	
 	public MFDG1000View(Context context, AttributeSet attrs) {
 		super(context, attrs);
@@ -63,91 +62,96 @@ public class MFDG1000View extends SurfaceView implements SurfaceHolder.Callback 
 
 	public updateView(values) {
 		//update NAV
-		setHeading(values[0].getFloat(G1000Protocol.HEADING));
-		setAPheading(values[0].getInt(G1000Protocol.APHEADING));
+		plane.heading = values[0].getFloat(G1000Protocol.HEADING);
+		plane.apheading = values[0].getInt(G1000Protocol.APHEADING);
 	
 		//VORL
-		setNAV1ID(values[0].getString(G1000Protocol.VORLID));
-		setNAV1DME(values[0].getFloat(G1000Protocol.VORLDME));
-		setNAV1DMEinrange(values[0].getBool(G1000Protocol.VORLDMEINRANGE));
-		setNAV1inrange(values[0].getBool(G1000Protocol.VORLINRANGE));
-		setNAV1freq(values[0].getFloat(G1000Protocol.VORLFREQ));
+		plane.vorlid = values[0].getString(G1000Protocol.VORLID);
+		plane.vorldme = values[0].getFloat(G1000Protocol.VORLDME);
+		plane.vorldmeinrange = values[0].getBool(G1000Protocol.VORLDMEINRANGE);
+		plane.vorlinrange = values[0].getBool(G1000Protocol.VORLINRANGE);
+		plane.vorlfreq = values[0].getFloat(G1000Protocol.VORLFREQ);
 	
-		setSwitchleft(values[0].getInt(G1000Protocol.SWITCHLEFT));
-		setNAV1dir(values[0].getFloat(G1000Protocol.VORLDIR));
+		plane.switchvorl = values[0].getInt(G1000Protocol.SWITCHLEFT);
+		plane.vorldirectionvalues[0].getFloat(G1000Protocol.VORLDIR);
 	
 		//VORRL
-		setNAV2ID(values[0].getString(G1000Protocol.VORRID));
-		setNAV2DME(values[0].getFloat(G1000Protocol.VORRDME));
-		setNAV2DMEinrange(values[0].getBool(G1000Protocol.VORRDMEINRANGE));
-		setNAV2inrange(values[0].getBool(G1000Protocol.VORRINRANGE));
-		setNAV2freq(values[0].getFloat(G1000Protocol.VORRFREQ));
+		plane.vorrid = values[0].getString(G1000Protocol.VORRID);
+		plane.vorldme = values[0].getFloat(G1000Protocol.VORRDME);
+		plane.vorrdmeinrange = values[0].getBool(G1000Protocol.VORRDMEINRANGE);
+		plane.vorrinrange = values[0].getBool(G1000Protocol.VORRINRANGE);
+		plane.vorrfreq = values[0].getFloat(G1000Protocol.VORRFREQ);
 	
-		setSwitchright(values[0].getInt(G1000Protocol.SWITCHRIGHT));
-		setNAV2dir(values[0].getFloat(G1000Protocol.VORRDIR));
+		plane.switchvorr = values[0].getInt(G1000Protocol.SWITCHRIGHT);
+		plane.vorrdirectionvalues[0].getFloat(G1000Protocol.VORRDIR);
 	
 		//ADFL
-		setADF1ID(values[0].getString(G1000Protocol.ADFLID));
-		setADF1inrange(values[0].getBool(G1000Protocol.ADFLINRANGE));
-		setADF1freq(values[0].getInt(G1000Protocol.ADFLFREQ));
-		setADF1dir(values[0].getFloat(G1000Protocol.ADFLDIR));
+		plane.adflid = values[0].getString(G1000Protocol.ADFLID);
+		plane.adflinrange = values[0].getBool(G1000Protocol.ADFLINRANGE);
+		plane.adflfreq = values[0].getInt(G1000Protocol.ADFLFREQ);
+		plane.adfldirection = values[0].getFloat(G1000Protocol.ADFLDIR);
 	
 		//ADFR
-		setADFrID(values[0].getString(G1000Protocol.ADFRID));
-		setADFrinrange(values[0].getBool(G1000Protocol.ADFRINRANGE));
-		setADFrfreq(values[0].getInt(G1000Protocol.ADFRFREQ));
-		setADFrdir(values[0].getFloat(G1000Protocol.ADFRDIR));
+		plane.adfrid = values[0].getString(G1000Protocol.ADFRID);
+		plane.adfrinrange = values[0].getBool(G1000Protocol.ADFRINRANGE);
+		plane.adfrfreq = values[0].getInt(G1000Protocol.ADFRFREQ);
+		plane.adfrdirection = values[0].getFloat(G1000Protocol.ADFRDIR);
 	
 		//RADIAL NAV1
-		setRaddir(values[0].getFloat(G1000Protocol.RADIALDIR));
-		setRadhead(values[0].getFloat(G1000Protocol.RADIALHEAD));
-		setRaddef(values[0].getFloat(G1000Protocol.RADIALDEF));
-		setGSdef(values[0].getFloat(G1000Protocol.GSDEF));
+		plane.radial = values[0].getFloat(G1000Protocol.RADIALDIR);
+		plane.realheading = values[0].getFloat(G1000Protocol.RADIALHEAD);
+		plane.radialdef = values[0].getFloat(G1000Protocol.RADIALDEF);
+		plane.gsdef = values[0].getFloat(G1000Protocol.GSDEF);
 	
 		//Modes
-		setMode(values[0].getInt(G1000Protocol.MODE));
-		setRange(values[0].getInt(G1000Protocol.RANGE));
-		setModebut(values[0].getBool(G1000Protocol.MODEBUT));
+		plane.mode = values[0].getInt(G1000Protocol.MODE);
+		plane.range = values[0].getInt(G1000Protocol.RANGE);
+		plane.modebut = values[0].getBool(G1000Protocol.MODEBUT);
 	
 		//Speed
-		setTruespeed(values[0].getFloat(G1000Protocol.TRUESPEED));
-		setGroundpeed(values[0].getFloat(G1000Protocol.GROUNDSPEED));
-		setWindhead(values[0].getFloat(G1000Protocol.WINDHEADING));
-		setWindspeed(values[0].getFloat(G1000Protocol.WINDSPEED));
+		plane.truespeed = values[0].getFloat(G1000Protocol.TRUESPEED);
+		plane.groundspeed = values[0].getFloat(G1000Protocol.GROUNDSPEED);
+		plane.windspeed = values[0].getFloat(G1000Protocol.WINDHEADING);
+		plane.windheading = values[0].getFloat(G1000Protocol.WINDSPEED);
 	
 		//Position
-		setLat(values[0].getFloat(G1000Protocol.LATITUDE));
-		setLon(values[0].getFloat(G1000Protocol.LONGITUDE));
+		plane.lat = values[0].getFloat(G1000Protocol.LATITUDE);
+		plane.lon = values[0].getFloat(G1000Protocol.LONGITUDE);
 		
 		//route
-		setLatwp0(values[0].getFloat(G1000Protocol.LATWP1));
-		setLonwp0(values[0].getFloat(G1000Protocol.LONWP1));
-		setLatwp1(values[0].getFloat(G1000Protocol.LATWP2));
-		setLonwp1(values[0].getFloat(G1000Protocol.LONWP2));
-		setLatwp2(values[0].getFloat(G1000Protocol.LATWP3));
-		setLonwp2(values[0].getFloat(G1000Protocol.LONWP3));
-		setLatwp3(values[0].getFloat(G1000Protocol.LATWP4));
-		setLonwp3(values[0].getFloat(G1000Protocol.LONWP4));
-		setLatwp4(values[0].getFloat(G1000Protocol.LATWP5));
-		setLonwp4(values[0].getFloat(G1000Protocol.LONWP5));
-		setLatwp5(values[0].getFloat(G1000Protocol.LATWP6));
-		setLonwp5(values[0].getFloat(G1000Protocol.LONWP6));
-		setLatwp6(values[0].getFloat(G1000Protocol.LATWP7));
-		setLonwp6(values[0].getFloat(G1000Protocol.LONWP7));
-		setLatwp7(values[0].getFloat(G1000Protocol.LATWP8));
-		setLonwp7(values[0].getFloat(G1000Protocol.LONWP8));
-		setLatwp8(values[0].getFloat(G1000Protocol.LATWP9));
-		setLonwp8(values[0].getFloat(G1000Protocol.LONWP9));
-		setLatwp9(values[0].getFloat(G1000Protocol.LATWP10));
-		setLonwp9(values[0].getFloat(G1000Protocol.LONWP10));
-		setLatwp10(values[0].getFloat(G1000Protocol.LATWP11));
-		setLonwp10(values[0].getFloat(G1000Protocol.LONWP11));
-		setLatwp11(values[0].getFloat(G1000Protocol.LATWP12));
-		setLonwp11(values[0].getFloat(G1000Protocol.LONWP12));
+		plane.latwp[0] = values[0].getFloat(G1000Protocol.LATWP1);
+		plane.lonwp[0] = values[0].getFloat(G1000Protocol.LONWP1);
+		plane.latwp[1] = values[0].getFloat(G1000Protocol.LATWP2);
+		plane.lonwp[1] = values[0].getFloat(G1000Protocol.LONWP2);
+		plane.latwp[2] = values[0].getFloat(G1000Protocol.LATWP3);
+		plane.lonwp[2] = values[0].getFloat(G1000Protocol.LONWP3);
+		plane.latwp[3] = values[0].getFloat(G1000Protocol.LATWP4);
+		plane.lonwp[3] = values[0].getFloat(G1000Protocol.LONWP4);
+		plane.latwp[4] = values[0].getFloat(G1000Protocol.LATWP5);
+		plane.lonwp[4] = values[0].getFloat(G1000Protocol.LONWP5);
+		plane.latwp[5] = values[0].getFloat(G1000Protocol.LATWP6);
+		plane.lonwp[5] = values[0].getFloat(G1000Protocol.LONWP6);
+		plane.latwp[6] = values[0].getFloat(G1000Protocol.LATWP7);
+		plane.lonwp[6] = values[0].getFloat(G1000Protocol.LONWP7);
+		plane.latwp[7] = values[0].getFloat(G1000Protocol.LATWP8);
+		plane.lonwp[7] = values[0].getFloat(G1000Protocol.LONWP8);
+		plane.latwp[8] = values[0].getFloat(G1000Protocol.LATWP9);
+		plane.lonwp[8] = values[0].getFloat(G1000Protocol.LONWP9);
+		plane.latwp[9] = values[0].getFloat(G1000Protocol.LATWP10);
+		plane.lonwp[9] = values[0].getFloat(G1000Protocol.LONWP10);
+		plane.latwp[10] = values[0].getFloat(G1000Protocol.LATWP11);
+		plane.lonwp[10] = values[0].getFloat(G1000Protocol.LONWP11);
+		plane.latwp[11] = values[0].getFloat(G1000Protocol.LATWP12);
+		plane.lonwp[11] = values[0].getFloat(G1000Protocol.LONWP12);
 		
-		setCurrentwp(values[0].getString(G1000Protocol.CURRENTWP));
-		setNumwp(values[0].getInt(G1000Protocol.NUMWP));
+		plane.currentwp = values[0].getString(G1000Protocol.CURRENTWP);
+		plane.numwp = values[0].getInt(G1000Protocol.NUMWP);
 		
+		// G1000 EIS
+		plane.leftload = values[0].getFloat(G1000Protocol.LEFT_LOAD);
+		plane.rightload = values[0].getFloat(G1000Protocol.RIGHT_LOAD);
+		plane.leftload = values[0].getFloat(G1000Protocol.LEFT_RPM);
+		plane.rightrpm = values[0].getFloat(G1000Protocol.RIGHT_RPM);
 		
 		//Check if the database needs update
 		if (plane.checkUpdateDBNeeded()) {
@@ -155,11 +159,8 @@ public class MFDG1000View extends SurfaceView implements SurfaceHolder.Callback 
 		} else {
 			draw();
 		}
-	
 	}
-
 	
-
 	@Override
 	public void surfaceCreated(SurfaceHolder holder) {
 		// TODO Auto-generated method stub
@@ -260,25 +261,14 @@ public class MFDG1000View extends SurfaceView implements SurfaceHolder.Callback 
 	    }
 	    	    
 	    return true;
-	  }
-	
-	
-	
+	}
+	  
 	public void draw() {
-		
-		long time, time2;
-		//time = System.currentTimeMillis();
-			
-		//Lock the canvas and start drawing
-        Canvas canvas = surfaceHolder.lockCanvas();
-        
-        plane.draw(canvas);
-        
-        surfaceHolder.unlockCanvasAndPost(canvas);
-        
-        //time2 = System.currentTimeMillis();
-  		//Log.d("777View", String.format("%d", (time2-time)));
-       
+	        Canvas canvas = surfaceHolder.lockCanvas();
+	        
+	        plane.draw(canvas);
+	        
+	        surfaceHolder.unlockCanvasAndPost(canvas);
 	}
 	
 	//Setters
@@ -286,7 +276,6 @@ public class MFDG1000View extends SurfaceView implements SurfaceHolder.Callback 
 	{
 		planeType = planetype;
 		//Log.d("SELECTED PLANE",String.format("%d",planeType));
-		
 		
 		switch (planeType) {
 			case G1000:  
@@ -297,477 +286,11 @@ public class MFDG1000View extends SurfaceView implements SurfaceHolder.Callback 
 			default:	
 				//		plane = new PlaneFree(mcontext);
 						break;
-						
 		}
-		
 	}
 	
 	void setPlaneType(int planeType)
 	{
 		plane.planeType = planeType;
 	}
-	
-	void setHeading(float newHeading)
-	{
-		plane.heading = newHeading;		
-	}
-	
-	void setAPheading(int newAPheading)
-	{
-		plane.apheading = newAPheading;		
-	}
-	
-	void setNAV1ID(String newvorid)
-	{
-		plane.vorlid = newvorid;
-	}
-	
-	void setNAV1DME(float newdme)
-	{
-		plane.vorldme = newdme;
-	}
-	
-	void setNAV1DMEinrange(boolean newdmeinrange)
-	{
-		plane.vorldmeinrange = newdmeinrange;
-	}
-	
-	void setNAV1inrange(boolean newinrange)
-	{
-		plane.vorlinrange = newinrange;
-	}
-	
-	void setNAV1freq(float newfreq)
-	{
-		plane.vorlfreq = newfreq;
-	}
-	
-	void setSwitchleft(int newswitch)
-	{
-		plane.switchvorl = newswitch;
-	}
-	
-	void setNAV1dir(float newdir)
-	{
-		plane.vorldirection = newdir;
-	}
-	
-
-	void setNAV2ID(String newvorid)
-	{
-		plane.vorrid = newvorid;
-	}
-	
-	void setNAV2DME(float newdme)
-	{
-		plane.vorrdme = newdme;
-	}
-	
-	void setNAV2DMEinrange(boolean newdmeinrange)
-	{
-		plane.vorrdmeinrange = newdmeinrange;
-	}
-	
-	void setNAV2inrange(boolean newinrange)
-	{
-		plane.vorrinrange = newinrange;
-	}
-	
-	void setNAV2freq(float newfreq)
-	{
-		plane.vorrfreq = newfreq;
-	}
-	
-	void setSwitchright(int newswitch)
-	{
-		plane.switchvorr = newswitch;
-	}
-	
-	void setNAV2dir(float newdir)
-	{
-		plane.vorrdirection = newdir;
-	}
-	
-	void setADF1ID(String newadfid)
-	{
-		plane.adflid = newadfid;
-	}
-	
-	void setADF1inrange(boolean newinrange)
-	{
-		plane.adflinrange = newinrange;
-	}
-	
-	void setADF1freq(int newfreq)
-	{
-		plane.adflfreq = newfreq;
-	}
-	
-	void setADF1dir(float newdir)
-	{
-		plane.adfldirection = newdir;
-	}
-	
-	void setADFrID(String newadfid)
-	{
-		plane.adfrid = newadfid;
-	}
-	
-	void setADFrinrange(boolean newinrange)
-	{
-		plane.adfrinrange = newinrange;
-	}
-	
-	void setADFrfreq(int newfreq)
-	{
-		plane.adfrfreq = newfreq;
-	}
-	
-	void setADFrdir(float newdir)
-	{
-		plane.adfrdirection = newdir;
-	}
-	
-	void setRaddir(float rad)
-	{
-		plane.radial = rad;
-	}
-	
-	void setRadhead(float head)
-	{
-		plane.realheading = head;
-	}
-	
-	void setRaddef(float def)
-	{
-		plane.radialdef = def;
-	}
-	
-	void setGSdef(float def)
-	{
-		plane.gsdef = def;
-	}
-	
-	void setMode(int newmode)
-	{
-		plane.mode = newmode;
-	}
-	
-	void setRange(int newrange)
-	{
-		plane.range = newrange;
-	}
-	
-	void setModebut(boolean newmodebut)
-	{
-		plane.modebut = newmodebut;
-	}
-	
-	void setTruespeed(float newspeed)
-	{
-		plane.truespeed = newspeed;
-	}
-	
-	void setGroundpeed(float newspeed)
-	{
-		plane.groundspeed = newspeed;
-	}
-	
-	void setWindspeed(float newspeed)
-	{
-		plane.windspeed = newspeed;
-	}
-	
-	void setWindhead(float newhead)
-	{
-		plane.windheading = newhead;
-	}
-	
-	void setLat(float newLat)
-	{
-		plane.lat = newLat;
-	}
-	
-	void setLon(float newLon)
-	{
-		plane.lon = newLon;
-	}
-	
-	void setLatwp0(float la)
-	{
-		plane.latwp[0] = la;
-	}
-	
-	void setLonwp0(float lo)
-	{
-		plane.lonwp[0] = lo;
-	}
-	
-	void setLatwp1(float la)
-	{
-		plane.latwp[1] = la;
-	}
-	
-	void setLonwp1(float lo)
-	{
-		plane.lonwp[1] = lo;
-	}
-	
-	void setLatwp2(float la)
-	{
-		plane.latwp[2] = la;
-	}
-	
-	void setLonwp2(float lo)
-	{
-		plane.lonwp[2] = lo;
-	}
-	
-	void setLatwp3(float la)
-	{
-		plane.latwp[3] = la;
-	}
-	
-	void setLonwp3(float lo)
-	{
-		plane.lonwp[3] = lo;
-	}
-	
-	void setLatwp4(float la)
-	{
-		plane.latwp[4] = la;
-	}
-	
-	void setLonwp4(float lo)
-	{
-		plane.lonwp[4] = lo;
-	}
-	
-	void setLatwp5(float la)
-	{
-		plane.latwp[5] = la;
-	}
-	
-	void setLonwp5(float lo)
-	{
-		plane.lonwp[5] = lo;
-	}
-	
-	void setLatwp6(float la)
-	{
-		plane.latwp[6] = la;
-	}
-	
-	void setLonwp6(float lo)
-	{
-		plane.lonwp[6] = lo;
-	}
-
-	void setLatwp7(float la)
-	{
-		plane.latwp[7] = la;
-	}
-	
-	void setLonwp7(float lo)
-	{
-		plane.lonwp[7] = lo;
-	}
-	
-	void setLatwp8(float la)
-	{
-		plane.latwp[8] = la;
-	}
-	
-	void setLonwp8(float lo)
-	{
-		plane.lonwp[8] = lo;
-	}
-
-	void setLatwp9(float la)
-	{
-		plane.latwp[9] = la;
-	}
-	
-	void setLonwp9(float lo)
-	{
-		plane.lonwp[9] = lo;
-	}
-	
-	void setLatwp10(float la)
-	{
-		plane.latwp[10] = la;
-	}
-	
-	void setLonwp10(float lo)
-	{
-		plane.lonwp[10] = lo;
-	}
-	
-	void setLatwp11(float la)
-	{
-		plane.latwp[11] = la;
-	}
-	
-	void setLonwp11(float lo)
-	{
-		plane.lonwp[11] = lo;
-	}
-	
-	void setCurrentwp(String cur)
-	{
-		plane.currentwp = cur;
-	}
-	
-	void setNumwp(int num)
-	{
-		plane.numwp = num;
-	}
-	
-	/*
-	void SetSpeed(float newSpeed) 
-	{
-		plane.speed = newSpeed;
-	}
-	
-	void setAltitude(float newAltitude)
-	{
-		plane.altitude = newAltitude;
-	}
-	
-	void setVerticalSpeed(float newverticalSpeed) 
-	{
-		plane.verticalSpeed = newverticalSpeed;		
-	}
-	
-	void setRoll(float newRoll)
-	{
-		plane.horizontRollAngle = -newRoll;	//the roll angle of FGFS is anti-clockwise whereas the rotation of matrix in android is clockwise
-	}
-	
-	void setPitch(float newPitch)
-	{
-		plane.horizontPitchAngle = newPitch;
-	}
-	
-	void setHeading(float newHeading)
-	{
-		plane.heading = newHeading;		
-	}
-	
-	void setNAV1Quality(float newQuality)
-	{
-		plane.locnavQuality = newQuality;
-	}
-	
-	void setNAV1loc(boolean newNavLoc)
-	{
-		plane.locnav = newNavLoc;		
-	}
-	
-	void setNAV1deflection(float newDeflection)
-	{
-		plane.headingLoc = newDeflection;
-	}
-	
-	void setGSActive(boolean newGSactive)
-	{
-		plane.gsActive = newGSactive;		
-	}
-	
-	void setGSInRange(boolean newgsInRange)
-	{
-		plane.gsInRange = newgsInRange;		
-	}
-	
-	void setGSdeflection(float newgsDeflection)
-	{
-		plane.gsDeflection = newgsDeflection;
-	}
-	
-	void setRadioaltimeter(int newRadioaltimeter)
-	{
-		plane.radioaltimeter = newRadioaltimeter;		
-	}
-	
-	void setMach(float newMach)
-	{
-		plane.mach = newMach;
-	}
-	
-	void setStallSpeed(float newStallSpeed)
-	{
-		plane.stallspeed = newStallSpeed; 
-	}
-	
-	void setStallWarning(boolean newStallWarning)
-	{
-		plane.stallwarning = newStallWarning;		
-	}
-	
-	void setFlaps(float newFlaps)
-	{
-		plane.flaps = newFlaps;
-	}
-	
-	void setMaxSpeed(float newMaxSpeed)
-	{
-		plane.maxspeed = newMaxSpeed;
-	}
-	
-	void setApIndicator(String newApIndicator)
-	{
-		plane.apIndicator = newApIndicator;
-		//Log.d("Saul",apIndicator);
-	}
-	
-	void setPitchMode(String newPitchMode)
-	{
-		plane.pitchMode = newPitchMode;
-		//Log.d("Saul",pitchMode);
-	}
-	
-	void setRollMode(String newRoleMode)
-	{
-		plane.rollMode = newRoleMode;
-	}
-	
-	void setSpeedMode(String newSpeedMode)
-	{
-		plane.speedMode = newSpeedMode;
-	}
-	
-	void setAPaltitude(float newApAltitude)
-	{
-		plane.apaltitude = newApAltitude;
-	}
-	
-	void setAPactualaltitude(float newAPactualaltitude)
-	{
-		plane.apactualaltitude = newAPactualaltitude;
-	}
-	
-	void setAPspeed(float newAPspeed)
-	{
-		plane.apspeed = newAPspeed;
-	}
-	
-	void setAPheading(int newAPheading)
-	{
-		plane.apheading = newAPheading;		
-	}
-	
-	void setDMEinrange(boolean inrange)
-	{
-		plane.dmeinrange = inrange;
-	}
-	
-	void setDME(float newdme)
-	{
-		plane.dme = newdme;
-	}
-	
-	
-	*/
-	
-	
 }
