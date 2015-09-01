@@ -41,10 +41,6 @@ public class MFDG1000View extends SurfaceView implements SurfaceHolder.Callback 
 
 	private SurfaceHolder surfaceHolder;
 	Context mcontext;
-		
-	
-	
-		
 	Plane plane;
 	int planeType;
 	
@@ -58,15 +54,10 @@ public class MFDG1000View extends SurfaceView implements SurfaceHolder.Callback 
 	public MFDG1000View(Context context, AttributeSet attrs) {
 		super(context, attrs);
 				
-		
 		mcontext = context;
 		// TODO Auto-generated constructor stub
 		surfaceHolder = this.getHolder();
 		surfaceHolder.addCallback(this);
-		
-		//plane = new Plane777(mcontext);
-				
-		
 	}
 
 	public updateView(values) {
@@ -250,9 +241,6 @@ public class MFDG1000View extends SurfaceView implements SurfaceHolder.Callback 
 	    				plane.showroute = true;	    			
 	    			}
 	    		}
-	    		
-	    		
-	    		
 	    		break;
 	    	case MotionEvent.ACTION_MOVE:
 	    		break;
@@ -283,8 +271,6 @@ public class MFDG1000View extends SurfaceView implements SurfaceHolder.Callback 
   		//Log.d("777View", String.format("%d", (time2-time)));
        
 	}
-
-	
 	
 	//Setters
 	void setPlane(int planetype) 
@@ -294,37 +280,11 @@ public class MFDG1000View extends SurfaceView implements SurfaceHolder.Callback 
 		
 		
 		switch (planeType) {
-			case BASIC: 
-		//				plane = new PlaneFree(mcontext);
-						plane = new Plane777(mcontext);
-						setPlaneType(planeType);
-						break;
-			case B777:  
-						plane = new Plane777(mcontext);
-						setPlaneType(planeType);
-						break;
-			case B787:  
-			//			plane = new Plane787(mcontext);
-						break;
-			case B747:  
-				//		plane = new Plane747(mcontext);
-						break;
-						
-			case A330:  
-				//		plane = new PlaneA330(mcontext);
-						plane = new Plane777(mcontext);
-						setPlaneType(planeType);
-						break;
-						
-			case A380:  
-					//	plane = new PlaneA380(mcontext);
-						break;
-						
 			case G1000:  
-				//		plane = new PlaneA330(mcontext);
 						plane = new PlaneG1000(mcontext);
 						setPlaneType(planeType);
 						break;
+			// This view only managed G1000
 			default:	
 				//		plane = new PlaneFree(mcontext);
 						break;
