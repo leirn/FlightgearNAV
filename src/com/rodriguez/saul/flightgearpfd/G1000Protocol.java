@@ -85,5 +85,10 @@ public class G1000Protocol {
     public static final int LEFT_RPM = 65;
     public static final int RIGHT_RPM = 66;
     
+    public static final int LEFT_OIL_TEMP = 67;
+    public static final int RIGHT_OIL_TEMP = 68;
+    public static final int LEFT_OIL_PRES = 69;
+    public static final int RIGHT_OIL_PRES = 70;
+    
 
 }
