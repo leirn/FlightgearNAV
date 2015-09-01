@@ -78,5 +78,12 @@ public class G1000Protocol {
     public static final int LONWP12 = 60;
     public static final int CURRENTWP = 61;
     public static final int NUMWP = 62;
+    
+    
+    public static final int LEFT_LOAD = 63;
+    public static final int RIGHT_LOAD = 64;
+    public static final int LEFT_RPM = 65;
+    public static final int RIGHT_RPM = 66;
+    
 
 }
