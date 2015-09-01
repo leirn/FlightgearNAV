@@ -49,6 +49,7 @@ public class MFDG1000View extends SurfaceView implements SurfaceHolder.Callback 
 	int centerx;
 	int centery;
 	float scaleFactor;
+	float g1000scaleFactor;
 			
 	
 	public MFDG1000View(Context context, AttributeSet attrs) {
@@ -187,6 +188,14 @@ public class MFDG1000View extends SurfaceView implements SurfaceHolder.Callback 
 		scaleFactor = (float)(mheight)/(float)maskHeight;
 				
 		plane.scaleFactor = scaleFactor;
+		
+		//Calculate the scale factor
+		int g1000enginedisplayHeight = plane.g1000enginedisplay.getHeight();
+		
+		//scaleFactor = (float) 0.5; //Only for test and new features
+		g1000scaleFactor = (float)(mheight)/(float)g1000enginedisplayHeight;
+				
+		plane.g1000scaleFactor = g1000scaleFactor;
 		
 		//plane.
 		plane.reflat = 0;
