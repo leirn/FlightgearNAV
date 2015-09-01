@@ -95,37 +95,37 @@ public class myWebView  extends WebView {
 
 	public updateView(values) {
 		// Update webview
-		setMode(values[0].getInt(MessageHandlerFGFS.MODE));
-		setRange(values[0].getInt(MessageHandlerFGFS.RANGE));
-		setLat(values[0].getFloat(MessageHandlerFGFS.LATITUDE));
-		setLon(values[0].getFloat(MessageHandlerFGFS.LONGITUDE));
-		setRadhead(values[0].getFloat(MessageHandlerFGFS.RADIALHEAD));
+		setMode(values[0].getInt(B777Protocol.MODE));
+		setRange(values[0].getInt(B777Protocol.RANGE));
+		setLat(values[0].getFloat(B777Protocol.LATITUDE));
+		setLon(values[0].getFloat(B777Protocol.LONGITUDE));
+		setRadhead(values[0].getFloat(B777Protocol.RADIALHEAD));
 		
 		//route
-		setLatwp0(values[0].getFloat(MessageHandlerFGFS.LATWP1));
-		setLonwp0(values[0].getFloat(MessageHandlerFGFS.LONWP1));
-		setLatwp1(values[0].getFloat(MessageHandlerFGFS.LATWP2));
-		setLonwp1(values[0].getFloat(MessageHandlerFGFS.LONWP2));
-		setLatwp2(values[0].getFloat(MessageHandlerFGFS.LATWP3));
-		setLonwp2(values[0].getFloat(MessageHandlerFGFS.LONWP3));
-		setLatwp3(values[0].getFloat(MessageHandlerFGFS.LATWP4));
-		setLonwp3(values[0].getFloat(MessageHandlerFGFS.LONWP4));
-		setLatwp4(values[0].getFloat(MessageHandlerFGFS.LATWP5));
-		setLonwp4(values[0].getFloat(MessageHandlerFGFS.LONWP5));
-		setLatwp5(values[0].getFloat(MessageHandlerFGFS.LATWP6));
-		setLonwp5(values[0].getFloat(MessageHandlerFGFS.LONWP6));
-		setLatwp6(values[0].getFloat(MessageHandlerFGFS.LATWP7));
-		setLonwp6(values[0].getFloat(MessageHandlerFGFS.LONWP7));
-		setLatwp7(values[0].getFloat(MessageHandlerFGFS.LATWP8));
-		setLonwp7(values[0].getFloat(MessageHandlerFGFS.LONWP8));
-		setLatwp8(values[0].getFloat(MessageHandlerFGFS.LATWP9));
-		setLonwp8(values[0].getFloat(MessageHandlerFGFS.LONWP9));
-		setLatwp9(values[0].getFloat(MessageHandlerFGFS.LATWP10));
-		setLonwp9(values[0].getFloat(MessageHandlerFGFS.LONWP10));
-		setLatwp10(values[0].getFloat(MessageHandlerFGFS.LATWP11));
-		setLonwp10(values[0].getFloat(MessageHandlerFGFS.LONWP11));
-		setLatwp11(values[0].getFloat(MessageHandlerFGFS.LATWP12));
-		setLonwp11(values[0].getFloat(MessageHandlerFGFS.LONWP12));
+		setLatwp0(values[0].getFloat(B777Protocol.LATWP1));
+		setLonwp0(values[0].getFloat(B777Protocol.LONWP1));
+		setLatwp1(values[0].getFloat(B777Protocol.LATWP2));
+		setLonwp1(values[0].getFloat(B777Protocol.LONWP2));
+		setLatwp2(values[0].getFloat(B777Protocol.LATWP3));
+		setLonwp2(values[0].getFloat(B777Protocol.LONWP3));
+		setLatwp3(values[0].getFloat(B777Protocol.LATWP4));
+		setLonwp3(values[0].getFloat(B777Protocol.LONWP4));
+		setLatwp4(values[0].getFloat(B777Protocol.LATWP5));
+		setLonwp4(values[0].getFloat(B777Protocol.LONWP5));
+		setLatwp5(values[0].getFloat(B777Protocol.LATWP6));
+		setLonwp5(values[0].getFloat(B777Protocol.LONWP6));
+		setLatwp6(values[0].getFloat(B777Protocol.LATWP7));
+		setLonwp6(values[0].getFloat(B777Protocol.LONWP7));
+		setLatwp7(values[0].getFloat(B777Protocol.LATWP8));
+		setLonwp7(values[0].getFloat(B777Protocol.LONWP8));
+		setLatwp8(values[0].getFloat(B777Protocol.LATWP9));
+		setLonwp8(values[0].getFloat(B777Protocol.LONWP9));
+		setLatwp9(values[0].getFloat(B777Protocol.LATWP10));
+		setLonwp9(values[0].getFloat(B777Protocol.LONWP10));
+		setLatwp10(values[0].getFloat(B777Protocol.LATWP11));
+		setLonwp10(values[0].getFloat(B777Protocol.LONWP11));
+		setLatwp11(values[0].getFloat(B777Protocol.LATWP12));
+		setLonwp11(values[0].getFloat(B777Protocol.LONWP12));
 							
 		updateRange();
 	
