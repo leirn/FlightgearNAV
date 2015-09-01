@@ -374,37 +374,78 @@ public class PlaneG1000 extends Plane {
 	        	}
 	        }
 	        
+	        drawG1000TopBar(canvas,paint);
 	        drawG1000EngineDisplay(canvas,paint);
+	        drawG1000SoftKeys(canvas,paint);
         
 		//drawHsiArc(canvas, paint);
 	}
 	
+	public void drawG1000TopBar(canvas,paint)
+	{
+		// Top bar uses roughly 10% of total height
+		paint.setColor(Color.WHITE);
+		paint.setStrokeWidth((float)(2 * g1000scaleFactor);
+		paint.setStyle(Style.STROKE);
+		canvas.drawLine(0, 0.1 * height, width, 0.1 * height, paint);
+		
+		//Display NAV1 / NAV2
+		//Display COM1 / COM2
+		//Display GS / TRK / BRG / ETE
+	}
+	
+	public void drawG1000SoftKeys(canvas,paint)
+	{
+		// SoftKey uses roughly 4% of total height
+		paint.setColor(Color.WHITE);
+		paint.setStrokeWidth((float)(2 * g1000scaleFactor);
+		paint.setStyle(Style.STROKE);
+		canvas.drawLine(0, 0.96 * height, width, 0.96 * height, paint);
+		for(int i = 0;i < 11; i++) {
+			canvas.drawLine(i / 12 * width, 0.96 * height, i / 12 * width, height, paint);
+		}
+	}
+	
 	public void drawG1000EngineDisplay(canvas,paint)
 	{
+		// EIS uses roughly 86% of total height
+		
+		float EISscale = 0.86 * g1000scaleFactor;
+		
 		Matrix m = new Matrix();
 		m.reset();
 		//Paint panel
-		m.postScale(g1000scaleFactor, g1000scaleFactor);
+		m.postScale(EISscale, EISscale);
+		m.postTranslate(0.1 * height, 0);
 		canvas.drawBitmap(g1000enginedisplay,m,paint);
+		//Paint right vertical white line
+		paint.setColor(Color.WHITE);
+		paint.setStrokeWidth((float)(2 * g1000scaleFactor);
+		paint.setStyle(Style.STROKE);
+		canvas.drawLine(g1000enginedisplay.getHeight() * EISscale, 0.10 * height, g1000enginedisplay.getHeight() * EISscale, 0.96 * height, paint);
 		//Paint left load gauge
 		m.reset();
 		m.postTranslate(32.0, (31.0 + (100 - leftload) * 246);
-		m.postScale(g1000scaleFactor, g1000scaleFactor);
+		m.postScale(EISscale, EISscale);
+		m.postTranslate(0.1 * height, 0);
 		canvas.drawBitmap(leftgauge,m,paint);
 		//Paint right load gauge
 		m.reset();
 		m.postTranslate(287.0, (31.0 + (100 - rightload) * 246);
-		m.postScale(g1000scaleFactor, g1000scaleFactor);
+		m.postScale(EISscale, EISscale);
+		m.postTranslate(0.1 * height, 0);
 		canvas.drawBitmap(rightgauge,m,paint);
 		//Paint left rpm gauge
 		m.reset();
 		m.postTranslate(32.0, (367.0 + (100 - leftrpm) * 270);
-		m.postScale(g1000scaleFactor, g1000scaleFactor);
+		m.postScale(EISscale, EISscale);
+		m.postTranslate(0.1 * height, 0);
 		canvas.drawBitmap(leftgauge,m,paint);
 		//Paint right rpm gauge
 		m.reset();
 		m.postTranslate(287.0, (367.0 + (100 - rightrpm) * 270);
-		m.postScale(g1000scaleFactor, g1000scaleFactor);
+		m.postScale(EISscale, EISscale);
+		m.postTranslate(0.1 * height, 0);
 		canvas.drawBitmap(rightgauge,m,paint);
 		//Paint left fuel flow
 		drawG1000Numbers(canvas, paint, value, x, y)
