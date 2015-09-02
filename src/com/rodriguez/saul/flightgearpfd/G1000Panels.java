@@ -3,6 +3,7 @@ package com.rodriguez.saul.flightgearpfd;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Point;
+import android.graphics.Paint;
 
 public class G1000Panels
 {
@@ -13,6 +14,9 @@ public class G1000Panels
         Bitmap activeSoftKey;
         Bitmap engine1, engine2, engine3;
         Bitmap leftTriangleGauge, rightTriangleGauge, leftTriangleGaugeAmber, rightTriangleGaugeAmber, leftTriangleGaugeRed, rightTriangleGaugeRed;
+        Bitmap horizon;
+        
+        Paint paint,
         
         static float TOPBAR_HEIGHT = 0.073;
         static float SOFTKEYS_HEIGHT = 0.034;
@@ -26,6 +30,7 @@ public class G1000Panels
         
         public G1000Panels (int width, int height)
         {
+        	paint = new Paint();
                 reset(width, height);
         }
         
@@ -40,6 +45,33 @@ public class G1000Panels
                 engine2 = null;
                 engine3 = null;
         
+        }
+        
+        Bitmap getHorizon()
+        {
+        	if(horizon != null)
+                        return horizon;
+                
+                int size = 1,3 * Maths.max(width, height);
+                horizon = Bitmap.createBitmap(
+                	Color.rgb(73, 67, 45), 
+                	size, 
+                	size, 
+                	Bitmap.Config.ARGB_8888);
+                Canvas canvas = new Canvas(horizon);
+                
+                paint.setStrokeWidth(2);
+		paint.setColor(Color.WHITE);
+		paint.setStyle(Style.STROKE);
+		
+		Shader shader = new LinearGradient(0, 0, 0, size/2, Color.rgb(28, 72, 152), Color.rgb(116, 139, 255), TileMode.CLAMP);
+		Paint paint = new Paint(); 
+		paint.setShader(shader); 
+		canvas.drawRect(new RectF(0, 0, size, size/2), paint);
+		
+		canvas.drawLine(0, size / 2, size, size/2);
+                
+                return horizon;
         }
         
         Bitmap getLeftTriangleGauge()
@@ -125,7 +157,7 @@ public class G1000Panels
         {
                 if(topBar != null)
                         return topBar;
-                
+                        
                 tbHeight = TOPBAR_HEIGHT * height;
                 topBar = Bitmap.createBitmap(Color.TRANSPARENT , width, tbHeight, Bitmap.Config.ARGB_8888);
                 Canvas canvas = new Canvas(topBar);
