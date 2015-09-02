@@ -10,15 +10,18 @@ public class G1000Panels
         Bitmap topBar;
         Bitmap softKeys;
         Bitmap activeSoftKey;
-        Bitmap engine1;
-        Bitmap engine2;
-        Bitmap engine3;
+        Bitmap engine1, engine2, engine3;
+        Bitmap leftTriangleGauge, rightTriangleGauge, leftTriangleGaugeAmber, rightTriangleGaugeAmber, leftTriangleGaugeRed, rightTriangleGaugeRed;
         
         static float TOPBAR_HEIGHT = 0.073;
         static float SOFTKEYS_HEIGHT = 0.034;
         static float EIS_HEIGHT = 0.893;
         
         static float EIS_WIDTH = 0.147;
+        static float EIS_RATIO = 0.219;
+        
+        static float LEFT_TRIANGLE_SHIFT_Y = 0.05;
+        static float RIGHT_TRIANGLE_SHIFT_Y = -0.05;
         
         public G1000Panels (int width, int height)
         {
@@ -36,6 +39,22 @@ public class G1000Panels
                 engine2 = null;
                 engine3 = null;
         
+        }
+        
+        Bitmap getLeftTriangleGauge()
+        {
+        	if(leftTriangleGauge != null)
+                        return leftTriangleGauge;
+                leftTriangleGauge = Bitmap.createBitmap(Color.GREEN , 20, 20, Bitmap.Config.ARGB_8888);
+                return leftTriangleGauge;
+        }
+        
+        Bitmap getRightTriangleGauge()
+        {
+        	if(rightTriangleGauge != null)
+                        return rightTriangleGauge;
+                rightTriangleGauge = Bitmap.createBitmap(Color.BLUE , 20, 20, Bitmap.Config.ARGB_8888);
+                return rightTriangleGauge;
         }
         
         Bitmap getTopBar()
@@ -98,7 +117,7 @@ public class G1000Panels
                 return activeSoftKey;
         }
         
-        Bitmap getEngine1()
+        Bitmap getEISEngine()
         {
                 if(engine1 != null)
                         return engine1;
@@ -111,7 +130,7 @@ public class G1000Panels
                 return engine1;
         }
         
-        Bitmap getEngine2()
+        Bitmap getEISSystem()
         {
                 if(engine2 != null)
                         return engine2;
@@ -124,7 +143,7 @@ public class G1000Panels
                 return engine2;
         }
         
-        Bitmap getEngine3()
+        Bitmap getEISFuel()
         {
                 if(engine3 != null)
                         return engine3;
@@ -135,5 +154,23 @@ public class G1000Panels
                 Canvas canvas = new Canvas(engine3);
                 
                 return engine3;
+        }
+        
+        public class EisEngine {
+        	// ratio compared to EIS Panel size
+        	static float OIL_TEMP_X = 0.1;
+        	static float OIL_TEMP_Y = 0.5;
+        	static float OIL_TEMP_WIDTH = 0.8;
+        	static float OIL_TEMP_MAX = 120;
+        	
+        	static float OIL_PRES_X = 0.1;
+        	static float OIL_PRES_Y = 0.6;
+        	static float OIL_PRES_WIDTH = 0.8;
+        	static float OIL_TEMP_MAX = 120;
+        }
+        public class EisSystem {
+        }
+        public class EisFuel {
+        }
         }
 }
