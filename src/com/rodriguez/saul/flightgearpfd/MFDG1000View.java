@@ -218,9 +218,6 @@ public class MFDG1000View extends SurfaceView implements SurfaceHolder.Callback 
 		//Paint empty panel
 		canvas.drawBitmap(panels.getTopBar(),m,paint);
 		
-		// Top bar uses roughly 10% of total height
-		
-		
 		//Display NAV1 / NAV2
 		//Display COM1 / COM2
 		//Display GS / TRK / BRG / ETE
@@ -240,7 +237,7 @@ public class MFDG1000View extends SurfaceView implements SurfaceHolder.Callback 
 	{
 		// EIS uses roughly 86% of total height
 		
-		float EISscale = 0.86 * g1000scaleFactor;
+		/*float EISscale = 0.86 * g1000scaleFactor;
 		
 		Matrix m = new Matrix();
 		m.reset();
@@ -312,7 +309,7 @@ public class MFDG1000View extends SurfaceView implements SurfaceHolder.Callback 
 		//Paint left fuel qty gal
 		canvas.drawBitmap(lefttriangle,m,paint);
 		//Paint right fuel qty gal
-		canvas.drawBitmap(righttriangle,m,paint);
+		canvas.drawBitmap(righttriangle,m,paint);*/
 	}
 	
 	private drawG1000Numbers(Canvas canvas, Paint paint, float value, int x, int y) {
