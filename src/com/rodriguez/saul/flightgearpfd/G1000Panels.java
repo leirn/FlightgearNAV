@@ -14,11 +14,11 @@ public class G1000Panels
         Bitmap engine2;
         Bitmap engine3;
         
-        static float TOPBAR_HEIGHT = 0,073;
-        static float SOFTKEYS_HEIGHT = 0,034;
-        static float EIS_HEIGHT = 0,893;
+        static float TOPBAR_HEIGHT = 0.073;
+        static float SOFTKEYS_HEIGHT = 0.034;
+        static float EIS_HEIGHT = 0.893;
         
-        static float EIS_WIDTH = 0,147;
+        static float EIS_WIDTH = 0.147;
         
         public G1000Panels (int width, int height)
         {
