@@ -82,6 +82,7 @@ public class MFDG1000View extends SurfaceView implements SurfaceHolder.Callback 
 	int pfdormfd;
 	static int PFD = 0;
 	static int MFD = 1;
+	static int MFD_REV = 2;
 	
 	static int EIS_PAGE_1 = 1;
 	static int EIS_PAGE_2 = 2;
@@ -102,7 +103,7 @@ public class MFDG1000View extends SurfaceView implements SurfaceHolder.Callback 
 		surfaceHolder = this.getHolder();
 		surfaceHolder.addCallback(this);
 		
-		pfdormfd = MFD;
+		pfdormfd = MFD_REV;
 	}
 
 	public updateView(values) {
@@ -173,7 +174,12 @@ public class MFDG1000View extends SurfaceView implements SurfaceHolder.Callback 
 	    		ongoingMotion = false;
 	    		//Switch from MFD to PFD only if motion covers 30% of screen width
 	    		if(Maths.abs(startMotionX - event.getX()) / mwidth > 0.3)
-	    			pfdormfd = !pfdormfd;
+	    			if(pfdormfd == MFD)
+	    				pfdormfd == PFD;
+	    			else if(pfdormfd == PFD)
+	    				pfdormfd == MFD;
+	    			//else : stay on MFD reversionary
+	    				
 	    		// Detect if softkeys pressed
 	    		if(event.getY() > (1 - G1000Panels.SOFTKEYS_HEIGHT) * mheight)
 	    			//TODO : Managed softkey actions
@@ -195,11 +201,18 @@ public class MFDG1000View extends SurfaceView implements SurfaceHolder.Callback 
 	        
 	        drawG1000Background(canvas, paint);
 	        
-	        if (pfdormfd == MFD;)
+	        if (pfdormfd == PFD)
+	        {
+		        drawG1000PFDMain(canvas,paint);
+	        }
+	        else if (pfdormfd == MFD)
 	        {
 		        drawG1000EngineDisplay(canvas,paint);
+		        drawG1000MFDMap(canvas,paint);
 	        }
 	        else {
+		        drawG1000PFDMain(canvas,paint);
+		        drawG1000EngineDisplay(canvas,paint);
 	        }
 		//drawHsiArc(canvas, paint);
 		
@@ -234,6 +247,16 @@ public class MFDG1000View extends SurfaceView implements SurfaceHolder.Callback 
 		//Paint empty panel
 		m.postTranslate(0.1 * height, 0);
 		canvas.drawBitmap(panels.getSoftKeys(),m,paint);
+	}
+	
+	public void drawG1000PFDMain(canvas,paint)
+	{
+		
+	}
+	
+	public void drawG1000MFDMap(canvas,paint)
+	{
+		
 	}
 	
 	public void drawG1000EngineDisplay(canvas,paint)
