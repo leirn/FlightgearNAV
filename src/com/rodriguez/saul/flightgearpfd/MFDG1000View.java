@@ -83,12 +83,17 @@ public class MFDG1000View extends SurfaceView implements SurfaceHolder.Callback 
 	static int PFD = 0;
 	static int MFD = 1;
 	
+	static int EIS_PAGE_1 = 1;
+	static int EIS_PAGE_2 = 2;
+	static int EIS_PAGE_3 = 3;
+	int currentEisPage;
 
 	
 	public MFDG1000View(Context context, AttributeSet attrs) {
 		super(context, attrs);
 		
 		ongoingMotion = false;
+		currentEisPage = EIS_PAGE_1;
 		
 		panels = new G1000Panels(this.getWidth(), this.getHeight());
 				
@@ -236,6 +241,71 @@ public class MFDG1000View extends SurfaceView implements SurfaceHolder.Callback 
 	public void drawG1000EngineDisplay(canvas,paint)
 	{
 		// EIS uses roughly 86% of total height
+		
+		float eis_height = EIS_HEIGHT * mheight;
+		float eis_width = EIS_RATIO * eis_height;
+		
+		Matrix m = new Matrix();
+		m.reset();
+		m.postTranslate(0, TOPBAR_HEIGHT * mheight);
+		switch(currentEisPage) {
+			case EIS_PAGE_1:
+				canvas.drawBitmap(panels.getEISEngine(),m,paint);
+				// Draw Fuel Flow
+				
+				// Draw Oil Temp
+				m.reset();
+				m.postTranslate(G1000Panels.EisEngine.OIL_TEMP_X, G1000Panels.EisEngine.OIL_TEMP_Y);
+				m.postTranslate(
+					G1000Panels.EisEngine.OIL_TEMP_WIDTH * eis_width * plane.leftoiltemp / G1000Panels.EisEngine.OIL_TEMP_MAX,
+					LEFT_TRIANGLE_SHIFT_Y * eis_height
+					);
+				m.postTranslate(0, TOPBAR_HEIGHT * mheight);
+				canvas.drawBitmap(panels.getLeftTriangleGauge(),m,paint);
+				
+				m.reset();
+				m.postTranslate(G1000Panels.EisEngine.OIL_TEMP_X, G1000Panels.EisEngine.OIL_TEMP_Y);
+				m.postTranslate(
+					G1000Panels.EisEngine.OIL_TEMP_WIDTH * eis_width * plane.rightoiltemp / G1000Panels.EisEngine.OIL_TEMP_MAX, 
+					RIGHT_TRIANGLE_SHIFT_Y * eis_height
+					);
+				m.postTranslate(0, TOPBAR_HEIGHT * mheight);
+				canvas.drawBitmap(panels.getRightTriangleGauge(),m,paint);
+				
+				// Draw OIL Pres
+				
+				// Draw Coolant Temp
+				
+				// Draw Fuel Temp
+				
+				// Draw Fuel Qty Gal
+				
+				break;
+			case EIS_PAGE_2:
+				canvas.drawBitmap(panels.getEISSystem(),m,paint);
+				// Draw Voltmeter
+				// Draw Ammeter
+				// Draw Gearbox temp
+				// Draw Coolant temp
+				// Draw Oil temp
+				// Draw Oil pres
+				// Draw deice level
+				break;
+			case EIS_PAGE_3:
+				canvas.drawBitmap(panels.getEISFuel(),m,paint);
+				// Draw Fuel qty
+				// Draw Fuel flow
+				// Draw Fuel temp
+				// Draw Fuel remaining
+				// Draw Fuel used
+				// Draw endurance
+				// Draw range
+				// Draw total in service time
+				break;
+			
+		}
+		
+		//LOAD and RPM are common to the three
 		
 		/*float EISscale = 0.86 * g1000scaleFactor;
 		
