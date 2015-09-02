@@ -46,6 +46,8 @@ public class MFDG1000View extends SurfaceView implements SurfaceHolder.Callback 
 	Plane plane;
 	int planeType;
 	
+	G1000Panels panels;
+	
 	int mwidth;
 	int mheight;	
 	int centerx;
@@ -56,7 +58,7 @@ public class MFDG1000View extends SurfaceView implements SurfaceHolder.Callback 
 	static int PFD = 0;
 	static int MFD = 1;
 	
-		Bitmap g1000enginedisplay;
+	Bitmap g1000enginedisplay;
 	Bitmap g1000symbols;
 	Bitmap num1;
 	Bitmap num2;
@@ -144,6 +146,8 @@ public class MFDG1000View extends SurfaceView implements SurfaceHolder.Callback 
 	
 	public MFDG1000View(Context context, AttributeSet attrs) {
 		super(context, attrs);
+		
+		panels = new G1000Panels(this.getWidth(), this.getHeight());
 				
 		mcontext = context;
 		// TODO Auto-generated constructor stub
@@ -152,7 +156,7 @@ public class MFDG1000View extends SurfaceView implements SurfaceHolder.Callback 
 		
 		pfdormfd = MFD;
 		
-				//Initialize the matrices;
+		//Initialize the matrices;
 		maskMatrix = new Matrix();
 		maskfullMatrix = new Matrix();
 		hsiMatrix = new Matrix();
@@ -274,6 +278,8 @@ public class MFDG1000View extends SurfaceView implements SurfaceHolder.Callback 
 		// TODO Auto-generated method stub
 		mwidth = this.getWidth();
 		mheight = this.getHeight();
+		
+		if()
 		
 		//Log.d("Saul", String.format("width = %d", mwidth));
 		//Log.d("Saul", String.format("height = %d", mheight));
@@ -419,11 +425,13 @@ public class MFDG1000View extends SurfaceView implements SurfaceHolder.Callback 
 	
 	public void drawG1000TopBar(canvas,paint)
 	{
+		Matrix m = new Matrix();
+		m.reset();
+		//Paint empty panel
+		canvas.drawBitmap(panels.getTopBar(),m,paint);
+		
 		// Top bar uses roughly 10% of total height
-		paint.setColor(Color.WHITE);
-		paint.setStrokeWidth((float)(2 * g1000scaleFactor);
-		paint.setStyle(Style.STROKE);
-		canvas.drawLine(0, 0.1 * height, width, 0.1 * height, paint);
+		
 		
 		//Display NAV1 / NAV2
 		//Display COM1 / COM2
@@ -432,14 +440,12 @@ public class MFDG1000View extends SurfaceView implements SurfaceHolder.Callback 
 	
 	public void drawG1000SoftKeys(canvas,paint)
 	{
-		// SoftKey uses roughly 4% of total height
-		paint.setColor(Color.WHITE);
-		paint.setStrokeWidth((float)(2 * g1000scaleFactor);
-		paint.setStyle(Style.STROKE);
-		canvas.drawLine(0, 0.96 * height, width, 0.96 * height, paint);
-		for(int i = 0;i < 11; i++) {
-			canvas.drawLine(i / 12 * width, 0.96 * height, i / 12 * width, height, paint);
-		}
+		// SoftKey uses roughly 4.5% of total height
+		Matrix m = new Matrix();
+		m.reset();
+		//Paint empty panel
+		m.postTranslate(0.1 * height, 0);
+		canvas.drawBitmap(panels.getSoftKeys(),m,paint);
 	}
 	
 	public void drawG1000EngineDisplay(canvas,paint)
