@@ -2,6 +2,7 @@ package com.rodriguez.saul.flightgearpfd;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.graphics.Point;
 
 public class G1000Panels
 {
@@ -45,7 +46,36 @@ public class G1000Panels
         {
         	if(leftTriangleGauge != null)
                         return leftTriangleGauge;
-                leftTriangleGauge = Bitmap.createBitmap(Color.GREEN , 20, 20, Bitmap.Config.ARGB_8888);
+        	float eisHeight = height * EIS_HEIGHT;
+                leftTriangleGauge = Bitmap.createBitmap(
+                	Color.GREEN , 
+                	0.3493 * height * EIS_HEIGHT, 
+                	0,02766 * height * EIS_HEIGHT, 
+                	Bitmap.Config.ARGB_8888);
+                Canvas canvas = new Canvas(leftTriangleGauge);
+                
+                Point a = new Point(0, 0);
+		Point b = new Point(0.3493 * eisHeight, 0);
+		Point c = new Point(0.01747* eisHeight, 0.02766 * eisHeight);
+		
+		Path path = new Path();
+		path.setFillType(FillType.EVEN_ODD);
+		path.lineTo(b.x, b.y);
+		path.lineTo(c.x, c.y);
+		path.lineTo(a.x, a.y);
+		path.close();
+		
+                paint.setStrokeWidth(1);
+		paint.setAntiAlias(true);
+		
+		paint.setColor(Color.WHITE);
+		paint.setStyle(Paint.Style.FILL_AND_STROKE);
+                canvas.drawPath(path, paint);
+		
+		paint.setColor(Color.BLACK);
+		paint.setStyle(Paint.Style.STROKE);
+                canvas.drawPath(path, paint);
+                
                 return leftTriangleGauge;
         }
         
@@ -53,7 +83,35 @@ public class G1000Panels
         {
         	if(rightTriangleGauge != null)
                         return rightTriangleGauge;
-                rightTriangleGauge = Bitmap.createBitmap(Color.BLUE , 20, 20, Bitmap.Config.ARGB_8888);
+        	float eisHeight = height * EIS_HEIGHT;
+                rightTriangleGauge = Bitmap.createBitmap(
+                	Color.BLUE , 
+                	0.3493 * height * EIS_HEIGHT, 
+                	0,02766 * height * EIS_HEIGHT, 
+                	Bitmap.Config.ARGB_8888);
+                Canvas canvas = new Canvas(rightTriangleGauge);
+                
+                Point a = new Point(0, 0.02766 * eisHeight);
+		Point b = new Point(0.3493 * eisHeight, 0.02766 * eisHeight);
+		Point c = new Point(0.01747* eisHeight, 0);
+		
+		Path path = new Path();
+		path.setFillType(FillType.EVEN_ODD);
+		path.lineTo(b.x, b.y);
+		path.lineTo(c.x, c.y);
+		path.lineTo(a.x, a.y);
+		path.close();
+		
+                paint.setStrokeWidth(1);
+		paint.setAntiAlias(true);
+		
+		paint.setColor(Color.WHITE);
+		paint.setStyle(Paint.Style.FILL_AND_STROKE);
+                canvas.drawPath(path, paint);
+		
+		paint.setColor(Color.BLACK);
+		paint.setStyle(Paint.Style.STROKE);
+                canvas.drawPath(path, paint);
                 return rightTriangleGauge;
         }
         
