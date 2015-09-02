@@ -14,7 +14,7 @@ public class G1000Panels
         Bitmap activeSoftKey;
         Bitmap engine1, engine2, engine3;
         Bitmap leftTriangleGauge, rightTriangleGauge, leftTriangleGaugeAmber, rightTriangleGaugeAmber, leftTriangleGaugeRed, rightTriangleGaugeRed;
-        Bitmap horizon;
+        Bitmap horizon, hsi;
         
         Paint paint,
         
@@ -27,6 +27,8 @@ public class G1000Panels
         
         static float LEFT_TRIANGLE_SHIFT_Y = 0.05;
         static float RIGHT_TRIANGLE_SHIFT_Y = -0.05;
+        
+        static float HSI_SIZE = 0.4192; // Taille par rapport à la zone principale, pas au canvas complet
         
         public G1000Panels (int width, int height)
         {
@@ -72,6 +74,57 @@ public class G1000Panels
 		canvas.drawLine(0, size / 2, size, size/2);
                 
                 return horizon;
+        }
+        
+        Bitmap getHSI()
+        {
+        	if(hsi != null)
+                        return hsi;
+                Matrix m = new Matrix();
+                m.reset();
+                int size = (1 - SOFTKEYS_HEIGHT - TOPBAR_HEIGHT) * HSI_SIZE * mheight;
+                hsi = Bitmap.createBitmap(
+                	Color.TRANSPARENT, 
+                	size, 
+                	size, 
+                	Bitmap.Config.ARGB_8888);
+                Canvas canvas = new Canvas(hsi);
+                paint.setStrokeWidth(2);
+		paint.setColor(Color.WHITE);
+		paint.setStyle(Style.STROKE);
+		for(int i = 0; i < 360; i = i + 10) {
+			canvas.drawLine(size / 2, 0, size / 2, 0.0575 * size, m, paint);
+			m.rotate(5);
+			canvas.drawLine(size / 2, 0, size / 2, 0.0287 * size, m, paint);
+			m.rotate(5);
+		}
+		paint.setTextAlign(Paint.Align CENTER);
+                canvas.drawText("N", size / 2, 0.1 * size, m);
+                canvas.rotate(30);
+                canvas.drawText("3", size / 2, 0.1 * size, m);
+                canvas.rotate(30);
+                canvas.drawText("6", size / 2, 0.1 * size, m);
+                canvas.rotate(30);
+                canvas.drawText("E", size / 2, 0.1 * size, m);
+                canvas.rotate(30);
+                canvas.drawText("12", size / 2, 0.1 * size, m);
+                canvas.rotate(30);
+                canvas.drawText("15", size / 2, 0.1 * size, m);
+                canvas.rotate(30);
+                canvas.drawText("S", size / 2, 0.1 * size, m);
+                canvas.rotate(30);
+                canvas.drawText("21", size / 2, 0.1 * size, m);
+                canvas.rotate(30);
+                canvas.drawText("24", size / 2, 0.1 * size, m);
+                canvas.rotate(30);
+                canvas.drawText("W", size / 2, 0.1 * size, m);
+                canvas.rotate(30);
+                canvas.drawText("30", size / 2, 0.1 * size, m);
+                canvas.rotate(30);
+                canvas.drawText("33", size / 2, 0.1 * size, m);
+                canvas.rotate(30);
+                
+                return hsi;
         }
         
         Bitmap getLeftTriangleGauge()
