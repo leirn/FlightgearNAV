@@ -76,6 +76,9 @@ public class G1000Panels
 		paint.setStyle(Paint.Style.STROKE);
                 canvas.drawPath(path, paint);
                 
+                paint.setTextAlign(Paint.Align CENTER);
+                canvas.drawText("L", 0.01747* eisHeight, 0.01383 * eisHeight);
+                
                 return leftTriangleGauge;
         }
         
@@ -112,6 +115,9 @@ public class G1000Panels
 		paint.setColor(Color.BLACK);
 		paint.setStyle(Paint.Style.STROKE);
                 canvas.drawPath(path, paint);
+                
+                paint.setTextAlign(Paint.Align CENTER);
+                canvas.drawText("R", 0.01747* eisHeight, 0.01383 * eisHeight);
                 return rightTriangleGauge;
         }
         
