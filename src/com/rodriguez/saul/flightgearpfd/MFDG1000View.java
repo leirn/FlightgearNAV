@@ -251,7 +251,23 @@ public class MFDG1000View extends SurfaceView implements SurfaceHolder.Callback 
 	
 	public void drawG1000PFDMain(canvas,paint)
 	{
+		static float PLANE_NOSE = 0.3333;
+		static float HSI_CENTER = 0.7715;
 		
+		
+		
+		int left = 0;
+		if(pfdormfd != PFD)
+			left = EIS_WIDTH * mwidth;
+		Matrix m = new Matrix();
+		m.reset();
+		m.postTranslate((mwidth - left) / 2 - (1,3 * Maths.max(mwidth, mheight) /2), (1 - SOFTKEYS_HEIGHT - TOPBAR_HEIGHT) * mheight / 2 - (1,3 * Maths.max(mwidth, mheight) /2));
+		m.postRotate(10); // TODO : retrieve actual value
+		
+		canvas.save();
+		canvas.clipRect(left, TOPBAR_HEIGHT * mheight, mwidth, (1 - SOFTKEYS_HEIGHT) * mheight, Region.Op.REPLACE);
+		canvas.drawBitmap(panels.getHorizon(),m,paint);
+		canvas.restore();
 	}
 	
 	public void drawG1000MFDMap(canvas,paint)
