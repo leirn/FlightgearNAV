@@ -17,6 +17,28 @@
  * 
  */
 
+/***
+ * Garmin G1000 Color
+ * Text : 
+ * 	White : 255, 255, 255
+ * 	Magenta : 255, 0, 255
+ * 	Cyan : 0, 255, 255
+ * 	Inactive : 128, 128, 128
+ * 	Background : 32, 32, 32
+ * Gauge :
+ * Green : 0, 128, 0
+ * Yellow : 255, 255, 0
+ * Red : 255, 0, 0
+ * 
+ * Softkey :
+ * 	Inactive :
+ * 		Text : 255, 255, 255
+ * 		Background : 32, 32, 32
+ * 	Active : 
+ * 		Text : 32, 32, 32
+ * 		Background : 128, 128, 128
+ */
+
 
 package com.rodriguez.saul.flightgearpfd;
 
