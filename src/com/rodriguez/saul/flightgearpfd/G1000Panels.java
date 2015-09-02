@@ -44,7 +44,7 @@ public class G1000Panels
                         return topBar;
                 
                 tbHeight = TOPBAR_HEIGHT * height;
-                topBar = new Bitmap(width, tbHeight);
+                topBar = Bitmap.createBitmap(Color.TRANSPARENT , width, tbHeight, Bitmap.Config.ARGB_8888);
                 Canvas canvas = new Canvas(topBar);
                 
                 paint.setColor(Color.WHITE);
@@ -68,7 +68,7 @@ public class G1000Panels
                         return softKeys;
                 
                 softHeight = SOFTKEYS_HEIGHT * height;
-                softKeys = new Bitmap(width, softHeight);
+                softKeys = Bitmap.createBitmap(Color.TRANSPARENT , width, softHeight, Bitmap.Config.ARGB_8888);
                 Canvas canvas = new Canvas(softKeys);
                 
                 paint.setColor(Color.WHITE);
@@ -92,7 +92,7 @@ public class G1000Panels
                 
                 softHeight = SOFTKEYS_HEIGHT * height;
                 softWidth = width / 12;
-                activeSoftKey = new Bitmap(softWidth, softHeight);
+                activeSoftKey = Bitmap.createBitmap(Color.TRANSPARENT , softWidth, softHeight, Bitmap.Config.ARGB_8888);
                 Canvas canvas = new Canvas(activeSoftKey);
                 
                 return activeSoftKey;
@@ -105,7 +105,7 @@ public class G1000Panels
                 
                 engineHeight = EIS_HEIGHT * height;
                 engineWidth = EIS_WIDTH * width;
-                engine1 = new Bitmap(engineWidth, engineHeight);
+                engine1 = Bitmap.createBitmap(Color.TRANSPARENT , engineWidth, engineHeight, Bitmap.Config.ARGB_8888);
                 Canvas canvas = new Canvas(engine1);
                 
                 return engine1;
@@ -118,7 +118,7 @@ public class G1000Panels
                 
                 engineHeight = EIS_HEIGHT * height;
                 engineWidth = EIS_WIDTH * width;
-                engine1 = new Bitmap(engineWidth, engineHeight);
+                engine1 = Bitmap.createBitmap(Color.TRANSPARENT , engineWidth, engineHeight, Bitmap.Config.ARGB_8888);
                 Canvas canvas = new Canvas(engine1);
                 
                 return engine2;
@@ -131,7 +131,7 @@ public class G1000Panels
                 
                 engineHeight = EIS_HEIGHT * height;
                 engineWidth = EIS_WIDTH * width;
-                engine1 = new Bitmap(engineWidth, engineHeight);
+                engine1 = Bitmap.createBitmap(Color.TRANSPARENT , engineWidth, engineHeight, Bitmap.Config.ARGB_8888);
                 Canvas canvas = new Canvas(engine3);
                 
                 return engine3;
