@@ -9,6 +9,7 @@ public class G1000Panels
         
         Bitmap topBar;
         Bitmap softKeys;
+        Bitmap activeSoftKey;
         Bitmap engine1;
         Bitmap engine2;
         Bitmap engine3;
@@ -30,6 +31,7 @@ public class G1000Panels
                 this.width = width;
                 topBar = null;
                 softKeys = null;
+                activeSoftKey = null;
                 engine1 = null;
                 engine2 = null;
                 engine3 = null;
@@ -81,6 +83,19 @@ public class G1000Panels
 		}
 
                 return softKeys;
+        }
+        
+        Bitmap getActiveSoftKey()
+        {
+                if(activeSoftKey != null)
+                        return activeSoftKey;
+                
+                softHeight = SOFTKEYS_HEIGHT * height;
+                softWidth = width / 12;
+                activeSoftKey = new Bitmap(softWidth, softHeight);
+                Canvas canvas = new Canvas(activeSoftKey);
+                
+                return activeSoftKey;
         }
         
         Bitmap getEngine1()
