@@ -211,9 +211,7 @@ public class MFDG1000View extends SurfaceView implements SurfaceHolder.Callback 
 	
 	public void drawG1000Background(canvas, paint)
 	{
-		paint.setColor(Color.rgb(32, 32, 32));
-		paint.setStyle(Paint.Style.FILL_AND_STROKE);		
-		canvas.drawRect(0, 0, mwidth, mheight, paint);
+		canvas.drawRGB(0, 0, 0);
 	}
 	
 	public void drawG1000TopBar(canvas,paint)
