@@ -305,6 +305,10 @@ public class G1000Panels
                 return engine3;
         }
         
+        private Bitmap loadAndRPM() {
+        	// Create the load and RPM EMPTY gauges
+        }
+        
         public class EisEngine {
         	// ratio compared to EIS Panel size
         	static float OIL_TEMP_X = 0.1;
