@@ -14,6 +14,8 @@
  *
  */
 
+package com.rodriguez.saul.flightgearpfd;
+
 public class B777Protocol {
 
     public static final int HEADING = 0; // heading in degrees

@@ -14,47 +14,35 @@ import android.webkit.WebView;
 
 
 public class myWebView  extends WebView {
-	Context mContext;
-	
-	int width;
-	int height;
-	
+	final int ROUTESIZE = 12; //number if waypoints
 	public int x,y; //offset values from center
-	
 	//Encoder Modes
 	public int mode;
 	public int range;
-	
 	public int rangeref;
+	Context mContext;
+	int width;
+	int height;
 	float rangescale;
-	
 	float dpi;
-	
 	//position
 	float lat;
 	float lon;
 	float reflat;
 	float reflon;
-	
-	
-	//Helper distance	
+	//Helper distance
 	double distx;
 	double disty;
-	
 	//Bitmaps
 	Bitmap planebmp;
 	Bitmap symbols;
 	//Matrices
 	Matrix planeMatrix;
-	
 	float scaleFactor;
 	float realheading;
-	
 	//waypoint
 	float[] latwp;
 	float[] lonwp;
-	final int ROUTESIZE = 12; //number if waypoints
-	
 	boolean showmap;  //true for map, false for chart
 	
 	int offsety;
@@ -93,7 +81,7 @@ public class myWebView  extends WebView {
 		
 	}
 
-	public updateView(values) {
+	public void updateView(MessageHandlerFGFS... values) {
 		// Update webview
 		setMode(values[0].getInt(B777Protocol.MODE));
 		setRange(values[0].getInt(B777Protocol.RANGE));
@@ -192,7 +180,7 @@ public class myWebView  extends WebView {
 	{
 		paint.setColor(Color.MAGENTA);
 		paint.setStyle(Style.STROKE);
-		paint.setTextSize((float)(10*scaleFactor));
+		paint.setTextSize(10 * scaleFactor);
 		paint.setStrokeWidth(2*scaleFactor);
 				
 				
@@ -367,13 +355,9 @@ public class myWebView  extends WebView {
 
 	    switch (event.getAction()) {
 	    	case MotionEvent.ACTION_DOWN:
-	    			if (showmap == true){
-	    				showmap = false;
-	    			} else {
-	    				showmap = true;
-	    			}
-	    			loadSkyvector();
-	    	/*	if (eventX < centerx && eventY < centery) { // left Up
+				showmap = showmap != true;
+				loadSkyvector();
+			/*	if (eventX < centerx && eventY < centery) { // left Up
 	    			if (plane.shownav == true) {
 	    				plane.shownav = false;
 	    			} else {

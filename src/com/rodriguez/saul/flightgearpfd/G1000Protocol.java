@@ -13,6 +13,8 @@
  *
  */
 
+package com.rodriguez.saul.flightgearpfd;
+
 public class G1000Protocol {
 
     public static final int HEADING = 0; // heading in degrees

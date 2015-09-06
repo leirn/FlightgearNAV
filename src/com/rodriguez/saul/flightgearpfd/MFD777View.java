@@ -39,24 +39,21 @@ import android.view.SurfaceView;
 
 public class MFD777View extends SurfaceView implements SurfaceHolder.Callback {
 
-	private SurfaceHolder surfaceHolder;
-	Context mcontext;
-	
 	public static final int BASIC = 0;
 	public static final int B777 = 1;
 	public static final int B787 = 2;
 	public static final int B747 = 3;
-	public static final int A330 = 4;	
+	public static final int A330 = 4;
 	public static final int A380 = 5;
-		
+	Context mcontext;
 	Plane plane;
 	int planeType;
-	
 	int mwidth;
-	int mheight;	
+	int mheight;
 	int centerx;
 	int centery;
 	float scaleFactor;
+	private SurfaceHolder surfaceHolder;
 	
 	public MFD777View(Context context, AttributeSet attrs) {
 		super(context, attrs);
@@ -69,30 +66,30 @@ public class MFD777View extends SurfaceView implements SurfaceHolder.Callback {
 		//plane = new Plane777(mcontext);
 	}
 
-	public updateView(values) {
+	public void updateView(MessageHandlerFGFS[] values) {
 		//update NAV
-		plane.heading = values[0].getFloat(G1000Protocol.HEADING);
-		plane.apheading = values[0].getInt(G1000Protocol.APHEADING);
+		plane.heading = values[0].getFloat(B777Protocol.HEADING);
+		plane.apheading = values[0].getInt(B777Protocol.APHEADING);
 	
 		//VORL
-		plane.vorlid = values[0].getString(G1000Protocol.VORLID);
-		plane.vorldme = values[0].getFloat(G1000Protocol.VORLDME);
-		plane.vorldmeinrange = values[0].getBool(G1000Protocol.VORLDMEINRANGE);
-		plane.vorlinrange = values[0].getBool(G1000Protocol.VORLINRANGE);
-		plane.vorlfreq = values[0].getFloat(G1000Protocol.VORLFREQ);
-	
-		plane.switchvorl = values[0].getInt(G1000Protocol.SWITCHLEFT);
-		plane.vorldirectionvalues[0].getFloat(G1000Protocol.VORLDIR);
+		plane.vorlid = values[0].getString(B777Protocol.VORLID);
+		plane.vorldme = values[0].getFloat(B777Protocol.VORLDME);
+		plane.vorldmeinrange = values[0].getBool(B777Protocol.VORLDMEINRANGE);
+		plane.vorlinrange = values[0].getBool(B777Protocol.VORLINRANGE);
+		plane.vorlfreq = values[0].getFloat(B777Protocol.VORLFREQ);
+
+		plane.switchvorl = values[0].getInt(B777Protocol.SWITCHLEFT);
+		plane.vorldirection = values[0].getFloat(B777Protocol.VORLDIR);
 	
 		//VORRL
-		plane.vorrid = values[0].getString(G1000Protocol.VORRID);
-		plane.vorldme = values[0].getFloat(G1000Protocol.VORRDME);
-		plane.vorrdmeinrange = values[0].getBool(G1000Protocol.VORRDMEINRANGE);
-		plane.vorrinrange = values[0].getBool(G1000Protocol.VORRINRANGE);
-		plane.vorrfreq = values[0].getFloat(G1000Protocol.VORRFREQ);
-	
-		plane.switchvorr = values[0].getInt(G1000Protocol.SWITCHRIGHT);
-		plane.vorrdirectionvalues[0].getFloat(G1000Protocol.VORRDIR);
+		plane.vorrid = values[0].getString(B777Protocol.VORRID);
+		plane.vorldme = values[0].getFloat(B777Protocol.VORRDME);
+		plane.vorrdmeinrange = values[0].getBool(B777Protocol.VORRDMEINRANGE);
+		plane.vorrinrange = values[0].getBool(B777Protocol.VORRINRANGE);
+		plane.vorrfreq = values[0].getFloat(B777Protocol.VORRFREQ);
+
+		plane.switchvorr = values[0].getInt(B777Protocol.SWITCHRIGHT);
+		plane.vorrdirection = values[0].getFloat(B777Protocol.VORRDIR);
 	
 		//ADFL
 		plane.adflid = values[0].getString(G1000Protocol.ADFLID);
@@ -171,24 +168,21 @@ public class MFD777View extends SurfaceView implements SurfaceHolder.Callback {
 
 	public void rearrangeParamA330()
 	{
-		switch (mMFD777.plane.mode) {
+		switch (plane.mode) {
 			case 0:  //ILS
-					mMFD777.setModebut(true); //Circle						
-					break;
-					
 			case 1: //VOR
-					mMFD777.setModebut(true); //Circle						
+				plane.modebut = true; //Circle
 					break;
 			case 2: //NAV
-					mMFD777.setModebut(true); //Circle	
-					if (mMFD777.plane.switchvorl == 2)
-						mMFD777.setSwitchleft(-1);
-					if (mMFD777.plane.switchvorr == 2)
-						mMFD777.setSwitchright(-1);
+				plane.modebut = true; //Circle
+				if (plane.switchvorl == 2)
+					plane.switchvorl = -1;
+				if (plane.switchvorr == 2)
+					plane.switchvorr = -1;
 					break;
 			case 3: //ARC
-					mMFD777.setModebut(false); //Arc
-					mMFD777.setMode(2);
+				plane.modebut = false; //Arc
+				plane.mode = 2;
 					break;
 			case 4: break;
 			default: break;
@@ -252,38 +246,22 @@ public class MFD777View extends SurfaceView implements SurfaceHolder.Callback {
 	    switch (event.getAction()) {
 	    	case MotionEvent.ACTION_DOWN:
 	    		if (eventX < centerx && eventY < centery) { // left Up
-	    			if (plane.shownav == true) {
-	    				plane.shownav = false;
-	    			} else {
-	    				plane.shownav = true;	    			
-	    			}
-	    		}
-	    		
-	    		if (eventX > centerx && eventY < centery) { //right up
-	    			if (plane.showcir == true) {
-	    				plane.showcir = false;
-	    			} else {
-	    				plane.showcir = true;	    			
-	    			}
-	    		}
-	    		
-	    		if (eventX < centerx && eventY > centery) { //left down
-	    			if (plane.showfix == true) {
-	    				plane.showfix = false;
-	    			} else {
-	    				plane.showfix = true;	    			
-	    			}
-	    		}
-	    		
-	    		if (eventX > centerx && eventY > centery) { //right down
-	    			if (plane.showroute == true) {
-	    				plane.showroute = false;
-	    			} else {
-	    				plane.showroute = true;	    			
-	    			}
-	    		}
-	    		
-	    		break;
+					plane.shownav = plane.shownav != true;
+				}
+
+				if (eventX > centerx && eventY < centery) { //right up
+					plane.showcir = plane.showcir != true;
+				}
+
+				if (eventX < centerx && eventY > centery) { //left down
+					plane.showfix = plane.showfix != true;
+				}
+
+				if (eventX > centerx && eventY > centery) { //right down
+					plane.showroute = plane.showroute != true;
+				}
+
+				break;
 	    	case MotionEvent.ACTION_MOVE:
 	    		break;
 	    	case MotionEvent.ACTION_UP:

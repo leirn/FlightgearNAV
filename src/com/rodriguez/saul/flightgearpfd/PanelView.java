@@ -44,32 +44,25 @@ import com.rodriguez.saul.flightgearpfd.R;
 
 public class PanelView extends Activity {
 
-	//Communications related members
-	private int udpPort;	
-	private UDPReceiver udpReceiver = null;
 	public static final int SOCKET_TIMEOUT = 10000;
-	
-	//Selected plane
-	private int selPlane;
-	
+	public static final int NAV = 1;
+	public static final int MAP = 2;
+	//Debug constant
+	private static final String MLOG = "PANELVIEW";
 	//Dynamic view related
 	LinearLayout llMain;
 	MFD777View mMFD777;
-	MFDG1000View myMFDG1000;
+	MFDG1000View mMFDG1000;
 	myWebView myWeb;
-	
-	public static final int NAV = 1;
-	public static final int MAP = 2;
 	int displayFlag;
-	
-	NAVdb[] navdb;	
+	NAVdb[] navdb;
 	FIXdb[] fixdb;
-	
 	float displaydpi;
-	
-	
-	//Debug constant
-	private static final String MLOG = "PANELVIEW";
+	//Communications related members
+	private int udpPort;
+	private UDPReceiver udpReceiver = null;
+	//Selected plane
+	private int selPlane;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -168,25 +161,90 @@ public class PanelView extends Activity {
 		 *  a String containing the result of the doInBackground task ( it is supposed to be sent to a method onPostExecute, but for simplicity it is 
 		 *  not used in this example).
 		 * */
+
+	public void loadNAVView() {
+
+
+		int btnGravity = Gravity.LEFT;
+		//int wrapContent = LinearLayout.LayoutParams.WRAP_CONTENT;
+		int wrapContent = LinearLayout.LayoutParams.FILL_PARENT;
+
+		LinearLayout.LayoutParams lParams = new LinearLayout.LayoutParams(
+				wrapContent, wrapContent);
+
+		lParams.gravity = btnGravity;
+
+		//Remove any previously created view
+		llMain.removeAllViews();
+
+		//Attach the custom view to a MFD777 object
+		if (selPlane == Plane.G1000) {
+			mMFDG1000 = new MFDG1000View(this, null);
+			llMain.addView(mMFDG1000, lParams);
+
+			mMFDG1000.setPlane(selPlane);
+			mMFDG1000.plane.setdb(navdb, fixdb);
+		} else {
+			mMFD777 = new MFD777View(this, null);
+			llMain.addView(mMFD777, lParams);
+
+			mMFD777.setPlane(selPlane);
+			mMFD777.plane.setdb(navdb, fixdb);
+		}
+
+
+	}
+
+	public void loadWebView(MessageHandlerFGFS[] values) {
+
+
+		int btnGravity = Gravity.LEFT;
+		//int wrapContent = LinearLayout.LayoutParams.WRAP_CONTENT;
+		int wrapContent = LinearLayout.LayoutParams.FILL_PARENT;
+
+		LinearLayout.LayoutParams lParams = new LinearLayout.LayoutParams(
+				wrapContent, wrapContent);
+
+		lParams.gravity = btnGravity;
+
+		//Remove any previously created view
+		llMain.removeAllViews();
+
+		//Attach the custom view to a webview object
+		myWeb = new myWebView(this);
+		llMain.addView(myWeb, lParams);
+		myWeb.setWebViewClient(new WebViewClient());
+		myWeb.getSettings().setJavaScriptEnabled(true);
+
+		myWeb.dpi = displaydpi;
+		myWeb.setMode(values[0].getInt(B777Protocol.MODE));
+		myWeb.setRange(values[0].getInt(B777Protocol.RANGE));
+		myWeb.setLat(values[0].getFloat(B777Protocol.LATITUDE));
+		myWeb.setLon(values[0].getFloat(B777Protocol.LONGITUDE));
+		myWeb.updateRefPos(); //updates center of the map coord.
+		myWeb.updateRange();
+
+
+	}
 		
 		private class UDPReceiver extends AsyncTask<Integer, MessageHandlerFGFS, String> {
 
 			/*
 			 *  doInBackground() opens a socket and receives the data from fgfs. It will wait SOCKET_TIMOUT ms before throwing an
-			 *  exception. 
-			 *  The incoming data is parsed by the parse() method where the buffer is split in multiple Strings. Each String contains 
-			 *  an updated parameter. After parsing the buffer, the onProgressUpdate is called by using this.pubishProgress(pd). 
+			 *  exception.
+			 *  The incoming data is parsed by the parse() method where the buffer is split in multiple Strings. Each String contains
+			 *  an updated parameter. After parsing the buffer, the onProgressUpdate is called by using this.pubishProgress(pd).
 			 * */
 			@Override
 			protected String doInBackground(Integer... params) {
 				// TODO Auto-generated method stub
 				DatagramSocket socket;
 				byte[] buf = new byte[512];
-				
+
 				boolean canceled = false;
 				String msg = null;
 				MessageHandlerFGFS pd = new MessageHandlerFGFS();
-				
+
 				try {
 						socket = new DatagramSocket(params[0]);
 						socket.setSoTimeout(SOCKET_TIMEOUT);
@@ -194,37 +252,37 @@ public class PanelView extends Activity {
 						Log.d(MLOG, e.toString());
 						return e.toString();
 				}
-				
+
 				Log.d(MLOG,"UDP Thread started and liseting on port: " + params[0]);
-										
+
 				while (!canceled) {
 					DatagramPacket p = new DatagramPacket(buf, buf.length);
-					
+
 					try {
 						socket.receive(p);
 						pd.parse(new String(p.getData()));
-						
+
 						//Log.d(MLOG,"pd parsed");
-						
+
 						//Add here a call to progress with the pd as param
 						this.publishProgress(pd);
-						//Check if the asynctask was cancelled somewhere else 
+						//Check if the asynctask was cancelled somewhere else
 						canceled = this.isCancelled();
-						
-					} catch (SocketTimeoutException e) {	
+
+					} catch (SocketTimeoutException e) {
 						Log.d(MLOG,"Socket Timeout Exception");
 						canceled = true;
 					} catch (Exception e) {
 						Log.d(MLOG,"Socket exception");
 						canceled = true;
 					}
-					
+
 				}
-				
+
 				socket.close();
-				
+
 				Log.d(MLOG, "UDP thread finished");
-				
+
 				return msg;
 			}
 
@@ -235,32 +293,32 @@ public class PanelView extends Activity {
 			protected void onProgressUpdate(MessageHandlerFGFS... values) {
 				// TODO Auto-generated method stub
 				super.onProgressUpdate(values);
-				
-				int mode = (values[0].getInt(MessageHandlerFGFS.MODE));
-				
-				//Default is 777, other planes need to change 
+
+				int mode = (values[0].getInt(G1000Protocol.MODE));
+
+				//Default is 777, other planes need to change
 				if (mMFD777.planeType == MFD777View.A330) {
 					if (mode == 4 ) { //PLAN is 4 in 333 whereas PLN is 3 in 777
 						mode = 3;
 					} else if(mode == 3) { // This will avoid that the Skyvector is triggered if ARC
 						mode = 2;
-					} 
+					}
 				}
-				
+
 				if (selPlane == MainActivity.G1000) {
-					myMFDG1000.updateView(values);
+					mMFDG1000.updateView(values);
 				} else if (displayFlag == MAP) { //Currenly Skyvector map is on display
-					
+
 					if (mode < 3) { // Change to NAV
-						displayFlag = NAV;				
+						displayFlag = NAV;
 						loadNAVView();
 						return;
 					}
-					
+
 					myWeb.updateView(values);
-					
+
 				} else if (displayFlag == NAV){
-					
+
 					if (mode == 3) { // Change to MAP
 						displayFlag = MAP;
 						loadWebView(values);
@@ -268,74 +326,6 @@ public class PanelView extends Activity {
 					}
 					mMFD777.updateView(values);
 				}
-			}	
-	    }
-
-		
-		
-		public void loadNAVView() {
-			
-			
-			int btnGravity = Gravity.LEFT;
-			//int wrapContent = LinearLayout.LayoutParams.WRAP_CONTENT;
-			int wrapContent = LinearLayout.LayoutParams.FILL_PARENT;
-			
-			LinearLayout.LayoutParams lParams = new LinearLayout.LayoutParams(
-			          wrapContent, wrapContent);
-			
-			lParams.gravity = btnGravity;
-			
-			//Remove any previously created view
-			llMain.removeAllViews();
-			
-			//Attach the custom view to a MFD777 object
-			if(selPlane == G1000) {
-				mMFDG1000 = new MFDG1000View(this,null);
-				llMain.addView(mMFDG1000,lParams);
-					
-				mMFDG1000.setPlane(selPlane);
-				mMFDG1000.plane.setdb(navdb,fixdb);
 			}
-			else {
-				mMFD777 = new MFD777View(this,null);
-				llMain.addView(mMFD777,lParams);
-					
-				mMFD777.setPlane(selPlane);
-				mMFD777.plane.setdb(navdb,fixdb);
-			}
-				
-			 			
-		}
-		
-		public void loadWebView(MessageHandlerFGFS[] values) {
-			
-			
-			int btnGravity = Gravity.LEFT;
-			//int wrapContent = LinearLayout.LayoutParams.WRAP_CONTENT;
-			int wrapContent = LinearLayout.LayoutParams.FILL_PARENT;
-			
-			LinearLayout.LayoutParams lParams = new LinearLayout.LayoutParams(
-			          wrapContent, wrapContent);
-			
-			lParams.gravity = btnGravity;
-			
-			//Remove any previously created view
-			llMain.removeAllViews();
-			
-			//Attach the custom view to a webview object
-			myWeb = new myWebView(this);
-			llMain.addView(myWeb,lParams);
-			myWeb.setWebViewClient(new WebViewClient());
-			myWeb.getSettings().setJavaScriptEnabled(true);
-			
-			myWeb.dpi = displaydpi;
-			myWeb.setMode(values[0].getInt(MessageHandlerFGFS.MODE));
-			myWeb.setRange(values[0].getInt(MessageHandlerFGFS.RANGE));
-			myWeb.setLat(values[0].getFloat(MessageHandlerFGFS.LATITUDE));
-			myWeb.setLon(values[0].getFloat(MessageHandlerFGFS.LONGITUDE));
-			myWeb.updateRefPos(); //updates center of the map coord.
-			myWeb.updateRange();
-						
-			
 		}
 }

@@ -55,6 +55,7 @@ import android.graphics.Paint;
 import android.graphics.Paint.Align;
 import android.graphics.Paint.Style;
 import android.graphics.Rect;
+import android.graphics.Region;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
@@ -63,31 +64,27 @@ import android.view.SurfaceView;
 
 public class MFDG1000View extends SurfaceView implements SurfaceHolder.Callback {
 
+	final static int PFD = 0;
+	final static int MFD = 1;
+	final static int MFD_REV = 2;
+	final static int EIS_PAGE_1 = 1;
+	final static int EIS_PAGE_2 = 2;
+	final static int EIS_PAGE_3 = 3;
 	boolean ongoingMotion;
 	int startMotionX;
-
-	private SurfaceHolder surfaceHolder;
 	Context mcontext;
-	Plane plane;
+	PlaneG1000 plane;
 	int planeType;
-	
 	G1000Panels panels;
-	
 	int mwidth;
-	int mheight;	
+	int mheight;
 	int centerx;
 	int centery;
 	float scaleFactor;
 	float g1000scaleFactor;
 	int pfdormfd;
-	static int PFD = 0;
-	static int MFD = 1;
-	static int MFD_REV = 2;
-	
-	static int EIS_PAGE_1 = 1;
-	static int EIS_PAGE_2 = 2;
-	static int EIS_PAGE_3 = 3;
 	int currentEisPage;
+	private SurfaceHolder surfaceHolder;
 
 	
 	public MFDG1000View(Context context, AttributeSet attrs) {
@@ -106,7 +103,7 @@ public class MFDG1000View extends SurfaceView implements SurfaceHolder.Callback 
 		pfdormfd = MFD_REV;
 	}
 
-	public updateView(values) {
+	public void updateView(MessageHandlerFGFS... values) {
 		//update NAV
 		plane.update(values);
 		draw();
@@ -124,27 +121,22 @@ public class MFDG1000View extends SurfaceView implements SurfaceHolder.Callback 
 		// TODO Auto-generated method stub
 		mwidth = this.getWidth();
 		mheight = this.getHeight();
-		
-		if()
-		
+
 		//Log.d("Saul", String.format("width = %d", mwidth));
 		//Log.d("Saul", String.format("height = %d", mheight));
 
 		centerx = mwidth/2;
 		centery = mheight/2;
-		
+
+		panels.reset(mwidth, mheight);
+
+
 		//Calculate the scale factor
-		int maskHeight = plane.mask.getHeight();
+		//int maskHeight = plane.mask.getHeight();
 		
 		//scaleFactor = (float) 0.5; //Only for test and new features
-		scaleFactor = (float)(mheight)/(float)maskHeight;
-		
-		//Calculate the scale factor
-		int g1000enginedisplayHeight = plane.g1000enginedisplay.getHeight();
-		
-		//scaleFactor = (float) 0.5; //Only for test and new features
-		g1000scaleFactor = (float)(mheight)/(float)g1000enginedisplayHeight;
-		
+		//scaleFactor = (float)(mheight)/(float)maskHeight;
+
 		//plane.
 		plane.reflat = 0;
 		plane.reflon = 0;
@@ -166,21 +158,21 @@ public class MFDG1000View extends SurfaceView implements SurfaceHolder.Callback 
 	    switch (event.getAction()) {
 	    	case MotionEvent.ACTION_DOWN:
 	    		ongoingMotion = true;
-	    		startMotionX = event.getX();
-	    		break;
-	    	case MotionEvent.ACTION_MOVE:
+				startMotionX = (int) event.getX();
+				break;
+			case MotionEvent.ACTION_MOVE:
 	    		break;
 	    	case MotionEvent.ACTION_UP:
 	    		ongoingMotion = false;
 	    		//Switch from MFD to PFD only if motion covers 30% of screen width
-	    		if(Maths.abs(startMotionX - event.getX()) / mwidth > 0.3)
-	    			if(pfdormfd == MFD)
-	    				pfdormfd == PFD;
-	    			else if(pfdormfd == PFD)
-	    				pfdormfd == MFD;
-	    			//else : stay on MFD reversionary
-	    				
-	    		// Detect if softkeys pressed
+				if (Math.abs(startMotionX - event.getX()) / mwidth > 0.3)
+					if (pfdormfd == MFD)
+						pfdormfd = PFD;
+					else if (pfdormfd == PFD)
+						pfdormfd = MFD;
+				//else : stay on MFD reversionary
+
+				// Detect if softkeys pressed
 	    		if(event.getY() > (1 - G1000Panels.SOFTKEYS_HEIGHT) * mheight)
 	    			//TODO : Managed softkey actions
 	    			return true;
@@ -191,8 +183,8 @@ public class MFDG1000View extends SurfaceView implements SurfaceHolder.Callback 
 	    	    
 	    return true;
 	}
-	
-	public void draw(Canvas canvas) {
+
+	public void draw() {
 		Canvas canvas = surfaceHolder.lockCanvas();
 	        
 		Paint paint = new Paint();
@@ -207,13 +199,12 @@ public class MFDG1000View extends SurfaceView implements SurfaceHolder.Callback 
 	        }
 	        else if (pfdormfd == MFD)
 	        {
-		        drawG1000EngineDisplay(canvas,paint);
-		        drawG1000MFDMap(canvas,paint);
-	        }
-	        else {
+				drawG1000MFDMap(canvas, paint);
+				drawG1000EngineDisplay(canvas, paint);
+			} else {
 		        drawG1000PFDMain(canvas,paint);
-		        drawG1000EngineDisplay(canvas,paint);
-	        }
+				drawG1000EngineDisplay(canvas, paint);
+			}
 		//drawHsiArc(canvas, paint);
 		
         	drawG1000TopBar(canvas,paint);
@@ -221,70 +212,84 @@ public class MFDG1000View extends SurfaceView implements SurfaceHolder.Callback 
 	        
 	        surfaceHolder.unlockCanvasAndPost(canvas);
 	}
-	
-	public void drawG1000Background(canvas, paint)
+
+	public void drawG1000Background(Canvas canvas, Paint paint)
 	{
 		canvas.drawRGB(0, 0, 0);
 	}
-	
-	public void drawG1000TopBar(canvas,paint)
+
+	public void drawG1000TopBar(Canvas canvas, Paint paint)
 	{
 		Matrix m = new Matrix();
 		m.reset();
 		//Paint empty panel
-		canvas.drawBitmap(panels.getTopBar(),m,paint);
+		canvas.drawBitmap(panels.getTopBar(), m, paint);
 		
 		//Display NAV1 / NAV2
 		//Display COM1 / COM2
 		//Display GS / TRK / BRG / ETE
 	}
-	
-	public void drawG1000SoftKeys(canvas,paint)
+
+	public void drawG1000SoftKeys(Canvas canvas, Paint paint)
 	{
 		// SoftKey uses roughly 4.5% of total height
 		Matrix m = new Matrix();
 		m.reset();
 		//Paint empty panel
-		m.postTranslate(0.1 * height, 0);
-		canvas.drawBitmap(panels.getSoftKeys(),m,paint);
+		m.postTranslate(0, (float) ((1 - G1000Panels.SOFTKEYS_HEIGHT) * mheight));
+		canvas.drawBitmap(panels.getSoftKeys(), m, paint);
 	}
-	
-	public void drawG1000PFDMain(canvas,paint)
+
+	public void drawG1000PFDMain(Canvas canvas, Paint paint)
 	{
-		static float PLANE_NOSE = 0.3333;
-		static float HSI_CENTER = 0.7715;
-		
-		
-		
-		int left = 0;
-		if(pfdormfd != PFD)
-			left = EIS_WIDTH * mwidth;
+		float pfdheight = (float) ((1 - G1000Panels.SOFTKEYS_HEIGHT - G1000Panels.TOPBAR_HEIGHT) * mheight);
+
+		double PLANE_NOSE = 0.3333;
+		double HSI_CENTER = 0.7715;
+
+
 		Matrix m = new Matrix();
 		m.reset();
-		m.postTranslate((mwidth - left) / 2 - (1,3 * Maths.max(mwidth, mheight) /2), (1 - SOFTKEYS_HEIGHT - TOPBAR_HEIGHT) * mheight / 2 - (1,3 * Maths.max(mwidth, mheight) /2));
-		m.postRotate(10); // TODO : retrieve actual value
-		
-		canvas.save();
-		canvas.clipRect(left, TOPBAR_HEIGHT * mheight, mwidth, (1 - SOFTKEYS_HEIGHT) * mheight, Region.Op.REPLACE);
-		canvas.drawBitmap(panels.getHorizon(),m,paint);
-		canvas.restore();
+		//m.postRotate(10); // TODO : retrieve actual value
+		Bitmap horizon = panels.getHorizon();
+		//m.preRotate(plane.heading, (float) (panels.horsize / 2), (float) (panels.horsize / 3));
+		m.postTranslate((float) (mwidth * 0.45), pfdheight / 3);
+		m.postTranslate(0, (float) (G1000Panels.TOPBAR_HEIGHT * mheight));
+		m.postTranslate(0, (float) (0 - panels.horsize / 3));
+		m.postTranslate((float) (0 - panels.horsize / 2), 0);
+		canvas.drawBitmap(horizon, m, paint);
+
+		m.reset();
+		//Paint empty panel
+		Bitmap hsi = panels.getHSI();
+		m.preRotate(-plane.heading, (float) (panels.hsisize / 2), (float) (panels.hsisize / 2));
+		m.postTranslate(0, (float) (G1000Panels.TOPBAR_HEIGHT * mheight));
+		m.postTranslate((float) (mwidth * 0.45), (float) (pfdheight * 0.774));
+		m.postTranslate((float) (0 - panels.hsisize / 2), (float) (0 - panels.hsisize / 2));
+		canvas.drawBitmap(hsi, m, paint);
+
+		Bitmap pfdmask = panels.getPFDMask();
+		m.reset();
+		m.postTranslate(0, (float) (G1000Panels.TOPBAR_HEIGHT * mheight));
+		canvas.drawBitmap(pfdmask, m, paint);
+
 	}
-	
-	public void drawG1000MFDMap(canvas,paint)
+
+	public void drawG1000MFDMap(Canvas canvas, Paint paint)
 	{
 		
 	}
-	
-	public void drawG1000EngineDisplay(canvas,paint)
+
+	public void drawG1000EngineDisplay(Canvas canvas, Paint paint)
 	{
 		// EIS uses roughly 86% of total height
-		
-		float eis_height = EIS_HEIGHT * mheight;
-		float eis_width = EIS_RATIO * eis_height;
+
+		double eis_height = G1000Panels.EIS_HEIGHT * mheight;
+		double eis_width = G1000Panels.EIS_RATIO * eis_height;
 		
 		Matrix m = new Matrix();
 		m.reset();
-		m.postTranslate(0, TOPBAR_HEIGHT * mheight);
+		m.postTranslate(0, (float) (G1000Panels.TOPBAR_HEIGHT * mheight));
 		switch(currentEisPage) {
 			case EIS_PAGE_1:
 				canvas.drawBitmap(panels.getEISEngine(),m,paint);
@@ -292,21 +297,21 @@ public class MFDG1000View extends SurfaceView implements SurfaceHolder.Callback 
 				
 				// Draw Oil Temp
 				m.reset();
-				m.postTranslate(G1000Panels.EisEngine.OIL_TEMP_X, G1000Panels.EisEngine.OIL_TEMP_Y);
+				m.postTranslate((float) (G1000Panels.EisEngine.OIL_TEMP_X * eis_height), (float) (G1000Panels.EisEngine.OIL_TEMP_Y * eis_height));
 				m.postTranslate(
-					G1000Panels.EisEngine.OIL_TEMP_WIDTH * eis_width * plane.leftoiltemp / G1000Panels.EisEngine.OIL_TEMP_MAX,
-					LEFT_TRIANGLE_SHIFT_Y * eis_height
+						(float) (G1000Panels.EisEngine.OIL_TEMP_WIDTH * eis_width * plane.leftoiltemp / G1000Panels.EisEngine.OIL_TEMP_MAX),
+						(float) (G1000Panels.LEFT_TRIANGLE_SHIFT_Y * eis_height)
 					);
-				m.postTranslate(0, TOPBAR_HEIGHT * mheight);
+				m.postTranslate(0, (float) (G1000Panels.TOPBAR_HEIGHT * mheight));
 				canvas.drawBitmap(panels.getLeftTriangleGauge(),m,paint);
 				
 				m.reset();
-				m.postTranslate(G1000Panels.EisEngine.OIL_TEMP_X, G1000Panels.EisEngine.OIL_TEMP_Y);
+				m.postTranslate((float) (G1000Panels.EisEngine.OIL_TEMP_X * eis_height), (float) (G1000Panels.EisEngine.OIL_TEMP_Y * eis_height));
 				m.postTranslate(
-					G1000Panels.EisEngine.OIL_TEMP_WIDTH * eis_width * plane.rightoiltemp / G1000Panels.EisEngine.OIL_TEMP_MAX, 
-					RIGHT_TRIANGLE_SHIFT_Y * eis_height
+						(float) (G1000Panels.EisEngine.OIL_TEMP_WIDTH * eis_width * plane.rightoiltemp / G1000Panels.EisEngine.OIL_TEMP_MAX),
+						(float) (G1000Panels.RIGHT_TRIANGLE_SHIFT_Y * eis_height)
 					);
-				m.postTranslate(0, TOPBAR_HEIGHT * mheight);
+				m.postTranslate(0, (float) (G1000Panels.TOPBAR_HEIGHT * mheight));
 				canvas.drawBitmap(panels.getRightTriangleGauge(),m,paint);
 				
 				// Draw OIL Pres
@@ -418,8 +423,8 @@ public class MFDG1000View extends SurfaceView implements SurfaceHolder.Callback 
 		//Paint right fuel qty gal
 		canvas.drawBitmap(righttriangle,m,paint);*/
 	}
-	
-	private drawG1000Numbers(Canvas canvas, Paint paint, float value, int x, int y) {
+
+	private void drawG1000Numbers(Canvas canvas, Paint paint, float value, int x, int y) {
 		
 	}
 	
@@ -430,7 +435,7 @@ public class MFDG1000View extends SurfaceView implements SurfaceHolder.Callback 
 		//Log.d("SELECTED PLANE",String.format("%d",planeType));
 		
 		switch (planeType) {
-			case G1000:  
+			case Plane.G1000:
 						plane = new PlaneG1000(mcontext);
 						setPlaneType(planeType);
 						break;

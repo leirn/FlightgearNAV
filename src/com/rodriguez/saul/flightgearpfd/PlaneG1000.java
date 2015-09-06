@@ -2,19 +2,19 @@ package com.rodriguez.saul.flightgearpfd;
 
 
 //import com.example.com.readnav.test.NAVdb;
+
+import android.content.Context;
 import android.util.Log;
 
 public class PlaneG1000 extends Plane {
+	public float leftload, rightload, leftrpm, rightrpm;
+	public float leftoiltemp, rightoiltemp, leftoilpres, rightoilpres;
 	//NAV database
-	NAVdb navdb;	
+	NAVdb navdb;
 	FIXdb fixdb;
 	int sync;
-	
-	int pfdormfd;
-	
 	float g1000scaleFactor;
-	float leftload, rightload, leftload, rightrpm;
-	
+	Context mContext;
 	
 	public PlaneG1000(Context context) {
 		
@@ -106,11 +106,10 @@ public class PlaneG1000 extends Plane {
 		rightoiltemp = 0;
 		leftoilpres = 0;
 		rightoilpres = 0;
-		
-		pfdormfd = MFDG1000View.MFD;
+
 	}
-	
-	public updateView(values) {
+
+	public void update(MessageHandlerFGFS... values) {
 		//update NAV
 		heading = values[0].getFloat(G1000Protocol.HEADING);
 		apheading = values[0].getInt(G1000Protocol.APHEADING);
@@ -123,7 +122,7 @@ public class PlaneG1000 extends Plane {
 		vorlfreq = values[0].getFloat(G1000Protocol.VORLFREQ);
 	
 		switchvorl = values[0].getInt(G1000Protocol.SWITCHLEFT);
-		vorldirectionvalues[0].getFloat(G1000Protocol.VORLDIR);
+		vorldirection = values[0].getFloat(G1000Protocol.VORLDIR);
 	
 		//VORRL
 		vorrid = values[0].getString(G1000Protocol.VORRID);
@@ -133,7 +132,7 @@ public class PlaneG1000 extends Plane {
 		vorrfreq = values[0].getFloat(G1000Protocol.VORRFREQ);
 	
 		switchvorr = values[0].getInt(G1000Protocol.SWITCHRIGHT);
-		vorrdirectionvalues[0].getFloat(G1000Protocol.VORRDIR);
+		vorrdirection = values[0].getFloat(G1000Protocol.VORRDIR);
 	
 		//ADFL
 		adflid = values[0].getString(G1000Protocol.ADFLID);
