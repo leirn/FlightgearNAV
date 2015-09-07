@@ -17,9 +17,9 @@ public class G1000Panels
     static final double SOFTKEYS_HEIGHT = 0.034;
     static final double EIS_HEIGHT = 0.893;
     static final double EIS_WIDTH = 0.147;
-    static final double EIS_RATIO = 0.219;
-    static final double LEFT_TRIANGLE_SHIFT_Y = -0.05;
-    static final double RIGHT_TRIANGLE_SHIFT_Y = 0.05;
+    static final double EIS_RATIO = 0.21;
+    static final double LEFT_TRIANGLE_SHIFT_Y = -0.02766;
+    static final double RIGHT_TRIANGLE_SHIFT_Y = 0;
     static final double HSI_SIZE = 0.42; // Taille par rapport à la zone principale, pas au canvas complet
     public double hsisize;
     public double horsize;
@@ -69,49 +69,49 @@ public class G1000Panels
         //Panels for speed and altitude
         paint.setColor(Color.argb(128, 128, 128, 128));
         paint.setStyle(Paint.Style.FILL_AND_STROKE);
-        canvas.drawRect((float) ((0.45 + 0.453 / 2) * width), (float) ((1 / 3 - 0.25) * h), (float) ((0.45 + 0.453 / 2 + 0.102) * width), (float) ((1 / 3 - 0.25) * h), paint);
-        canvas.drawRect((float) ((0.45 + 0.453 / 2) * width), (float) ((1 / 3 - 0.25) * h), (float) ((0.45 + 0.453 / 2 + 0.102) * width), (float) ((1 / 3 - 0.25) * h), paint);
+        canvas.drawRect((float) ((0.45 - 0.453 / 2) * width), (float) ((0.33 - 0.25) * h), (float) ((0.45 - 0.453 / 2 - 0.085) * width), (float) ((0.33 + 0.25) * h), paint);
+        canvas.drawRect((float) ((0.45 + 0.453 / 2) * width), (float) ((0.33 - 0.25) * h), (float) ((0.45 + 0.453 / 2 + 0.102) * width), (float) ((0.33 + 0.25) * h), paint);
         paint.setColor(Color.WHITE);
         paint.setStyle(Paint.Style.STROKE);
-        canvas.drawRect((float) ((0.45 + 0.453 / 2) * width), (float) ((1 / 3 - 0.25) * h), (float) ((0.45 + 0.453 / 2 + 0.102) * width), (float) ((1 / 3 - 0.25) * h), paint);
-        canvas.drawRect((float) ((0.45 + 0.453 / 2) * width), (float) ((1 / 3 - 0.25) * h), (float) ((0.45 + 0.453 / 2 + 0.102) * width), (float) ((1 / 3 - 0.25) * h), paint);
+        canvas.drawRect((float) ((0.45 - 0.453 / 2) * width), (float) ((0.33 - 0.25) * h), (float) ((0.45 - 0.453 / 2 - 0.085) * width), (float) ((0.33 + 0.25) * h), paint);
+        canvas.drawRect((float) ((0.45 + 0.453 / 2) * width), (float) ((0.33 - 0.25) * h), (float) ((0.45 + 0.453 / 2 + 0.102) * width), (float) ((0.33 + 0.25) * h), paint);
 
         //Fixed markers around HSI
         canvas.drawLine(
                 (float) (0.45 * width + 0.43 / 2 * h * Math.cos(0)),
-                (float) ((1 / 3 + 0.44) * h + 0.43 / 2 * h * Math.sin(0)),
+                (float) ((0.33 + 0.44) * h + 0.43 / 2 * h * Math.sin(0)),
                 (float) (0.45 * width + 0.475 / 2 * h * Math.cos(0)),
-                (float) ((1 / 3 + 0.44) * h + 0.475 / 2 * h * Math.sin(0)),
+                (float) ((0.33 + 0.44) * h + 0.475 / 2 * h * Math.sin(0)),
                 paint);
         canvas.drawLine(
                 (float) (0.45 * width + 0.43 / 2 * h * Math.cos(Math.PI)),
-                (float) ((1 / 3 + 0.44) * h + 0.43 / 2 * h * Math.sin(Math.PI)),
+                (float) ((0.33 + 0.44) * h + 0.43 / 2 * h * Math.sin(Math.PI)),
                 (float) (0.45 * width + 0.475 / 2 * h * Math.cos(Math.PI)),
-                (float) ((1 / 3 + 0.44) * h + 0.475 / 2 * h * Math.sin(Math.PI)),
+                (float) ((0.33 + 0.44) * h + 0.475 / 2 * h * Math.sin(Math.PI)),
                 paint);
         canvas.drawLine(
                 (float) (0.45 * width + 0.43 / 2 * h * Math.cos(Math.PI / 6)),
-                (float) ((1 / 3 + 0.44) * h + 0.43 / 2 * h * Math.sin(Math.PI / 6)),
+                (float) ((0.33 + 0.44) * h + 0.43 / 2 * h * Math.sin(Math.PI / 6)),
                 (float) (0.45 * width + 0.475 / 2 * h * Math.cos(Math.PI / 6)),
-                (float) ((1 / 3 + 0.44) * h + 0.475 / 2 * h * Math.sin(Math.PI / 6)),
+                (float) ((0.33 + 0.44) * h + 0.475 / 2 * h * Math.sin(Math.PI / 6)),
                 paint);
         canvas.drawLine(
                 (float) (0.45 * width + 0.43 / 2 * h * Math.cos(-Math.PI / 6)),
-                (float) ((1 / 3 + 0.44) * h + 0.43 / 2 * h * Math.sin(-Math.PI / 6)),
+                (float) ((0.33 + 0.44) * h + 0.43 / 2 * h * Math.sin(-Math.PI / 6)),
                 (float) (0.45 * width + 0.475 / 2 * h * Math.cos(-Math.PI / 6)),
-                (float) ((1 / 3 + 0.44) * h + 0.475 / 2 * h * Math.sin(-Math.PI / 6)),
+                (float) ((0.33 + 0.44) * h + 0.475 / 2 * h * Math.sin(-Math.PI / 6)),
                 paint);
         canvas.drawLine(
                 (float) (0.45 * width + 0.43 / 2 * h * Math.cos(Math.PI + Math.PI / 6)),
-                (float) ((1 / 3 + 0.44) * h + 0.43 / 2 * h * Math.sin(Math.PI + Math.PI / 6)),
+                (float) ((0.33 + 0.44) * h + 0.43 / 2 * h * Math.sin(Math.PI + Math.PI / 6)),
                 (float) (0.45 * width + 0.475 / 2 * h * Math.cos(Math.PI + Math.PI / 6)),
-                (float) ((1 / 3 + 0.44) * h + 0.475 / 2 * h * Math.sin(Math.PI + Math.PI / 6)),
+                (float) ((0.33 + 0.44) * h + 0.475 / 2 * h * Math.sin(Math.PI + Math.PI / 6)),
                 paint);
         canvas.drawLine(
                 (float) (0.45 * width + 0.43 / 2 * h * Math.cos(Math.PI - Math.PI / 6)),
-                (float) ((1 / 3 + 0.44) * h + 0.43 / 2 * h * Math.sin(Math.PI - Math.PI / 6)),
+                (float) ((0.33 + 0.44) * h + 0.43 / 2 * h * Math.sin(Math.PI - Math.PI / 6)),
                 (float) (0.45 * width + 0.475 / 2 * h * Math.cos(Math.PI - Math.PI / 6)),
-                (float) ((1 / 3 + 0.44) * h + 0.475 / 2 * h * Math.sin(Math.PI - Math.PI / 6)),
+                (float) ((0.33 + 0.44) * h + 0.475 / 2 * h * Math.sin(Math.PI - Math.PI / 6)),
                 paint);
         return pfdmask;
     }
@@ -136,13 +136,26 @@ public class G1000Panels
         Paint paint = new Paint();
         paint.setShader(shader);
         canvas.drawRect(new RectF(0, 0, (int) horsize, (int) (horsize / 3)), paint);
+        paint.reset();
+        paint.setStrokeWidth(2);
+        paint.setColor(Color.WHITE);
+        paint.setStyle(Paint.Style.STROKE);
+
 
         canvas.drawLine(0, (int) (horsize / 3), (int) horsize, (int) (horsize / 3), paint);
 
+        double radius = 0.275 * height * EIS_HEIGHT;
+        canvas.drawArc(
+                (int) ((horsize / 2) - radius),
+                (int) ((horsize / 3) - radius),
+                (int) ((horsize / 2) + radius),
+                (int) ((horsize / 3) + radius)
+                , 210, 120, false, paint);
+
         //Draw 20° line
         canvas.drawLine(
-                (float) (horsize / 2 - 0.05 * width), (int) (horsize / 3 - 0.2 * EIS_HEIGHT),
-                (float) (horsize / 2 + 0.05 * width), (int) (horsize / 3 - 0.2 * EIS_HEIGHT),
+                (float) (horsize / 2 - 0.05 * width), (float) (horsize / 3 - 0.2 * EIS_HEIGHT),
+                (float) (horsize / 2 + 0.05 * width), (float) (horsize / 3 - 0.2 * EIS_HEIGHT),
                 paint);
         //Draw 15° line
         canvas.drawLine(
@@ -223,29 +236,29 @@ public class G1000Panels
 
         paint.setTextAlign(Paint.Align.CENTER);
         canvas.drawText("N", (float) (hsisize / 2), (float) (0.1 * hsisize), paint);
-        canvas.rotate(30);
+        canvas.rotate(30, (float) (hsisize / 2), (float) (hsisize / 2));
         canvas.drawText("3", (float) (hsisize / 2), (float) (0.1 * hsisize), paint);
-        canvas.rotate(30);
+        canvas.rotate(30, (float) (hsisize / 2), (float) (hsisize / 2));
         canvas.drawText("6", (float) (hsisize / 2), (float) (0.1 * hsisize), paint);
-        canvas.rotate(30);
+        canvas.rotate(30, (float) (hsisize / 2), (float) (hsisize / 2));
         canvas.drawText("E", (float) (hsisize / 2), (float) (0.1 * hsisize), paint);
-        canvas.rotate(30);
+        canvas.rotate(30, (float) (hsisize / 2), (float) (hsisize / 2));
         canvas.drawText("12", (float) (hsisize / 2), (float) (0.1 * hsisize), paint);
-        canvas.rotate(30);
+        canvas.rotate(30, (float) (hsisize / 2), (float) (hsisize / 2));
         canvas.drawText("15", (float) (hsisize / 2), (float) (0.1 * hsisize), paint);
-        canvas.rotate(30);
+        canvas.rotate(30, (float) (hsisize / 2), (float) (hsisize / 2));
         canvas.drawText("S", (float) (hsisize / 2), (float) (0.1 * hsisize), paint);
-        canvas.rotate(30);
+        canvas.rotate(30, (float) (hsisize / 2), (float) (hsisize / 2));
         canvas.drawText("21", (float) (hsisize / 2), (float) (0.1 * hsisize), paint);
-        canvas.rotate(30);
+        canvas.rotate(30, (float) (hsisize / 2), (float) (hsisize / 2));
         canvas.drawText("24", (float) (hsisize / 2), (float) (0.1 * hsisize), paint);
-        canvas.rotate(30);
+        canvas.rotate(30, (float) (hsisize / 2), (float) (hsisize / 2));
         canvas.drawText("W", (float) (hsisize / 2), (float) (0.1 * hsisize), paint);
-        canvas.rotate(30);
+        canvas.rotate(30, (float) (hsisize / 2), (float) (hsisize / 2));
         canvas.drawText("30", (float) (hsisize / 2), (float) (0.1 * hsisize), paint);
-        canvas.rotate(30);
+        canvas.rotate(30, (float) (hsisize / 2), (float) (hsisize / 2));
         canvas.drawText("33", (float) (hsisize / 2), (float) (0.1 * hsisize), paint);
-        canvas.rotate(30);
+        canvas.rotate(30, (float) (hsisize / 2), (float) (hsisize / 2));
 
         return hsi;
     }
@@ -340,7 +353,7 @@ public class G1000Panels
         paint.setStrokeWidth((float) (1));
         paint.setStyle(Paint.Style.STROKE);
         //Bottom line
-        canvas.drawLine(0, (float) (0.1 * height), width, (float) (0.1 * height), paint);
+        canvas.drawLine(0, (float) (0.1 * height - 2), width, (float) (0.1 * height - 2), paint);
         //Mid height line
         canvas.drawLine((float) (0.25 * width), tbHeight / 2, (float) (0.75 * width), tbHeight / 2, paint);
         // Vertical lines
@@ -364,11 +377,11 @@ public class G1000Panels
         paint.setStrokeWidth((float) (2));
         paint.setStyle(Paint.Style.STROKE);
         canvas.drawLine(0, 0, width, 0, paint);
-        for (int i = 1; i < 12; i++) {
+        for (double i = 1; i < 12; i++) {
             //paint.setColor(Color.BLACK);
             //canvas.drawLine(i / 12 * width, 0, i / 12 * width, softHeight, paint);
             //paint.setColor(Color.WHITE);
-            double offsetx = i / 12 * (double) width;
+            double offsetx = (i / 12) * (double) width;
             canvas.drawLine((float) offsetx, 0, (float) offsetx, softHeight, paint);
         }
         return softKeys;
@@ -392,11 +405,96 @@ public class G1000Panels
             return engine1;
 
         int engineHeight = (int) (EIS_HEIGHT * height);
-        int engineWidth = (int) (EIS_WIDTH * width);
+        int engineWidth = (int) (EIS_RATIO * engineHeight);
         engine1 = Bitmap.createBitmap(engineWidth, engineHeight, Bitmap.Config.ARGB_8888);
-        engine1.eraseColor(Color.TRANSPARENT);
+        engine1.eraseColor(Color.BLACK);
+        paint.setColor(Color.GREEN);
+        paint.setTextAlign(Paint.Align.CENTER);
         Canvas canvas = new Canvas(engine1);
+        paint.setStyle(Paint.Style.FILL_AND_STROKE);
+        //Load
+        canvas.drawRect((float) (engineHeight * 0.05), (float) (engineHeight * 0.02), (float) (engineHeight * 0.06), (float) (engineHeight * 0.174), paint);
+        canvas.drawRect((float) (engineHeight * 0.15), (float) (engineHeight * 0.02), (float) (engineHeight * 0.16), (float) (engineHeight * 0.174), paint);
+        paint.setColor(Color.WHITE);
+        canvas.drawText("LOAD %", (float) (engineHeight * 0.105), (float) (engineHeight * 0.1981), paint);
+        for (int i = 0; i < 6; i++) {
+            canvas.drawText(String.valueOf((5 - i) * 20), (float) (engineHeight * 0.105), (float) (engineHeight * (0.02 + ((0.174 - 0.02) * i / 5))), paint);
+            canvas.drawLine(
+                    (float) (engineHeight * 0.05),
+                    (float) (engineHeight * (0.02 + ((0.174 - 0.02) * i / 5))),
+                    (float) (engineHeight * 0.07),
+                    (float) (engineHeight * (0.02 + ((0.174 - 0.02) * i / 5))),
+                    paint);
 
+            canvas.drawLine(
+                    (float) (engineHeight * 0.14),
+                    (float) (engineHeight * (0.02 + ((0.174 - 0.02) * i / 5))),
+                    (float) (engineHeight * 0.16),
+                    (float) (engineHeight * (0.02 + ((0.174 - 0.02) * i / 5))),
+                    paint);
+        }
+        // RPM
+        paint.setColor(Color.GREEN);
+        canvas.drawRect((float) (engineHeight * 0.05), (float) (engineHeight * 0.23), (float) (engineHeight * 0.06), (float) (engineHeight * 0.40), paint);
+        canvas.drawRect((float) (engineHeight * 0.15), (float) (engineHeight * 0.23), (float) (engineHeight * 0.16), (float) (engineHeight * 0.40), paint);
+        paint.setColor(Color.WHITE);
+        canvas.drawText("RPM", (float) (engineHeight * 0.105), (float) (engineHeight * 0.4201), paint);
+        for (int i = 0; i < 6; i++) {
+            canvas.drawText(String.valueOf((5 - i) * 600), (float) (engineHeight * 0.105), (float) (engineHeight * (0.23 + ((0.40 - 0.23) * i / 5))), paint);
+            canvas.drawLine(
+                    (float) (engineHeight * 0.05),
+                    (float) (engineHeight * (0.23 + ((0.40 - 0.23) * i / 5))),
+                    (float) (engineHeight * 0.07),
+                    (float) (engineHeight * (0.23 + ((0.40 - 0.23) * i / 5))),
+                    paint);
+
+            canvas.drawLine(
+                    (float) (engineHeight * 0.14),
+                    (float) (engineHeight * (0.23 + ((0.40 - 0.23) * i / 5))),
+                    (float) (engineHeight * 0.16),
+                    (float) (engineHeight * (0.23 + ((0.40 - 0.23) * i / 5))),
+                    paint);
+        }
+
+        // FUEL FLOW
+        paint.setColor(Color.WHITE);
+        canvas.drawText("FUEL FLOW", (float) (engineHeight * 0.105), (float) (engineHeight * 0.4611), paint);
+        canvas.drawText("GPH", (float) (engineHeight * 0.105), (float) (engineHeight * 0.4881), paint);
+
+
+        // OIL TEMP
+        paint.setColor(Color.WHITE);
+        canvas.drawText("OIL TEMP", (float) (engineHeight * 0.105), (float) (engineHeight * 0.5331), paint);
+        paint.setColor(Color.GREEN);
+        canvas.drawRect((float) (engineHeight * 0.015), (float) (engineHeight * 0.5648), (float) (engineHeight * 0.195), (float) (engineHeight * 0.5771), paint);
+
+        // OIL PRES
+        paint.setColor(Color.WHITE);
+        canvas.drawText("OIL PRES", (float) (engineHeight * 0.105), (float) (engineHeight * 0.6231), paint);
+        paint.setColor(Color.GREEN);
+        canvas.drawRect((float) (engineHeight * 0.015), (float) (engineHeight * 0.6571), (float) (engineHeight * 0.195), (float) (engineHeight * 0.6701), paint);
+
+        // COOLANT TEMP
+        paint.setColor(Color.WHITE);
+        canvas.drawText("COOLANT TEMP", (float) (engineHeight * 0.105), (float) (engineHeight * 0.7181), paint);
+        paint.setColor(Color.GREEN);
+        canvas.drawRect((float) (engineHeight * 0.015), (float) (engineHeight * 0.75), (float) (engineHeight * 0.195), (float) (engineHeight * 0.7623), paint);
+
+        // FUEL TEMP
+        paint.setColor(Color.GREEN);
+        canvas.drawRect((float) (engineHeight * 0.015), (float) (engineHeight * 0.8425), (float) (engineHeight * 0.195), (float) (engineHeight * 0.8555), paint);
+        paint.setColor(Color.WHITE);
+        canvas.drawText("FUEL TEMP", (float) (engineHeight * 0.105), (float) (engineHeight * 0.8081), paint);
+        canvas.drawLine((float) (engineHeight * 0.015), (float) (engineHeight * 0.8365), (float) (engineHeight * 0.015), (float) (engineHeight * 0.8615), paint);
+        canvas.drawLine((float) (engineHeight * 0.195), (float) (engineHeight * 0.8365), (float) (engineHeight * 0.195), (float) (engineHeight * 0.8675), paint);
+
+        // FUEL QTY GAL
+        paint.setColor(Color.GREEN);
+        canvas.drawRect((float) (engineHeight * 0.015), (float) (engineHeight * 0.9365), (float) (engineHeight * 0.195), (float) (engineHeight * 0.9505), paint);
+        paint.setColor(Color.WHITE);
+        canvas.drawText("FUEL QTY GAL", (float) (engineHeight * 0.105), (float) (engineHeight * 0.9031), paint);
+        canvas.drawLine((float) (engineHeight * 0.015), (float) (engineHeight * 0.9305), (float) (engineHeight * 0.015), (float) (engineHeight * 0.9565), paint);
+        canvas.drawLine((float) (engineHeight * 0.195), (float) (engineHeight * 0.9305), (float) (engineHeight * 0.195), (float) (engineHeight * 0.9565), paint);
         return engine1;
     }
 
@@ -429,12 +527,12 @@ public class G1000Panels
     public class EisEngine {
         // ratio compared to EIS Panel size
         static final double OIL_TEMP_X = 0.1;
-        static final double OIL_TEMP_Y = 0.5;
+        static final double OIL_TEMP_Y = 0.5713;
         static final double OIL_TEMP_WIDTH = 0.8;
         static final double OIL_TEMP_MAX = 120;
 
         static final double OIL_PRES_X = 0.1;
-        static final double OIL_PRES_Y = 0.6;
+        static final double OIL_PRES_Y = 0.6636;
         static final double OIL_PRES_WIDTH = 0.8;
         static final double OIL_PRES_MAX = 120;
     }
