@@ -31,6 +31,8 @@ public class G1000Panels
     private Bitmap engine1, engine2, engine3;
     private Bitmap leftTriangleGauge, rightTriangleGauge, leftTriangleGaugeAmber, rightTriangleGaugeAmber, leftTriangleGaugeRed, rightTriangleGaugeRed;
     private Bitmap horizon, hsi, pfdmask;
+    
+    public HorEISGauge oilTemp, oilpres, coolant, fueltemp, fuelqty;
 
     public G1000Panels(int width, int height) {
         paint = new Paint();
@@ -48,7 +50,11 @@ public class G1000Panels
         engine3 = null;
         horizon = null;
         hsi = null;
-
+        oiltemp = null;
+        oilpres = null;
+        coolant = null;
+        fueltemp = null;
+        fuelqty = null;
     }
 
     Bitmap getPFDMask() {
@@ -465,36 +471,32 @@ public class G1000Panels
         // OIL TEMP
         paint.setColor(Color.WHITE);
         canvas.drawText("OIL TEMP", (float) (engineHeight * 0.105), (float) (engineHeight * 0.5331), paint);
-        paint.setColor(Color.GREEN);
-        canvas.drawRect((float) (engineHeight * 0.015), (float) (engineHeight * 0.5648), (float) (engineHeight * 0.195), (float) (engineHeight * 0.5771), paint);
-
+        oiltemp = new HorEISGauge(-40, -32, 50, 125, 140, 150);
+        canvas.drawBitmap(oiltemp.drawGauge(), (float) (engineHeight * 0.015), (float) (engineHeight * 0.5593));
+        
         // OIL PRES
         paint.setColor(Color.WHITE);
         canvas.drawText("OIL PRES", (float) (engineHeight * 0.105), (float) (engineHeight * 0.6231), paint);
-        paint.setColor(Color.GREEN);
-        canvas.drawRect((float) (engineHeight * 0.015), (float) (engineHeight * 0.6571), (float) (engineHeight * 0.195), (float) (engineHeight * 0.6701), paint);
+        oilpres = new HorEISGauge(0, 1.0, 2.3, 5.2, 6.5, 8);
+        canvas.drawBitmap(oilpres.drawGauge(), (float) (engineHeight * 0.015), (float) (engineHeight * 0.6516));
 
         // COOLANT TEMP
         paint.setColor(Color.WHITE);
         canvas.drawText("COOLANT TEMP", (float) (engineHeight * 0.105), (float) (engineHeight * 0.7181), paint);
-        paint.setColor(Color.GREEN);
-        canvas.drawRect((float) (engineHeight * 0.015), (float) (engineHeight * 0.75), (float) (engineHeight * 0.195), (float) (engineHeight * 0.7623), paint);
+        coolant = new HorEISGauge(-40, -32, 60, 96, 105, 120);
+        canvas.drawBitmap(coolant.drawGauge(), (float) (engineHeight * 0.015), (float) (engineHeight * 0.7442));
 
         // FUEL TEMP
-        paint.setColor(Color.GREEN);
-        canvas.drawRect((float) (engineHeight * 0.015), (float) (engineHeight * 0.8425), (float) (engineHeight * 0.195), (float) (engineHeight * 0.8555), paint);
         paint.setColor(Color.WHITE);
         canvas.drawText("FUEL TEMP", (float) (engineHeight * 0.105), (float) (engineHeight * 0.8081), paint);
-        canvas.drawLine((float) (engineHeight * 0.015), (float) (engineHeight * 0.8365), (float) (engineHeight * 0.015), (float) (engineHeight * 0.8615), paint);
-        canvas.drawLine((float) (engineHeight * 0.195), (float) (engineHeight * 0.8365), (float) (engineHeight * 0.195), (float) (engineHeight * 0.8675), paint);
+        fueltemp = new HorEISGauge(-40, -30, -22, 70, 75, 85);
+        canvas.drawBitmap(fueltemp.drawGauge(), (float) (engineHeight * 0.015), (float) (engineHeight * 0.8369));
 
         // FUEL QTY GAL
-        paint.setColor(Color.GREEN);
-        canvas.drawRect((float) (engineHeight * 0.015), (float) (engineHeight * 0.9365), (float) (engineHeight * 0.195), (float) (engineHeight * 0.9505), paint);
         paint.setColor(Color.WHITE);
         canvas.drawText("FUEL QTY GAL", (float) (engineHeight * 0.105), (float) (engineHeight * 0.9031), paint);
-        canvas.drawLine((float) (engineHeight * 0.015), (float) (engineHeight * 0.9305), (float) (engineHeight * 0.015), (float) (engineHeight * 0.9565), paint);
-        canvas.drawLine((float) (engineHeight * 0.195), (float) (engineHeight * 0.9305), (float) (engineHeight * 0.195), (float) (engineHeight * 0.9565), paint);
+        fuelqty = new HorEISGauge(0, 1, 1, 25, 25, 25);
+        canvas.drawBitmap(fuelqty.drawGauge(), (float) (engineHeight * 0.015), (float) (engineHeight * 0.9319));
         return engine1;
     }
 
